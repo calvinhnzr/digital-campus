@@ -3,7 +3,7 @@
 ## Darstellung des Problemraums
 
 Studentische Einrichtungen wie der Campus Gummersbach verfügen oft über mehrere Gebäude und Räume, die nicht immer eindeutig ausgezeichnet sind. Oft hat man keinen Überblick darüber, welche Funktion ein Raum hat und welches Material zur Verfügung steht. 
-Einige Hochschulen und Universitäten bezeichnen sich selbst als unübersichtlich [Goethe-Universität — Orientierung Auf dem Campus, n.d.](#quellen) bzw. ist es bekannt, dass besonders Erstsemester sich nicht auf ihrem Campus zurechtfinden. Auch im HochschulPlanungsSystem (HoPS) der TH Köln sind diese Informationen nur oberflächlich zu finden [HoPS | HochschulPlanungsSystem Der TH Köln, n.d.](#quellen). Der 27-seitigen Erstsemesterbroschüre (Informationen Für Erstsemester, n.d.) ist nur eine Seite dem Campus gewidmet, wo dieser nur grob kategorisiert wird.
+Einige Hochschulen und Universitäten bezeichnen sich selbst als unübersichtlich [[1](#quellen)] bzw. ist es bekannt, dass besonders Erstsemester sich nicht auf ihrem Campus zurechtfinden. Auch im HochschulPlanungsSystem (HoPS) der TH Köln sind diese Informationen nur oberflächlich zu finden [[2](#quellen)]. Der 27-seitigen Erstsemesterbroschüre [[3](#quellen)] ist nur eine Seite dem Campus gewidmet, wo dieser nur grob kategorisiert wird.
 
 ## Zielsetzung / Vision
 
@@ -19,10 +19,10 @@ Zur Einbindung einer Multiscreen Experience wird die Synchronisation von Raumbel
 In Zeiten von Covid-19 und Online Vorlesungen fällt es nicht nur Erstsemestern schwer, sich am Campus zu orientieren. Durch die Anwendung soll die Zufriedenheit der Studierenden, aber auch möglicher externer Besucher beim Zurechtfinden am Campus erhöht werden. Raumbelegungen können direkt in der Anwendung eingesehen werden, wodurch unnötige Wege eingespart werden können.
 
 # Quellen
-- Goethe-Universität — Orientierung auf dem Campus. (n.d.). Goethe-Universität Frankfurt. Retrieved October 31, 2022, from https://www.uni-frankfurt.de/92633759/Orientierung_auf_dem_Campus
-- HoPS | HochschulPlanungsSystem der TH Köln. (n.d.). HoPS | HochschulPlanungsSystem der TH Köln. Retrieved October 31, 2022, from https://fhpwww.gm.fh-koeln.de/hops/modules/roomequipment/room.php?room=0215
-- Informationen für Erstsemester. (n.d.). TH Köln. Retrieved October 31, 2022, from https://www.th-koeln.de/mam/downloads/deutsch/hochschule/fakultaeten/informatik_und_ingenieurwissenschaften/erstsemesterbroschure_gesamt_august_2021.pdf
 
+1. Goethe-Universität — Orientierung auf dem Campus. (n.d.). Goethe-Universität Frankfurt. Retrieved October 31, 2022, from https://www.uni-frankfurt.de/92633759/Orientierung_auf_dem_Campus
+2. HoPS | HochschulPlanungsSystem der TH Köln. (n.d.). HoPS | HochschulPlanungsSystem der TH Köln. Retrieved October 31, 2022, from https://fhpwww.gm.fh-koeln.de/hops/modules/roomequipment/room.php?room=0215
+3. Informationen für Erstsemester. (n.d.). TH Köln. Retrieved October 31, 2022, from https://www.th-koeln.de/mam/downloads/deutsch/hochschule/fakultaeten/informatik_und_ingenieurwissenschaften/erstsemesterbroschure_gesamt_august_2021.pdf
 
 # Festlegung Deliverables Audit 1
 
@@ -32,3 +32,4 @@ In Zeiten von Covid-19 und Online Vorlesungen fällt es nicht nur Erstsemestern 
 - ggf. erste Modellierungen und Modellierungsbegründungen
 - Domänenmodell, Zielhierarchie, Projektplan, Alleinstellungsmerkmale, erste Risiken, Spezifikation des ersten technischen/architekturellen Proof-of-Concepts (PoC)
 - Deliverables für den 2. Audit (Projektplan)
+
