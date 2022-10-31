@@ -22,3 +22,13 @@ In Zeiten von Covid-19 und Online Vorlesungen fällt es nicht nur Erstsemestern 
 - Goethe-Universität — Orientierung auf dem Campus. (n.d.). Goethe-Universität Frankfurt. Retrieved October 31, 2022, from https://www.uni-frankfurt.de/92633759/Orientierung_auf_dem_Campus
 - HoPS | HochschulPlanungsSystem der TH Köln. (n.d.). HoPS | HochschulPlanungsSystem der TH Köln. Retrieved October 31, 2022, from https://fhpwww.gm.fh-koeln.de/hops/modules/roomequipment/room.php?room=0215
 - Informationen für Erstsemester. (n.d.). TH Köln. Retrieved October 31, 2022, from https://www.th-koeln.de/mam/downloads/deutsch/hochschule/fakultaeten/informatik_und_ingenieurwissenschaften/erstsemesterbroschure_gesamt_august_2021.pdf
+
+
+# Festlegung Deliverables Audit 1
+
+- Problemstellung und Herleitung der Zielsetzung
+- Zielsetzungen sowie Begründung des Vorgehens zur Erreichung dieser
+- Erläuterung der Abwägung der gewählten Methoden im Vorgehen
+- ggf. erste Modellierungen und Modellierungsbegründungen
+- Domänenmodell, Zielhierarchie, Projektplan, Alleinstellungsmerkmale, erste Risiken, Spezifikation des ersten technischen/architekturellen Proof-of-Concepts (PoC)
+- Deliverables für den 2. Audit (Projektplan)
