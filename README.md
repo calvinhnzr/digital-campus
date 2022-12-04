@@ -2,17 +2,25 @@
 
 ## Darstellung des Problemraums
 
-Studentische Einrichtungen wie der Campus Gummersbach verfügen oft über mehrere Gebäude und Räume, die nicht immer eindeutig ausgezeichnet sind. Oft hat man keinen Überblick darüber, welche Funktion ein Raum hat und welches Material zur Verfügung steht. 
+Studentische Einrichtungen wie der Campus Gummersbach verfügen oft über mehrere Gebäude und Räume, die nicht immer eindeutig ausgezeichnet sind. Oft hat man keinen Überblick darüber, welche Funktion ein Raum hat, welches Material zur Verfügung steht und ob ein Raum bereits belegt ist.
+
 Einige Hochschulen und Universitäten bezeichnen sich selbst als unübersichtlich [[1](#quellen)] bzw. ist es bekannt, dass besonders Erstsemester sich nicht auf ihrem Campus zurechtfinden. Auch im HochschulPlanungsSystem (HoPS) der TH Köln sind diese Informationen nur oberflächlich zu finden [[2](#quellen)]. Der 27-seitigen Erstsemesterbroschüre [[3](#quellen)] ist nur eine Seite dem Campus gewidmet, wo dieser nur grob kategorisiert wird.
 
 ## Zielsetzung / Vision
 
-Das Ziel ist es, eine Abbildung des Campus in vereinfachter digitaler Form als Webanwendung darzustellen. Hierbei soll es Nutzern möglich sein, nach Räumen, bzw. spezifischer nach ortsbezogenen Daten, wie z. B. der benötigten Software, Hardware, nach Sitzplätzen oder nach Verfügbarkeit auf Basis der aktuellen Stundenpläne zu filtern. Zusätzlich können sich Nutzer auch direkt Informationen und Metadaten zu individuellen Räumen anzeigen lassen.
+Das Ziel ist es, eine Abbildung des Campus in digitaler Form als Webanwendung darzustellen. Hierbei soll es Benutzern möglich sein, nach Räumen und Equipment zu filtern. Zum Equipment gehören z. B. die benötigte Software, Hardware oder die verfügbaren Sitzplätze. Die Raumverfügbarkeit soll auf Basis aktueller Stundenpläne, Sensoren und/oder Benutzereingaben ermittelt werden.
 
-### Einbindung des Leitthemas:
+Zusätzlich zur Filterfunktion können sich Nutzer auch direkt Informationen und Metadaten zu individuellen Räumen anzeigen lassen. 
+
+
+### Einbindung des Leitthemas - "Multiscreen Web Applikation":
 
 ### Synchronisation:
-Zur Einbindung einer Multiscreen Experience wird die Synchronisation von Raumbelegungen in den Fokus gestellt. Hierfür können Nutzer beim Betreten von Räumen in der Anwendung angeben, dass sie im Raum sind und beim Verlassen, dass sie den Raum verlassen haben.
+Zur Einbindung einer Multiscreen Experience wird die Synchronisation von Raumbelegungen in den Fokus gestellt. Hierfür können Nutzer beim Betreten von Räumen in der Anwendung angeben (z. B. manuelle Eingabe oder Scannen von Codes), dass sie im Raum sind und beim Verlassen, dass sie den Raum verlassen haben. Die gemessenen Daten sollen direkt in der Anwendung zur Verfügung stehen und somit die Benutzer und Informationssysteme vor Räumen informieren.
+
+### Device Shifting:
+Es werden begrenzt Rauminformationen auf einem Display angezeigt. MIttels NFC/Code kann man sich weitere Informationen auf dem Smartphone anzeigen lassen.
+
 
 ## Relevanz
 
