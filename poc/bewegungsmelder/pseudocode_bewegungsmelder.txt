@@ -1,0 +1,69 @@
+JSON:
+message =
+{
+  "id" : "1",
+  "room" : "test-room",
+  "position" : "outside"
+}
+
+code:
+
+recentTriggers = map()
+
+on message received:
+
+if(message.room exists in recentTriggers){
+  trigger1 = recentTriggers[message.room]
+  trigger2 = message
+
+  timeBetweenTriggers = trigger2.received - trigger1.received
+
+  if(trigger1.position == "outside" && trigger2.position == "inside"){
+    print("entered room")
+    amount = likelyAmountOfPeople(timeBetweenTriggers)
+    roomPopulation += amount
+  }
+    
+  if(trigger1.position == "inside" && trigger1.position == "outside" {
+    print("exited room")
+    amount = likelyAmountOfPeople(timeBetweenTriggers)
+    roomPopulation -= amount
+  }
+}
+
+timeReceived = time.current()
+message.received = timeReceived
+
+recentTriggers.add(key: room, value: message)
+
+
+////////////////////
+int ttl = 5
+
+while(true){
+  for i in recentTriggers{
+    if(time.current() - i.received < ttl){
+       recentTriggers.delete(i)
+    }
+  }
+}
+\\\\\\\\\\\\\\\\\\\
+averageWalkingSpeed =  1.42 metres per second
+distanceBetweenTriggers = 1m
+
+likelyAmountOfPeople(int timeBetweenTriggers){
+  expectedTimeInSeconds = distanceBetweenTriggers * averageWalkingSpeed
+
+  x = timeBetweenTriggers / expectedTimeInSeconds)
+
+  if(x <= 1){
+    return 1
+  }
+
+  if(x <= 1.5){
+    return 2
+  }
+
+  if(x <= 2){
+    return 3
+  }
