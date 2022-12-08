@@ -24,7 +24,7 @@ Es werden begrenzt Rauminformationen auf einem Display angezeigt. MIttels NFC/Co
 
 ## Relevanz
 
-In Zeiten von Covid-19 und Online Vorlesungen fällt es nicht nur Erstsemestern schwer, sich am Campus zu orientieren. Durch die Anwendung soll die Zufriedenheit der Studierenden, aber auch möglicher externer Besucher beim Zurechtfinden am Campus erhöht werden. Raumbelegungen können direkt in der Anwendung eingesehen werden, wodurch unnötige Wege eingespart werden können.
+In Zeiten von Covid-19 und Online Vorlesungen fällt es nicht nur Erstsemestern schwer, sich am Campus zu orientieren. Durch das System soll die Zufriedenheit der Studierenden, aber auch möglicher externer Besucher beim Zurechtfinden am Campus erhöht werden. Raumbelegungen können direkt in dem System eingesehen werden, wodurch unnötige Wege eingespart werden können.
 
 # Quellen
 
