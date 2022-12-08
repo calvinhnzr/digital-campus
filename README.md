@@ -8,7 +8,7 @@ Einige Hochschulen und Universitäten bezeichnen sich selbst als unübersichtlic
 
 ## Zielsetzung / Vision
 
-Das Ziel ist es, eine Abbildung des Campus in digitaler Form als Webanwendung darzustellen. Hierbei soll es Benutzern möglich sein, nach Räumen und Equipment zu filtern. Zum Equipment gehören z. B. die benötigte Software, Hardware oder die verfügbaren Sitzplätze. Die Raumverfügbarkeit soll auf Basis aktueller Stundenpläne, Sensoren und/oder Benutzereingaben ermittelt werden.
+Das Ziel ist es, eine Abbildung des Campus in digitaler Form darzustellen. Hierbei soll es Benutzern möglich sein, nach Räumen und Equipment zu filtern. Zum Equipment gehören z. B. die benötigte Software, Hardware oder die verfügbaren Sitzplätze. Die Raumverfügbarkeit soll auf Basis aktueller Stundenpläne, Sensoren und/oder Benutzereingaben ermittelt werden.
 
 Zusätzlich zur Filterfunktion können sich Nutzer auch direkt Informationen und Metadaten zu individuellen Räumen anzeigen lassen. 
 
