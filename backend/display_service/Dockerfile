@@ -1,0 +1,23 @@
+FROM node:16.17.0
+
+# Create app directory
+WORKDIR /usr/src/app/display_service
+
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package.json ./
+
+RUN npm install && npm cache clean --force
+# If you are building your code for production
+# RUN npm ci --only=production
+
+ENV PATH=/usr/src/display_service/node_modules/.bin:$PATH
+
+WORKDIR /usr/src/app/display_service/src
+
+# Bundle app source
+COPY ./ ./
+
+EXPOSE 8001
+CMD [ "npm", "run", "start:dev" ]
