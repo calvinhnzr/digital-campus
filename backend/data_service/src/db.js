@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 const path = require('path');
 
-require('dotenv').config({ path:__dirname + '../../../../.env'})
+// require('dotenv').config({ path:__dirname + '../../../../.env'})
+require('dotenv').config()
+
 
 const uri = `mongodb+srv://webclub:${process.env.MONGO_PW}@cluster0.uipp4bn.mongodb.net/digitalCampusDB?retryWrites=true&w=majority`;
 
