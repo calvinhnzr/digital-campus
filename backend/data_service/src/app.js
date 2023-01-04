@@ -1,6 +1,13 @@
 const { connect } = require('./db')
 const express = require("express");
+const cors = require('cors');
+
 const app = express();
+
+
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://my-app.com'],
+}));
 
 // ROUTES IMPORT
 const roomRoutes = require('./routes/roomRoutes')
