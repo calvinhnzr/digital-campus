@@ -11,6 +11,8 @@ app.use(cors({
 
 // ROUTES IMPORT
 const roomRoutes = require('./routes/roomRoutes')
+const assetsRoutes = require('./routes/assetsRoutes.js')
+const scheduleRoutes = require('./routes/schedulesRoutes')
 
 // ROUTES
 app.get("/", (req, res) => {
@@ -18,6 +20,8 @@ app.get("/", (req, res) => {
 });
 
 app.use('/api/rooms', roomRoutes)
+app.use('/api/assets', assetsRoutes)
+app.use('/api/schedules', scheduleRoutes)
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
