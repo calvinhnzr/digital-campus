@@ -1,0 +1,15 @@
+[
+  {
+    "campus": "Gummersbach",
+    "rooms": [
+      {
+        "roomNo": "3217",
+        "activeUsers": ["token"]
+      },
+      {
+        "roomNo": "3216",
+        "activeUsers": ["token", "token"]
+      }
+    ]
+  }
+]

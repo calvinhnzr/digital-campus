@@ -1,0 +1,111 @@
+[
+  {
+    "campusId": "objectId",
+    "name": "Gummersbach",
+    "buildings": [
+      {
+        "buildingId": "objectId",
+        "name": "Gebäude A",
+        "coords": {
+          "x": 0,
+          "y": 0,
+          "width": 127,
+          "depth": 14,
+          "direction": null
+        },
+        "floors": [
+          {
+            "floorId": "objectId",
+            "name": "1. Etage",
+            "level": 1,
+            "coords": {
+              "x": 0,
+              "y": 0,
+              "width": 127,
+              "depth": 14,
+              "direction": null
+            },
+            "rooms": [
+              {
+                "roomId": "objectId",
+                "number": "3217",
+                "name": "MI-Multimediaraum",
+                "type": "labor",
+                "description": "",
+                "assests": [
+                  {
+                    "assetId": "objectId",
+                    "count": 10
+                  }
+                ],
+                "coords": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 14,
+                  "depth": 7,
+                  "direction": "NORTH"
+                }
+              }
+            ],
+            "halls": [
+              {
+                "hallId": "objectId",
+                "number": "E300",
+                "coords": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 22,
+                  "depth": 3,
+                  "direction": "EAST"
+                }
+              }
+            ],
+            "stairs": [
+              {
+                "stairId": "objectId",
+                "number": "T300",
+                "name": "",
+                "coords": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 11,
+                  "depth": 2,
+                  "direction": "SOUTH"
+                }
+              }
+            ],
+            "lifts": [
+              {
+                "liftId": "objectId",
+                "name": "Aufzug 1",
+                "maxWeight": 960,
+                "maxPeople": 12,
+                "coords": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 2,
+                  "depth": 2,
+                  "direction": "WEST"
+                }
+              }
+            ],
+            "outdoors": [
+              {
+                "outdoorId": "objectId",
+                "number": "A001",
+                "name": "Garage Fahrzeuge",
+                "coords": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 11,
+                  "depth": 2,
+                  "direction": null
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

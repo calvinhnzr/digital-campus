@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Whiteboard",
+    "description": "Pylontafel Whiteboard 1x3x1,5"
+  },
+  {
+    "name": "Kreidetafel",
+    "description": "Pylontafel Kreide 1x3x1,5"
+  },
+  {
+    "name": "Beamer",
+    "description": ""
+  },
+  {
+    "name": "Stiftdisplay",
+    "description": "Wacom-Stiftdisplay"
+  },
+  {
+    "name": "Verdunklung innen",
+    "description": ""
+  },
+  {
+    "name": "Waschbecken",
+    "description": ""
+  },
+  {
+    "name": "Leinwand",
+    "description": ""
+  },
+  {
+    "name": "Lautsprecher",
+    "description": ""
+  },
+  {
+    "name": "Smartboard",
+    "description": ""
+  }
+]
