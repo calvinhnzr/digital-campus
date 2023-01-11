@@ -1,4 +1,4 @@
-FROM node:16.17.0
+FROM node
 
 # Create app directory
 WORKDIR /usr/src/app/display_service

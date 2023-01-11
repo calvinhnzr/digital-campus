@@ -1,0 +1,30 @@
+{
+  "_id": { "$oid": "63bb1210320e2682d2c6e58a" },
+  "roomNo": "0405",
+  "timetable": {
+    "monday": [
+      {
+        "name": "Technisches Zeichnen für Wirtschaftsing und Allg. Maschinenbau",
+        "type": "vorlesung",
+        "timeStart": { "$date": { "$numberLong": "1675155600000" } },
+        "timeEnd": { "$date": { "$numberLong": "1675169100000" } }
+      },
+      {
+        "name": "Physik 2",
+        "type": "vorlesung",
+        "timeStart": { "$date": { "$numberLong": "1675170000000" } },
+        "timeEnd": { "$date": { "$numberLong": "1675176300000" } }
+      },
+      {
+        "name": "Tutorium Informatik II",
+        "timeEnd": { "$date": { "$numberLong": "1675190700000" } },
+        "timeStart": { "$date": { "$numberLong": "1675184400000" } },
+        "type": "tutorium"
+      }
+    ],
+    "tuesday": [{}],
+    "wednesday": [{}],
+    "thursday": [{}],
+    "friday": [{}]
+  }
+}
