@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
-const path = require('path');
+const path = require("path");
 
 // require('dotenv').config({ path:__dirname + '../../../../.env'})
-require('dotenv').config()
-
+require("dotenv").config();
 
 const uri = `mongodb+srv://webclub:${process.env.MONGO_PW}@cluster0.uipp4bn.mongodb.net/digitalCampusDB?retryWrites=true&w=majority`;
 
@@ -18,7 +17,7 @@ const roomSchema = new mongoose.Schema({
     scheduleStatus: Boolean,
     loginCount: Number,
   },
-  assets: [{ id: Number, count: Number }],
+  assets: [{ assetId: String, count: Number }],
 });
 
 const Room = mongoose.model("rooms", roomSchema);
@@ -51,6 +50,7 @@ async function returnAllRooms() {
   const rooms = await Room.find({});
   console.log(rooms);
   return rooms;
+
 }
 
 // TODO:
@@ -76,5 +76,6 @@ async function returnAllSchedules() {
 }
 
 connect().catch((err) => console.log(err));
+
 
 module.exports = { connect, returnAllRooms, returnFilteredRooms, returnAllAssets, returnAllSchedules };

@@ -1,0 +1,15 @@
+.App {
+  background-color: #343434;
+  height: 100%;
+  width: 100%;
+}
+
+canvas {
+  height: 100%;
+  width: 100%;
+  outline: 1px solid;
+}
+
+.html {
+  color: white;
+}

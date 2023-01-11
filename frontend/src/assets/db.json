@@ -1,0 +1,795 @@
+{
+  "_id": "",
+  "campusId": "",
+  "name": "Gummersbach",
+  "buildings": [
+    {
+      "buildingId": "",
+      "name": "Gebäude A",
+      "coords": {
+        "x": 0,
+        "y": 0,
+        "width": 127,
+        "depth": 14,
+        "direction": null
+      },
+      "floors": [
+        {
+          "floorId": "",
+          "name": "3. Etage",
+          "level": 1,
+          "coords": {
+            "x": 0,
+            "y": 0,
+            "width": 127,
+            "depth": 14,
+            "direction": null
+          },
+          "rooms": [
+            {
+              "roomId": "",
+              "number": "3200",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 112,
+                "y": 10,
+                "width": 3,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3201",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 115,
+                "y": 10,
+                "width": 3,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3202",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 118,
+                "y": 10,
+                "width": 2,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3203",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 120,
+                "y": 10,
+                "width": 2,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3204",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 120,
+                "y": 0,
+                "width": 7,
+                "depth": 7,
+                "direction": "SOUTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3205",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 114,
+                "y": 0,
+                "width": 6,
+                "depth": 7,
+                "direction": "SOUTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3206",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 107,
+                "y": 0,
+                "width": 7,
+                "depth": 7,
+                "direction": "SOUTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3207",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 103,
+                "y": 0,
+                "width": 4,
+                "depth": 7,
+                "direction": "SOUTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3208",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 100,
+                "y": 0,
+                "width": 3,
+                "depth": 7,
+                "direction": "SOUTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3209",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 89,
+                "y": 0,
+                "width": 11,
+                "depth": 7,
+                "direction": "SOUTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3210",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 80,
+                "y": 5,
+                "width": 4,
+                "depth": 2,
+                "direction": "EAST"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3212",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 80,
+                "y": 2,
+                "width": 4,
+                "depth": 3,
+                "direction": "EAST"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3214",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 80,
+                "y": 0,
+                "width": 4,
+                "depth": 2,
+                "direction": "EAST"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3215",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 69,
+                "y": 0,
+                "width": 11,
+                "depth": 7,
+                "direction": "SOUTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3216",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 57,
+                "y": 0,
+                "width": 12,
+                "depth": 7,
+                "direction": "SOUTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3217",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 50,
+                "y": 0,
+                "width": 7,
+                "depth": 7,
+                "direction": "SOUTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3218",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 45,
+                "y": 0,
+                "width": 5,
+                "depth": 7,
+                "direction": "SOUTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3219",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 36,
+                "y": 0,
+                "width": 9,
+                "depth": 7,
+                "direction": "SOUTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3220",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 27,
+                "y": 0,
+                "width": 9,
+                "depth": 7,
+                "direction": "SOUTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3221",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 16,
+                "y": 0,
+                "width": 11,
+                "depth": 7,
+                "direction": "SOUTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3222",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 5,
+                "y": 0,
+                "width": 11,
+                "depth": 7,
+                "direction": "SOUTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3223",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 0,
+                "y": 10,
+                "width": 3,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3224",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 3,
+                "y": 10,
+                "width": 3,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3225",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 6,
+                "y": 10,
+                "width": 2,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3226",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 8,
+                "y": 10,
+                "width": 3,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3227",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 11,
+                "y": 10,
+                "width": 3,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3228",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 14,
+                "y": 10,
+                "width": 4,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3229",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 18,
+                "y": 10,
+                "width": 3,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3230",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 21,
+                "y": 10,
+                "width": 3,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3231",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 24,
+                "y": 10,
+                "width": 3,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3232",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 27,
+                "y": 10,
+                "width": 2,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3233",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 29,
+                "y": 10,
+                "width": 3,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3234",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 32,
+                "y": 10,
+                "width": 3,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3235",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 35,
+                "y": 10,
+                "width": 8,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3236",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 43,
+                "y": 10,
+                "width": 2,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3237",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 50,
+                "y": 10,
+                "width": 2,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3238",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 52,
+                "y": 10,
+                "width": 2,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3239",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 54,
+                "y": 10,
+                "width": 7,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3240",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 61,
+                "y": 10,
+                "width": 3,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3241",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 64,
+                "y": 10,
+                "width": 5,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3242",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 69,
+                "y": 10,
+                "width": 2,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3243",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 72,
+                "y": 10,
+                "width": 4,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3244",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 76,
+                "y": 10,
+                "width": 2,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3245",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 78,
+                "y": 10,
+                "width": 5,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3246",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 83,
+                "y": 10,
+                "width": 3,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3247",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 86,
+                "y": 10,
+                "width": 3,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            },
+            {
+              "roomId": "",
+              "number": "3248",
+              "name": "",
+              "type": "",
+              "description": "",
+              "assests": [],
+              "coords": {
+                "x": 89,
+                "y": 10,
+                "width": 3,
+                "depth": 4,
+                "direction": "NORTH"
+              }
+            }
+          ],
+          "halls": [
+            {
+              "hallId": "",
+              "number": "E300",
+              "coords": {
+                "x": 0,
+                "y": 0,
+                "width": 22,
+                "depth": 3,
+                "direction": "EAST"
+              }
+            }
+          ],
+          "stairs": [
+            {
+              "stairId": "",
+              "number": "T300",
+              "name": "",
+              "coords": {
+                "x": 0,
+                "y": 0,
+                "width": 11,
+                "depth": 2,
+                "direction": "SOUTH"
+              }
+            }
+          ],
+          "lifts": [
+            {
+              "liftId": "",
+              "name": "Aufzug 1",
+              "maxWeight": 960,
+              "maxPeople": 12,
+              "coords": {
+                "x": 0,
+                "y": 0,
+                "width": 2,
+                "depth": 2,
+                "direction": "WEST"
+              }
+            }
+          ],
+          "outdoors": [
+            {
+              "outdoorId": "",
+              "number": "A001",
+              "name": "Garage Fahrzeuge",
+              "coords": {
+                "x": 0,
+                "y": 0,
+                "width": 11,
+                "depth": 2,
+                "direction": null
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
