@@ -192,6 +192,28 @@ const campusSchema = new mongoose.Schema({
 
 const Campus = mongoose.model("campus", campusSchema);
 
+const activeUsersSchema = new mongoose.Schema({
+  campus: String,
+  rooms: [
+    {
+      roomNo: String,
+      activeUsers: [
+        {
+          token: String,
+        },
+      ],
+    },
+  ],
+});
+
+const ActiveUsers = mongoose.model("activeUsers", activeUsersSchema);
+
+async function returnAllActiveUsers() {
+  const users = await ActiveUsers.find({});
+  console.log(users);
+  return users;
+}
+
 async function returnAllCampus() {
   const campuses = await Campus.find({});
   console.log(campuses);
@@ -240,4 +262,5 @@ module.exports = {
   returnAllAssets,
   returnAllTimetables,
   returnAllCampus,
+  returnAllActiveUsers,
 };

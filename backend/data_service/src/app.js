@@ -16,6 +16,7 @@ const roomRoutes = require("./routes/roomRoutes");
 const assetsRoutes = require("./routes/assetsRoutes.js");
 const timetableRoutes = require("./routes/timetablesRoutes");
 const campusRoutes = require("./routes/campusRoutes");
+const activeUserRoutes = require("./routes/activeUserRoutes");
 
 // ROUTES
 app.get("/", (req, res) => {
@@ -26,6 +27,7 @@ app.use("/api/rooms", roomRoutes);
 app.use("/api/assets", assetsRoutes);
 app.use("/api/timetables", timetableRoutes);
 app.use("/api/campus", campusRoutes);
+app.use("/api/activeusers", activeUserRoutes);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
