@@ -41,6 +41,124 @@ const scheduleSchema = new mongoose.Schema({
 
 const Schedule = mongoose.model("schedules", scheduleSchema);
 
+const campusSchema = new mongoose.Schema({
+  _id: String,
+  name: String,
+  buildings: [
+    {
+      buildingId: String,
+      name: String,
+      coords: {
+        x: Number,
+        y: Number,
+        width: Number,
+        depth: Number,
+        direction: String
+      },
+      floors: [
+        {
+          floorId: String,
+          name: String,
+          level: Number,
+          coords: {
+            x: Number,
+            y: Number,
+            width: Number,
+            depth: Number,
+            direction: String
+          },
+          rooms: [
+            {
+              roomId: String,
+              number: Number,
+              name: String,
+              type: String,
+              description: String,
+              assets: [
+                {
+                  assetId: String,
+                  count: Number
+                }
+              ],
+              coords: {
+                x: Number,
+                y: Number,
+                width: Number,
+                depth: Number,
+                direction: String
+              }
+            }
+          ],
+          halls: [
+            {
+              hallId: String,
+              number: String,
+              coords: {
+                x: Number,
+                y: Number,
+                width: Number,
+                depth: Number,
+                direction: String
+              }
+            }
+          ],
+          stairs: [
+            {
+              stairId: String,
+              number: String,
+              name: String,
+              coords: {
+                x: Number,
+                y: Number,
+                width: Number,
+                depth: Number,
+                direction: String
+              }
+            }
+          ],
+          lifts: [
+            {
+              liftId: String,
+              name: String,
+              maxWeight: Number,
+              maxPeople: Number,
+              coords: {
+                x: Number,
+                y: Number,
+                width: Number,
+                depth: Number,
+                direction: String
+              }
+            }
+          ],
+          outdoors: [
+            {
+              outdoorId: String,
+              number: String,
+              name: String,
+              coords: {
+                x: Number,
+                y: Number,
+                width: Number,
+                depth: Number,
+                direction: String
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+})
+
+const Campus = mongoose.model("campus", campusSchema);
+
+async function returnAllCampus() {
+  const campuses = await Campus.find({});
+  console.log(campuses);
+  return campuses;
+}
+
 async function connect() {
   await mongoose.connect(uri);
   console.log("connected to MongoDB");
@@ -77,5 +195,5 @@ async function returnAllSchedules() {
 
 connect().catch((err) => console.log(err));
 
+module.exports = { connect, returnAllRooms, returnFilteredRooms, returnAllAssets, returnAllSchedules, returnAllCampus };
 
-module.exports = { connect, returnAllRooms, returnFilteredRooms, returnAllAssets, returnAllSchedules };
