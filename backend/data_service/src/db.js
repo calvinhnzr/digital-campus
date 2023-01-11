@@ -6,25 +6,24 @@ require("dotenv").config();
 
 const uri = `mongodb+srv://webclub:${process.env.MONGO_PW}@cluster0.uipp4bn.mongodb.net/digitalCampusDB?retryWrites=true&w=majority`;
 
-const roomSchema = new mongoose.Schema({
-  _id: Number,
-  name: String, //fehlt hiervor "roomNo" als key?
-  type: String,
-  description: String,
-  seats: Number,
-  location: Array,
-  availability: {
-    scheduleStatus: Boolean,
-    loginCount: Number,
-  },
-  assets: [{ assetId: String, count: Number }],
-});
-
-const Room = mongoose.model("rooms", roomSchema);
+// OLD:
+// const roomSchema = new mongoose.Schema({
+//   _id: String,
+//   name: String, //fehlt hiervor "roomNo" als key?
+//   type: String,
+//   description: String,
+//   seats: Number,
+//   location: Array,
+//   availability: {
+//     scheduleStatus: Boolean,
+//     loginCount: Number,
+//   },
+//   assets: [{ assetId: String, count: Number }],
+// });
+// const Room = mongoose.model("rooms", roomSchema);
 
 const assetSchema = new mongoose.Schema({
-  _id: Number,
-  assetNo: Number,
+  _id: String,
   name: String,
   description: String,
 });
@@ -109,9 +108,9 @@ const campusSchema = new mongoose.Schema({
           rooms: [
             {
               roomId: String,
-              number: Number,
+              number: String,
               name: String,
-              type: String,
+              type: { type: String },
               description: String,
               assets: [
                 {
@@ -225,11 +224,12 @@ async function connect() {
   console.log("connected to MongoDB");
 }
 
-async function returnAllRooms() {
-  const rooms = await Room.find({});
-  console.log(rooms);
-  return rooms;
-}
+// OLD:
+// async function returnAllRooms() {
+//   const rooms = await Room.find({});
+//   console.log(rooms);
+//   return rooms;
+// }
 
 // TODO:
 // [BUG] funktioniert nicht da, die k/v pairs als [object Object] empfangen werden
@@ -257,7 +257,8 @@ connect().catch((err) => console.log(err));
 
 module.exports = {
   connect,
-  returnAllRooms,
+  // OLD:
+  // returnAllRooms,
   returnFilteredRooms,
   returnAllAssets,
   returnAllTimetables,
