@@ -22,24 +22,63 @@ const roomSchema = new mongoose.Schema({
 
 const Room = mongoose.model("rooms", roomSchema);
 
-
 const assetSchema = new mongoose.Schema({
   _id: Number,
   assetNo: Number,
   name: String,
-  description: String
-})
+  description: String,
+});
 
 const Asset = mongoose.model("assets", assetSchema);
 
+const timetableSchema = new mongoose.Schema({
+  campus: String,
+  campusId: String,
+  rooms: [
+    {
+      roomNo: String,
+      timetable: {
+        monday: [
+          {
+            name: String,
+            type: { type: String },
+            time: String,
+          },
+        ],
+        tuesday: [
+          {
+            name: String,
+            type: { type: String },
+            time: String,
+          },
+        ],
+        wednesday: [
+          {
+            name: String,
+            type: { type: String },
+            time: String,
+          },
+        ],
+        thursday: [
+          {
+            name: String,
+            type: { type: String },
+            time: String,
+          },
+        ],
+        friday: [
+          {
+            name: String,
+            type: { type: String },
+            time: String,
+          },
+        ],
+      },
+    },
+  ],
+});
 
-const scheduleSchema = new mongoose.Schema({
-  _id: Number,
-  roomNo: String,
-  timeslots: Array
-})
-
-const Schedule = mongoose.model("schedules", scheduleSchema);
+const Timetable = mongoose.model("timetable", timetableSchema);
 
 const campusSchema = new mongoose.Schema({
   _id: String,
@@ -53,7 +92,7 @@ const campusSchema = new mongoose.Schema({
         y: Number,
         width: Number,
         depth: Number,
-        direction: String
+        direction: String,
       },
       floors: [
         {
@@ -65,7 +104,7 @@ const campusSchema = new mongoose.Schema({
             y: Number,
             width: Number,
             depth: Number,
-            direction: String
+            direction: String,
           },
           rooms: [
             {
@@ -77,17 +116,17 @@ const campusSchema = new mongoose.Schema({
               assets: [
                 {
                   assetId: String,
-                  count: Number
-                }
+                  count: Number,
+                },
               ],
               coords: {
                 x: Number,
                 y: Number,
                 width: Number,
                 depth: Number,
-                direction: String
-              }
-            }
+                direction: String,
+              },
+            },
           ],
           halls: [
             {
@@ -98,9 +137,9 @@ const campusSchema = new mongoose.Schema({
                 y: Number,
                 width: Number,
                 depth: Number,
-                direction: String
-              }
-            }
+                direction: String,
+              },
+            },
           ],
           stairs: [
             {
@@ -112,9 +151,9 @@ const campusSchema = new mongoose.Schema({
                 y: Number,
                 width: Number,
                 depth: Number,
-                direction: String
-              }
-            }
+                direction: String,
+              },
+            },
           ],
           lifts: [
             {
@@ -127,9 +166,9 @@ const campusSchema = new mongoose.Schema({
                 y: Number,
                 width: Number,
                 depth: Number,
-                direction: String
-              }
-            }
+                direction: String,
+              },
+            },
           ],
           outdoors: [
             {
@@ -141,15 +180,15 @@ const campusSchema = new mongoose.Schema({
                 y: Number,
                 width: Number,
                 depth: Number,
-                direction: String
-              }
-            }
-          ]
-        }
-      ]
-    }
-  ]
-})
+                direction: String,
+              },
+            },
+          ],
+        },
+      ],
+    },
+  ],
+});
 
 const Campus = mongoose.model("campus", campusSchema);
 
@@ -168,7 +207,6 @@ async function returnAllRooms() {
   const rooms = await Room.find({});
   console.log(rooms);
   return rooms;
-
 }
 
 // TODO:
@@ -187,13 +225,19 @@ async function returnAllAssets() {
   return assets;
 }
 
-async function returnAllSchedules() {
-  const schedules = await Schedule.find({});
-  console.log(schedules);
-  return schedules;
+async function returnAllTimetables() {
+  const timetable = await Timetable.find({});
+  console.log(timetable);
+  return timetable;
 }
 
 connect().catch((err) => console.log(err));
 
-module.exports = { connect, returnAllRooms, returnFilteredRooms, returnAllAssets, returnAllSchedules, returnAllCampus };
-
+module.exports = {
+  connect,
+  returnAllRooms,
+  returnFilteredRooms,
+  returnAllAssets,
+  returnAllTimetables,
+  returnAllCampus,
+};

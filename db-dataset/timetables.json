@@ -29,25 +29,21 @@
             {
               "name": "Physik 2",
               "type": "vorlesung",
-              "timeStart": "13:00",
-              "timeEnd": "14:45"
+              "time": "13:00"
             },
             {
               "name": "Physik 2",
               "type": "vorlesung",
-              "timeStart": "14:00",
-              "timeEnd": "14:45"
+              "time": "14:00"
             },
             {
               "name": "Tutorium Informatik II",
-              "timeStart": "17:00",
-              "timeEnd": "18:45",
+              "time": "17:00",
               "type": "tutorium"
             },
             {
               "name": "Tutorium Informatik II",
-              "timeStart": "18:00",
-              "timeEnd": "18:45",
+              "time": "18:00",
               "type": "tutorium"
             }
           ],
