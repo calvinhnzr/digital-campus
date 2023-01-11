@@ -196,11 +196,7 @@ const activeUsersSchema = new mongoose.Schema({
   rooms: [
     {
       roomNo: String,
-      activeUsers: [
-        {
-          token: String,
-        },
-      ],
+      activeUsers: [],
     },
   ],
 });
