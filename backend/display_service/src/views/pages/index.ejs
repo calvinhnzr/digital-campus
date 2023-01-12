@@ -84,8 +84,8 @@
         }
       }
 
+      /* ----------------------------------------------- */
       /* custom css */
-
       body {
         font-family: Arial, Helvetica, sans-serif;
         padding: 1.2rem;
@@ -117,12 +117,10 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
-        background-color: #f2f2f2;
         margin: 0 0 1.5rem 0;
       }
 
       .description {
-        background-color: #f2f2f2;
         text-align: center;
       }
 
@@ -135,13 +133,10 @@
       .status {
         text-align: center;
         margin: 2rem 0;
-        background-color: #f2f2f2;
       }
     </style>
 
     <% const roomNo = [timetable.roomNo.slice(0,1), ".", timetable.roomNo.slice(1)].join("") %>
-    <!--  -->
-    <% const test = 123 %>
     <!--  -->
     <% const monday = timetable.timetable.monday %>
     <!--  -->
@@ -152,14 +147,20 @@
     <% const thursday = timetable.timetable.thursday %>
     <!--  -->
     <% const friday = timetable.timetable.friday %>
+    <!--  -->
+    <% const roomType = roomInfo.type %>
+    <!--  -->
+    <% const roomDescription = roomInfo.description %>
+    <!-- TODO -->
+    <%# const roomStatus = roomStatus.status %>
 
     <div class="title">
       <h1>R <%= roomNo %></h1>
 
-      <h2>Raumtyp (Labor/Hörsaal)</h2>
+      <h2><%= roomType || "Raumtyp noch nicht vorhanden!" %></h2>
     </div>
 
-    <h2 class="description">Beschreibung (MI-Multimediaraum)</h2>
+    <h2 class="description"><%= roomDescription || "Raumbeschreibung noch nicht vorhanden!" %></h2>
 
     <table>
       <thead>
@@ -186,6 +187,6 @@
       </tbody>
     </table>
 
-    <h2 class="status">Status des Raumes (2 Nutzer im Raum/Nicht buchbar)</h2>
+    <h2 class="status">Raumbelegung noch nicht vorhanden!</h2>
   </body>
 </html>
