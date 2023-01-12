@@ -4,10 +4,9 @@
     "name": "Gummersbach",
     "buildings": [
       {
-        "buildingId": "objectId",
         "name": "Gebäude A",
         "coords": {
-          "x": 0,
+          "x": 9,
           "y": 0,
           "width": 127,
           "depth": 14,
@@ -17,7 +16,7 @@
           {
             "floorId": "",
             "name": "3. Etage",
-            "level": 1,
+            "level": 3,
             "coords": {
               "x": 0,
               "y": 0,
@@ -239,9 +238,9 @@
               {
                 "roomId": "",
                 "number": "3216",
-                "name": "",
-                "type": "",
-                "description": "",
+                "name": "MI-Studio / Seminarraum",
+                "type": "labor",
+                "description": "Projektraum/Arbeitsgruppenraum",
                 "assets": [],
                 "coords": {
                   "x": 57,
@@ -254,9 +253,9 @@
               {
                 "roomId": "",
                 "number": "3217",
-                "name": "",
-                "type": "",
-                "description": "",
+                "name": "MI-Multimediaraum",
+                "type": "labor",
+                "description": "Filmvorführraum, Multimediaraum",
                 "assets": [],
                 "coords": {
                   "x": 50,
@@ -790,6 +789,404 @@
             ]
           }
         ]
+      },
+      {
+        "buildingId": "",
+        "name": "Gebäude B",
+        "coords": {
+          "x": 91,
+          "y": 29,
+          "width": 75,
+          "depth": 15,
+          "direction": null
+        },
+        "floors": [
+          {
+            "floorId": "",
+            "name": "3. Etage",
+            "level": 3,
+            "coords": {
+              "x": 0,
+              "y": 0,
+              "width": 127,
+              "depth": 14,
+              "direction": null
+            },
+            "rooms": [
+              {
+                "roomId": "",
+                "number": "3100",
+                "name": "",
+                "type": "Hörsäle und Seminarräume",
+                "description": "",
+                "assets": [],
+                "coords": {
+                  "x": 5,
+                  "y": 0,
+                  "width": 5,
+                  "depth": 6,
+                  "direction": "SOUTH"
+                }
+              },
+              {
+                "roomId": "",
+                "number": "3101",
+                "name": "",
+                "type": "Hörsäle und Seminarräume",
+                "description": "",
+                "assets": [],
+                "coords": {
+                  "x": 0,
+                  "y": 9,
+                  "width": 11,
+                  "depth": 6,
+                  "direction": "NORTH"
+                }
+              },
+              {
+                "roomId": "",
+                "number": "3102",
+                "name": "",
+                "type": "Hörsäle und Seminarräume",
+                "description": "",
+                "assets": [],
+                "coords": {
+                  "x": 11,
+                  "y": 9,
+                  "width": 13,
+                  "depth": 6,
+                  "direction": "NORTH"
+                }
+              },
+              {
+                "roomId": "",
+                "number": "3103",
+                "name": "",
+                "type": "Hörsäle und Seminarräume",
+                "description": "",
+                "assets": [],
+                "coords": {
+                  "x": 24,
+                  "y": 9,
+                  "width": 5,
+                  "depth": 6,
+                  "direction": "NORTH"
+                }
+              },
+              {
+                "roomId": "",
+                "number": "3104",
+                "name": "",
+                "type": "Hörsäle und Seminarräume",
+                "description": "",
+                "assets": [],
+                "coords": {
+                  "x": 29,
+                  "y": 9,
+                  "width": 6,
+                  "depth": 6,
+                  "direction": "NORTH"
+                }
+              },
+              {
+                "roomId": "",
+                "number": "3105",
+                "name": "",
+                "type": "Hörsäle und Seminarräume",
+                "description": "",
+                "assets": [],
+                "coords": {
+                  "x": 35,
+                  "y": 9,
+                  "width": 3,
+                  "depth": 2,
+                  "direction": "NORTH"
+                }
+              },
+              {
+                "roomId": "",
+                "number": "3106",
+                "name": "",
+                "type": "Hörsäle und Seminarräume",
+                "description": "",
+                "assets": [],
+                "coords": {
+                  "x": 40,
+                  "y": 9,
+                  "width": 9,
+                  "depth": 6,
+                  "direction": "NORTH"
+                }
+              },
+              {
+                "roomId": "",
+                "number": "3107",
+                "name": "",
+                "type": "Hörsäle und Seminarräume",
+                "description": "",
+                "assets": [],
+                "coords": {
+                  "x": 49,
+                  "y": 9,
+                  "width": 9,
+                  "depth": 6,
+                  "direction": "NORTH"
+                }
+              },
+              {
+                "roomId": "",
+                "number": "3108",
+                "name": "",
+                "type": "Hörsäle und Seminarräume",
+                "description": "",
+                "assets": [],
+                "coords": {
+                  "x": 58,
+                  "y": 9,
+                  "width": 9,
+                  "depth": 6,
+                  "direction": "NORTH"
+                }
+              },
+              {
+                "roomId": "",
+                "number": "3109",
+                "name": "",
+                "type": "Hörsäle und Seminarräume",
+                "description": "",
+                "assets": [],
+                "coords": {
+                  "x": 67,
+                  "y": 9,
+                  "width": 8,
+                  "depth": 6,
+                  "direction": "NORTH"
+                }
+              },
+              {
+                "roomId": "",
+                "number": "3110",
+                "name": "",
+                "type": "Hörsäle und Seminarräume",
+                "description": "",
+                "assets": [],
+                "coords": {
+                  "x": 62,
+                  "y": 0,
+                  "width": 8,
+                  "depth": 6,
+                  "direction": "SOUTH"
+                }
+              },
+              {
+                "roomId": "",
+                "number": "3111",
+                "name": "",
+                "type": "Hörsäle und Seminarräume",
+                "description": "",
+                "assets": [],
+                "coords": {
+                  "x": 55,
+                  "y": 0,
+                  "width": 7,
+                  "depth": 6,
+                  "direction": "SOUTH"
+                }
+              },
+              {
+                "roomId": "",
+                "number": "3112",
+                "name": "",
+                "type": "Hörsäle und Seminarräume",
+                "description": "",
+                "assets": [],
+                "coords": {
+                  "x": 47,
+                  "y": 0,
+                  "width": 8,
+                  "depth": 6,
+                  "direction": "SOUTH"
+                }
+              },
+              {
+                "roomId": "",
+                "number": "3113",
+                "name": "",
+                "type": "Labore",
+                "description": "",
+                "assets": [],
+                "coords": {
+                  "x": 40,
+                  "y": 0,
+                  "width": 7,
+                  "depth": 6,
+                  "direction": "SOUTH"
+                }
+              },
+              {
+                "roomId": "",
+                "number": "3114",
+                "name": "",
+                "type": "Büro",
+                "description": "",
+                "assets": [],
+                "coords": {
+                  "x": 38,
+                  "y": 0,
+                  "width": 2,
+                  "depth": 6,
+                  "direction": "SOUTH"
+                }
+              },
+              {
+                "roomId": "",
+                "number": "3115",
+                "name": "Behinderten WC",
+                "type": "WC",
+                "description": "",
+                "assets": [],
+                "coords": {
+                  "x": 35,
+                  "y": 4,
+                  "width": 3,
+                  "depth": 2,
+                  "direction": "SOUTH"
+                }
+              },
+              {
+                "roomId": "",
+                "number": "3116",
+                "name": "EDV Raum",
+                "type": "",
+                "description": "",
+                "assets": [],
+                "coords": {
+                  "x": 35,
+                  "y": 0,
+                  "width": 3,
+                  "depth": 4,
+                  "direction": "EAST"
+                }
+              },
+              {
+                "roomId": "",
+                "number": "3118",
+                "name": "Damen und Herren",
+                "type": "WC",
+                "description": "",
+                "assets": [],
+                "coords": {
+                  "x": 30,
+                  "y": 0,
+                  "width": 5,
+                  "depth": 6,
+                  "direction": "SOUTH"
+                }
+              }
+            ],
+            "halls": [
+              {
+                "hallId": "",
+                "number": "",
+                "coords": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 0,
+                  "depth": 0,
+                  "direction": null
+                }
+              }
+            ],
+            "stairs": [
+              {
+                "stairId": "",
+                "number": "",
+                "name": "",
+                "coords": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 0,
+                  "depth": 0,
+                  "direction": null
+                }
+              }
+            ],
+            "lifts": [],
+            "outdoors": []
+          }
+        ]
+      },
+      {
+        "buildingId": "",
+        "name": "Verbindung A und B Gebäude",
+        "coords": {
+          "x": 101,
+          "y": 14,
+          "width": 20,
+          "depth": 15,
+          "direction": null
+        },
+        "floors": []
+      },
+      {
+        "buildingId": "",
+        "name": "Mensa",
+        "coords": {
+          "x": 0,
+          "y": 29,
+          "width": 38,
+          "depth": 38,
+          "direction": null
+        },
+        "floors": []
+      },
+      {
+        "buildingId": "",
+        "name": "Mensa",
+        "coords": {
+          "x": 0,
+          "y": 29,
+          "width": 38,
+          "depth": 38,
+          "direction": null
+        },
+        "floors": []
+      },
+      {
+        "buildingId": "",
+        "name": "Abel Group",
+        "coords": {
+          "x": 91,
+          "y": 58,
+          "width": 23,
+          "depth": 42,
+          "direction": null
+        },
+        "floors": []
+      },
+      {
+        "buildingId": "",
+        "name": "Bibliothek",
+        "coords": {
+          "x": 140,
+          "y": 60,
+          "width": 23,
+          "depth": 40,
+          "direction": null
+        },
+        "floors": []
+      },
+      {
+        "buildingId": "",
+        "name": "Ferchau",
+        "coords": {
+          "x": 193,
+          "y": 60,
+          "width": 18,
+          "depth": 40,
+          "direction": null
+        },
+        "floors": []
       }
     ]
   }
