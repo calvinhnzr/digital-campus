@@ -31,15 +31,15 @@ services:
       - ./backend/display_service:/usr/src/app/display_service/src
     depends_on:
       - redis
-  link_service:
-    container_name: link_service
+  auth_service:
+    container_name: auth_service
     build:
-      context: ./backend/link_service
+      context: ./backend/auth_service
       dockerfile: Dockerfile
     ports:
       - "8002:8002"
     volumes:
-      - ./backend/link_service:/usr/src/app/link_service/src
+      - ./backend/auth_service:/usr/src/app/auth_service/src
     depends_on:
       - redis
   redis:

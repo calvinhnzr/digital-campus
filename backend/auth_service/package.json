@@ -1,8 +1,8 @@
 {
-  "name": "link_service",
+  "name": "auth_service",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "",
   "scripts": {
     "start": "node src/app.js",
     "start:dev": "nodemon src/app.js"
@@ -14,6 +14,8 @@
     "nodemon": "^2.0.20"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
     "ioredis": "^5.2.4"
   }
 }
