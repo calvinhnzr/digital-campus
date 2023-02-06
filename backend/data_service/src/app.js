@@ -12,7 +12,7 @@ app.use(
 );
 
 // ROUTES IMPORT
-const roomRoutes = require("./routes/roomRoutes");
+// const roomRoutes = require("./routes/roomRoutes");
 const assetsRoutes = require("./routes/assetsRoutes.js");
 const timetableRoutes = require("./routes/timetablesRoutes");
 const campusRoutes = require("./routes/campusRoutes");
@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.use("/api/rooms", roomRoutes);
+// app.use("/api/rooms", roomRoutes);
 app.use("/api/assets", assetsRoutes);
 app.use("/api/timetables", timetableRoutes);
 app.use("/api/campus", campusRoutes);

@@ -13,3 +13,7 @@ canvas {
 .html {
   color: white;
 }
+
+.fiberHtml {
+  display: contents;
+}

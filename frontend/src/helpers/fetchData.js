@@ -1,6 +1,6 @@
 // fetch-data.js
 export async function fetchData(method, url) {
-  return fetch(url, {
+  return await fetch(url, {
     method: method,
     headers: {
       "Content-Type": "application/json",
