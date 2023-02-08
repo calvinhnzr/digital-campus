@@ -1,10 +1,11 @@
 .App {
-  background-color: #343434;
+  background-color: #6469b7;
   height: 100%;
   width: 100%;
 }
 
-canvas {
+canvas,
+main {
   height: 100%;
   width: 100%;
   outline: 1px solid;

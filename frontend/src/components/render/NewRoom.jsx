@@ -1,11 +1,13 @@
 import { useEffect, useState, Suspense } from "react"
 import { useGLTF, Html } from "@react-three/drei"
 
+import { useAtom } from "jotai"
+import { searchRoomAtom } from "../../store"
+
 function Model(props) {
   const gltf = useGLTF(`/room.gltf`, true)
   const model = gltf.scene.clone()
   return <primitive object={model} dispose={null} />
-  // console.log(model)
 }
 
 const NewRoom = (props) => {
@@ -15,8 +17,9 @@ const NewRoom = (props) => {
   let x = props.data.coords.x
   let y = props.data.coords.y
 
+  const [searchRoom] = useAtom(searchRoomAtom)
+
   const [visible, setVisible] = useState(true)
-  const [highlight, setHighlight] = useState(false)
 
   return (
     <group position={[x + width / 2, height / 2, y + depth / 2]} visible={visible}>
@@ -29,8 +32,8 @@ const NewRoom = (props) => {
         <boxGeometry args={[width, height, depth]} />
         <meshStandardMaterial
           attach="material"
-          color="white"
-          wireframe={props.highlightRoom === props.data.number ? false : true}
+          color={searchRoom === props.data.number ? "lime" : "white"}
+          wireframe={searchRoom === props.data.number ? false : false}
         />
       </mesh>
     </group>

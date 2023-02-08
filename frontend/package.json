@@ -12,6 +12,7 @@
     "@react-three/drei": "^9.51.1",
     "@react-three/fiber": "^8.10.0",
     "@types/three": "^0.148.0",
+    "jotai": "^2.0.0",
     "lamina": "^1.1.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

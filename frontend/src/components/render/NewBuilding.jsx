@@ -13,7 +13,7 @@ const NewBuilding = (props) => {
   return (
     <group position={[x, 0, y]}>
       {props.children}
-      <Html className="fiberHtml">{props.data.name}</Html>
+      {/* <Html className="fiberHtml">{props.data.name}</Html> */}
       <mesh position={[width / 2, height / 2, depth / 2]} visible={visible}>
         <boxGeometry attach="geometry" args={[width, height, depth]} />
         <meshStandardMaterial attach="material" color="white" wireframe={true} />
