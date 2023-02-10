@@ -1,18 +1,13 @@
-import { useAtom } from "jotai"
-
-import { campusDataAtom } from "../../store"
-
 import NewBuilding from "./NewBuilding"
 import NewFloor from "./NewFloor"
 import NewRoom from "./NewRoom"
+import { PivotControls } from "@react-three/drei"
 
-const Campus = () => {
-  const [campusData, setCampusData] = useAtom(campusDataAtom)
-
+const Campus = ({ campusData }) => {
   return (
     <>
       {campusData ? (
-        <group className="campus">
+        <group className="campus" wireframe>
           {campusData[0].buildings.map((building) => (
             <NewBuilding key={building._id} data={building}>
               {building.floors.map((floor) => (

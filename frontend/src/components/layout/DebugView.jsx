@@ -25,7 +25,7 @@ const DebugView = () => {
       </label>
       <label>
         Suche Raum{" "}
-        <input type="text" placeholder="3217" onChange={(e) => setSearchRoom(e.target.value)} value={searchRoom} />
+        <input type="text" placeholder="3216" onChange={(e) => setSearchRoom(e.target.value)} value={searchRoom} />
       </label>
     </StyledDebug>
   )
