@@ -258,4 +258,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# display_service
+backend/display_service/index.png
+backend/display_service/index.bmp
+
 # End of https://www.toptal.com/developers/gitignore/api/react,node,nextjs,visualstudiocode,macos,windows

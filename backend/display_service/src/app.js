@@ -1,3 +1,7 @@
+const { generate } = require("./helpers/generate");
+
+const path = require("path");
+
 // redis
 const redisPubSub = require("./redisPubSub");
 
@@ -13,42 +17,13 @@ app.get("/display/campus/:campus/rooms/:room", async (req, res) => {
   const campusParam = req.params.campus;
   const roomParam = req.params.room;
 
-  // get room information
-  // -------------------------
-  const roomResponse = await fetch("http://data_service:8000/api/campus");
-  const roomData = await roomResponse.json();
+  const result = await generate(campusParam, roomParam);
 
-  let roomInfo;
-  const rCampus = roomData.find((campus) => campus.name.toLowerCase() === campusParam.toLowerCase());
-  rCampus.buildings.forEach((building) => {
-    building.floors.forEach((floor) => {
-      floor.rooms.forEach((room) => {
-        if (room.number.toLowerCase() === roomParam.toLowerCase()) {
-          roomInfo = room;
-        }
-      });
-    });
-  });
-
-  if (!roomInfo) {
-    return res.status(404).send("Room not found");
+  if (result.error) {
+    return res.status(500).send(result.error);
+  } else {
+    return res.status(200).sendFile(path.join(__dirname, "../index.bmp"));
   }
-  // -------------------------
-
-  // get timetable information
-  // -------------------------
-  const timetableResponse = await fetch("http://data_service:8000/api/timetables");
-  const timetableData = await timetableResponse.json();
-
-  const tCampus = timetableData.find((campus) => campus.campus.toLowerCase() === campusParam.toLowerCase());
-  const timetable = tCampus.rooms.find((room) => room.roomNo.toLowerCase() === roomParam.toLowerCase());
-
-  if (!timetable) {
-    return res.status(404).send("Timetable not found");
-  }
-  // -------------------------
-
-  return res.render("pages/index", { timetable, roomInfo });
 });
 
 const PORT = process.env.PORT || 8001;
