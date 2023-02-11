@@ -1,8 +1,11 @@
+// jwt
+const { generateToken, checkToken } = require("./helpers/token");
+
 // redis
-const redisPubSub = require("./redisPubSub");
+const redisPubSub = require("./helpers/redisPubSub");
 
 // db
-const { connect, getActiveUsers, addActiveUser, removeActiveUser } = require("./db");
+const { connect, addUser, removeUser, checkIfUserExists, getUserCount } = require("./helpers/db");
 
 // express
 const express = require("express");
@@ -11,45 +14,95 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// routes
-app.get("/", (req, res) => {
-  res.send("auth_service");
+// pi initial setup
+redisPubSub.onMessage("piStarted", (payload) => {
+  newPiToken(payload.room);
 });
 
-app.get("/activeusers/rooms/:room", async (req, res) => {
-  const room = req.params.room;
+const newPiToken = (room) => {
+  const token = generateToken(room);
+  redisPubSub.publishEvent("newToken", { token });
+};
 
-  const result = await getActiveUsers(room);
+// index
+app.get("/", (req, res) => res.send("auth_service"));
 
-  if (result.error) {
-    return res.status(400).json({ error: result.error });
+// auth check
+app.get("/auth", async (req, res) => {
+  const { token } = req.query;
+
+  if (!token) return res.status(400).json({ message: "no token provided" });
+
+  const result = checkToken(token);
+  if (!result) return res.status(401).json({ message: "token invalid" });
+
+  const exists = await checkIfUserExists(token);
+  if (!exists) return res.status(200).json({ exists: false });
+
+  return res.status(200).json({ exists: true });
+});
+
+// login
+app.post("/auth", async (req, res) => {
+  const { tokenOld, tokenNew } = req.body;
+
+  if (!tokenNew) return res.status(400).json({ message: "no new token provided" });
+  if (!tokenNew && tokenOld) return res.status(400).json({ message: "new token missing" });
+
+  const resultNew = checkToken(tokenNew);
+  if (!resultNew) return res.status(401).json({ message: "new token invalid" });
+
+  const exists = await checkIfUserExists(tokenNew);
+  if (exists) return res.status(409).json({ message: "new token already exists" });
+
+  if (tokenOld) {
+    const resultOld = checkToken(tokenOld);
+
+    if (!resultOld) return res.status(401).json({ message: "old token invalid" });
+
+    const exists = await checkIfUserExists(tokenOld);
+    if (exists) await removeUser(tokenOld);
   }
-  return res.status(200).json(result);
+
+  const user = await addUser(tokenNew);
+
+  const { token, room } = user;
+
+  newPiToken(room);
+
+  return res.status(201).json({ room, token });
 });
 
-app.post("/activeusers/rooms/:room/", async (req, res) => {
-  const room = req.params.room;
-  const user = req.body.user;
+// logout
+app.delete("/auth", async (req, res) => {
+  const { token } = req.body;
 
-  const result = await addActiveUser(room, user);
+  if (!token) return res.status(400).json({ message: "no token provided" });
 
-  if (result.error) {
-    res.status(400).json({ error: result.error });
-  }
-  res.status(201).json(result);
+  const result = checkToken(token);
+
+  if (!result) return res.status(401).json({ message: "token invalid" });
+
+  const exists = await checkIfUserExists(token);
+  if (!exists) return res.status(410).json({ message: "token not found" });
+
+  await removeUser(token);
+
+  return res.status(200).json({ message: "user logged out successfully" });
 });
 
-app.delete("/activeusers/rooms/:room/", async (req, res) => {
-  const room = req.params.room;
-  const user = req.body.user;
+// count
+app.get("/api/count", async (req, res) => {
+  const { room } = req.query;
 
-  const result = await removeActiveUser(room, user);
+  if (!room) return res.status(400).json({ message: "no room provided" });
 
-  if (result.error) {
-    res.status(400).json({ error: result.error });
-  }
-  res.status(201).json({ message: "user removed" });
+  const count = await getUserCount(room);
+
+  return res.status(200).json({ count });
 });
+
+app.all("*", (req, res) => res.status(404).json({ message: "not found" }));
 
 // start express server
 const PORT = process.env.PORT || 8002;

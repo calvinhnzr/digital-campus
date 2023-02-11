@@ -1,4 +1,4 @@
-FROM node:16.17.0
+FROM node:19.6.0
 
 # Create app directory
 WORKDIR /usr/src/app/auth_service
