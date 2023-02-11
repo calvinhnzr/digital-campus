@@ -215,6 +215,28 @@ async function returnAllCampus() {
   return campuses;
 }
 
+async function returnCampusByName(name) {
+  const campus = await Campus.find({ name: name });
+  console.log(campus);
+  return campus;
+}
+
+// for a specific campus
+async function returnAllRooms(name) {
+  // const rooms = await Campus.aggregate([{ $match: { floors: { $regex: "*" } } }, { $group: { _id: "_id" } }]);
+  // const rooms = await Campus.find({ name: name }.buildings);
+  const campus = await Campus.find({ name: name });
+  const rooms = [];
+  for (let i = 0; i < campus[0].buildings.length; i++) {
+    for (let j = 0; j < campus[0].buildings[i].floors.length; j++) {
+      for (let k = 0; k < campus[0].buildings[i].floors[j].rooms.length; k++) {
+        rooms.push(campus[0].buildings[i].floors[j].rooms[k]);
+      }
+    }
+  }
+  return rooms;
+}
+
 async function connect() {
   await mongoose.connect(uri);
   console.log("connected to MongoDB");
@@ -259,5 +281,7 @@ module.exports = {
   returnAllAssets,
   returnAllTimetables,
   returnAllCampus,
+  returnAllRooms,
+  returnCampusByName,
   returnAllActiveUsers,
 };
