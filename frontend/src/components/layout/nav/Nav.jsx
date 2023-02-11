@@ -4,20 +4,20 @@ import { useAtom } from "jotai"
 
 import { FaMap, FaCameraRetro } from "react-icons/fa"
 
-import { roomTypesAtom, perspectiveAtom } from "../../../store.jsx"
+import { perspectiveAtom } from "../../../store.jsx"
 
 import Search from "./Search.jsx"
 import RoomTypes from "./RoomTypes.jsx"
 
 const StyledNav = styled.nav`
   /* outline: 1px solid red; */
-  position: absolute;
+  /* position: absolute; */
+  grid-area: nav;
   gap: 0 2rem;
   display: flex;
   height: 3rem;
   width: 100%;
   height: auto;
-  padding: 1.5rem 2rem;
   .perspective {
     /* outline: 1px solid red; */
     z-index: 100;

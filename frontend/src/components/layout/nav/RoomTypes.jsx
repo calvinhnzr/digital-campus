@@ -3,7 +3,7 @@ import { useAtom } from "jotai"
 import styled from "styled-components"
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi"
 
-import { selectedRoomTypeAtom } from "../../../store.jsx"
+import { queryTypeAtom } from "../../../store.jsx"
 
 const Button = () => {}
 
@@ -15,6 +15,7 @@ const Container = styled.ul`
   margin: 0;
   list-style: none;
   gap: 1.5rem;
+  /* height: fit-content; */
   align-items: center;
   /* outline: 1px solid red; */
   overflow-x: scroll;
@@ -60,24 +61,23 @@ const Container = styled.ul`
 
 const RoomTypes = () => {
   let types = ["Büro", "Labor", "Verwaltung", "Hörsaal", "Seminaraum", "Projektraum"]
-
   let more = ["Toilette", "Aufzug", "Treppe", "Studienservice"]
 
-  const [selectedRoomType, setSelectedRoomType] = useAtom(selectedRoomTypeAtom)
+  const [queryType, setQueryType] = useAtom(queryTypeAtom)
 
   return (
     <Container>
       {types.map((value, index) => {
         return (
-          <li key={index} className={selectedRoomType === value ? "checked" : ""}>
+          <li key={index} className={queryType === value ? "checked" : ""}>
             <label title={value}>
               {value}
               <input
                 type="radio"
-                name="selectedRoomType"
+                name="queryRoomType"
                 value={value}
-                checked={selectedRoomType === value}
-                onChange={(e) => setSelectedRoomType(e.target.value)}
+                checked={queryType === value}
+                onChange={(e) => setQueryType(e.target.value)}
               />
             </label>
           </li>

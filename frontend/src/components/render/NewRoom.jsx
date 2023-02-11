@@ -1,7 +1,7 @@
 import { useEffect, useState, Suspense } from "react"
 import { useGLTF, Html } from "@react-three/drei"
 import { useAtom } from "jotai"
-import { searchRoomAtom, roomsDataAtom } from "../../store"
+import { queryNumberAtom, roomsDataAtom } from "../../store"
 
 function Model(props) {
   const gltf = useGLTF(`/room.gltf`, true)
@@ -16,7 +16,7 @@ const NewRoom = (props) => {
   let x = props.data.coords.x
   let y = props.data.coords.y
 
-  const [searchRoom] = useAtom(searchRoomAtom)
+  const [searchRoom] = useAtom(queryNumberAtom)
   const [roomsData, setRoomsData] = useAtom(roomsDataAtom)
 
   const [visible, setVisible] = useState(true)
@@ -26,9 +26,9 @@ const NewRoom = (props) => {
   const [hightColor, setHightColor] = useState(false)
 
   function handleClick(e) {
-    e.stopPropagation()
-    setRoomsData({ ...props.data })
-    console.log(roomsData)
+    // e.stopPropagation()
+    // setRoomsData({ ...props.data })
+    // console.log(roomsData)
   }
 
   useEffect(() => {

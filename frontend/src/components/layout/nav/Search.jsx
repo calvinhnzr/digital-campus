@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import { useAtom } from "jotai"
 import { FaSearch } from "react-icons/fa"
-import { searchRoomAtom } from "../../../store"
+import { queryNumberAtom } from "../../../store"
 
 const Label = styled.label`
   z-index: 100;
@@ -40,15 +40,15 @@ const Label = styled.label`
 `
 
 const Search = () => {
-  const [searchRoom, setSearchRoom] = useAtom(searchRoomAtom)
+  const [queryNumber, setQueryNumber] = useAtom(queryNumberAtom)
 
   function handleChange(e) {
-    setSearchRoom(e.target.value)
+    setQueryNumber(e.target.value)
   }
 
   return (
     <Label>
-      <input type="text" maxLength="4" placeholder="3216" onChange={(e) => handleChange(e)} value={searchRoom} />
+      <input type="text" maxLength="4" placeholder="3216" onChange={(e) => handleChange(e)} value={queryNumber} />
       <FaSearch />
     </Label>
   )
