@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useLayoutEffect } from "react"
 import styled from "styled-components"
+import { useAtom } from "jotai"
 import { FaFlask, FaChevronDown, FaChevronUp } from "react-icons/fa"
-
+import { verifiedRoomAtom } from "../../../store"
 import More from "./More"
 import Button from "./Button"
 
@@ -70,9 +71,12 @@ const Header = styled.label`
       display: block;
       height: 1rem;
       width: 1rem;
-      background-color: #92d557;
+      background-color: #47da1b;
       border-radius: 50%;
       margin-right: 0.5rem;
+    }
+    &.busy::before {
+      background-color: #ea8e37;
     }
   }
 `
@@ -104,12 +108,24 @@ const Body = styled.section`
 `
 
 const Card = (props) => {
-
   const [open, setOpen] = useState(false)
+  const [count, setCount] = useState(0)
+  const [verifiedRoom, setVerifiedRoom] = useAtom(verifiedRoomAtom)
+  let url = `http://localhost:8002/api/count?room=${props.data.number}`
+
+  const fetchRoomCount = async (url) => {
+    const response = await fetch(url)
+    const data = await response.json()
+    setCount(data.count)
+  }
 
   useLayoutEffect(() => {
     props.index === 0 && setOpen(true)
   }, [])
+
+  useLayoutEffect(() => {
+    fetchRoomCount(url)
+  }, [verifiedRoom])
 
   return (
     <StyledCard open={open}>
@@ -120,12 +136,13 @@ const Card = (props) => {
           {props.data.type ? props.data.type : "{type}"} <FaFlask />
         </h4>
         <span className="number">{props.data.number ? props.data.number : "{number}"}</span>
-        <p className="status">frei</p>
+
+        {count ? <p className="status busy">{count ? count : "loading"}</p> : <p className="status empty">frei</p>}
       </Header>
 
       {open && (
         <Body>
-          <Button />
+          <Button number={props.data.number} />
           <More label="Ausstattung" gridArea="ausstattung" data={props.data}>
             <ul>
               <li>Data</li>

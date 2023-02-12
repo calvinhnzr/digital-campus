@@ -1,27 +1,104 @@
-import React from "react"
+import { useLayoutEffect } from "react"
 import styled from "styled-components"
+import { useAtom } from "jotai"
+import { verifiedRoomAtom } from "../../../store"
 
-const StyledButton = styled.input`
+import { newTokenAtom, oldTokenAtom } from "../../../App"
+
+const StyledButton = styled.label`
   /* opacity: 0.5; */
-  grid-area: button;
-
-  border-radius: 6px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.8em;
-  width: fit-content;
-  margin-bottom;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  color: white;
-  cursor: pointer;
-  transition: border-color 0.25s;
-  cursor: not-allowed;
+  input {
+    grid-area: button;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.8em;
+    width: fit-content;
+    margin-bottom;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    color: white;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    cursor: not-allowed;
+    &.login {
+      cursor: pointer;
+      background-color: #47da1b;
+    }
+    &.logout {
+      cursor: pointer;
+      background-color: #da1b4e;
+    }
+  }  
 `
 
-const Button = () => {
-  return <StyledButton type="button" value="Raum beitreten" />
+const Button = (props) => {
+  const [verifiedRoom, setVerifiedRoom] = useAtom(verifiedRoomAtom)
+  const [newToken, setNewToken] = useAtom(newTokenAtom)
+  const [oldToken, setOldToken] = useAtom(oldTokenAtom)
+
+  async function handleFetch(method, body) {
+    const response = await fetch("http://localhost:8002/auth", {
+      method: `${method}`,
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    if (!response.ok) return false
+
+    const data = await response.json()
+    return data
+  }
+
+  async function login() {
+    const body = { tokenOld: oldToken, tokenNew: newToken }
+
+    const data = await handleFetch("POST", body)
+
+    if (data) {
+      setOldToken(data.token)
+      setNewToken("")
+      setVerifiedRoom({
+        number: data.room,
+        loggedIn: true,
+      })
+    }
+  }
+
+  async function logout() {
+    const body = { token: oldToken }
+
+    const data = await handleFetch("DELETE", body)
+
+    if (data) {
+      setOldToken("")
+      setVerifiedRoom({
+        number: "",
+        loggedIn: false,
+      })
+    }
+  }
+
+  async function handleClick() {
+    verifiedRoom.loggedIn ? logout() : login()
+  }
+
+  return (
+    <StyledButton>
+      {props.number === verifiedRoom.number ? (
+        <input
+          type="button"
+          value={verifiedRoom.loggedIn ? "Raum verlassen" : "Raum betreten"}
+          className={verifiedRoom.loggedIn ? "logout" : "login"}
+          onClick={(e) => handleClick(e)}
+        />
+      ) : (
+        <input type="button" value="Raum betreten" />
+      )}
+    </StyledButton>
+  )
 }
 
 export default Button

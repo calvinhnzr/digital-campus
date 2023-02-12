@@ -25,7 +25,10 @@ const newPiToken = (room) => {
 };
 
 // index
-app.get("/", (req, res) => res.send("auth_service"));
+app.get("/", (req, res) => {
+  const token = generateToken("3216");
+  return res.json({ token });
+});
 
 // auth check
 app.get("/auth", async (req, res) => {

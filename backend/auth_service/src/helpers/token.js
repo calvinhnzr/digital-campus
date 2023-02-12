@@ -12,6 +12,8 @@ const generateToken = (room) => {
   return token;
 };
 
+console.log(generateToken("3216"));
+
 const checkToken = (token) => {
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
