@@ -30,8 +30,8 @@ function App() {
 
   return (
     <div className="App">
+      <Nav />
       <Main>
-        <Nav />
         {/* <Filter /> */}
         <Results />
       </Main>

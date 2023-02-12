@@ -4,12 +4,13 @@ const StyledMain = styled.main`
   position: absolute;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 2.75rem auto;
-  gap: 2rem 0rem;
-  padding: 2rem 2.5rem;
-  overflow: hidden;
+  /* grid-template-rows: 2.75rem auto; */
+  grid-template-rows: 2.75rem minmax(0, auto);
+  /* gap: 2rem 0rem; */
+  padding: 2rem 2.5rem 0;
+  overflow-y: scroll;
   grid-template-areas:
-    "nav nav nav"
+    "nav nav nav "
     "filter .  results";
 `
 

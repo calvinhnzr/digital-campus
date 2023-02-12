@@ -14,13 +14,20 @@ const StyledNav = styled.nav`
   /* position: absolute; */
   grid-area: nav;
   gap: 0 2rem;
+  padding: 2rem 2.5rem;
   display: flex;
   height: 3rem;
   width: 100%;
+  /* width: calc(100% - 5rem); */
+  background: linear-gradient(to bottom, #636363, #63636300);
+
   height: auto;
+  position: fixed;
+  z-index: 1000;
   .perspective {
     /* outline: 1px solid red; */
-    z-index: 100;
+
+    margin-left: auto;
     cursor: pointer;
     input {
       display: none;

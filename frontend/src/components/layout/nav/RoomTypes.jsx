@@ -10,7 +10,6 @@ const Button = () => {}
 const Container = styled.ul`
   display: flex;
   grid-template-columns: auto;
-  width: 100%;
   z-index: 100;
   padding: 0;
   margin: 0;
@@ -20,10 +19,10 @@ const Container = styled.ul`
   align-items: center;
   /* outline: 1px solid red; */
   overflow-x: scroll;
-  &::-webkit-scrollbar {
+  /* &::-webkit-scrollbar {
     display: none;
     -webkit-appearance: none;
-  }
+  } */
   li {
     &.checked {
       /* text-decoration: underline; */

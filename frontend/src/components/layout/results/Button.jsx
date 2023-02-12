@@ -7,8 +7,9 @@ const StyledButton = styled.input`
 
   border-radius: 6px;
   border: 1px solid transparent;
-  padding: 0.6em 2em;
+  padding: 0.6em 1.8em;
   width: fit-content;
+  margin-bottom;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -16,6 +17,7 @@ const StyledButton = styled.input`
   color: white;
   cursor: pointer;
   transition: border-color 0.25s;
+  cursor: not-allowed;
 `
 
 const Button = () => {

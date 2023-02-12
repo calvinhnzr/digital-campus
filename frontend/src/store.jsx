@@ -12,6 +12,15 @@ export const queryAtom = atom({
   type: "",
 })
 
+
+export const selectedAtom = atom([
+  {
+    data: {},
+    clicked: false,
+    hover: false,
+  },
+])
+
 export const formAtom = atom({
   status: "",
   date: "",
