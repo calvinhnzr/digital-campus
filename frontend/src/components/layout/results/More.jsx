@@ -21,7 +21,7 @@ const StyledMore = styled.div`
 `
 
 const More = (props) => {
-  const [hidden, setHidden] = useState(true)
+  const [hidden, setHidden] = useState(false)
 
   return (
     <StyledMore gridArea={props.gridArea}>

@@ -7,6 +7,7 @@ const StyledMain = styled.main`
   grid-template-rows: 2.75rem auto;
   gap: 2rem 0rem;
   padding: 2rem 2.5rem;
+  overflow: hidden;
   grid-template-areas:
     "nav nav nav"
     "filter .  results";

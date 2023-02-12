@@ -3,12 +3,13 @@ import { useAtom } from "jotai"
 import styled from "styled-components"
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi"
 
-import { queryTypeAtom } from "../../../store.jsx"
+import { queryAtom } from "../../../store.jsx"
 
 const Button = () => {}
 
 const Container = styled.ul`
   display: flex;
+  grid-template-columns: auto;
   width: 100%;
   z-index: 100;
   padding: 0;
@@ -31,6 +32,7 @@ const Container = styled.ul`
       border-radius: 6px; */
 
       label {
+        box-sizing: border-box;
         font-weight: 700;
         color: #87ff87;
       }
@@ -41,16 +43,9 @@ const Container = styled.ul`
       font-weight: 400;
       cursor: pointer;
 
+      text-transform: capitalize !important;
       &:hover {
         font-weight: 700;
-      }
-      &::before {
-        display: block;
-        content: attr(title);
-        font-weight: 700;
-        height: 0;
-        overflow: hidden;
-        visibility: hidden;
       }
       input {
         display: none;
@@ -60,24 +55,32 @@ const Container = styled.ul`
 `
 
 const RoomTypes = () => {
-  let types = ["Büro", "Labor", "Verwaltung", "Hörsaal", "Seminaraum", "Projektraum"]
+  let types = ["büro", "labor", "verwaltung", "hörsaal", "seminaraum", "projektraum"]
   let more = ["Toilette", "Aufzug", "Treppe", "Studienservice"]
 
-  const [queryType, setQueryType] = useAtom(queryTypeAtom)
+  const [query, setQuery] = useAtom(queryAtom)
+
+  function handleChange(e) {
+    setQuery({
+      id: false,
+      number: false,
+      type: e.target.value,
+    })
+  }
 
   return (
     <Container>
       {types.map((value, index) => {
         return (
-          <li key={index} className={queryType === value ? "checked" : ""}>
+          <li key={index} className={query.type === value ? "checked" : ""}>
             <label title={value}>
               {value}
               <input
                 type="radio"
                 name="queryRoomType"
                 value={value}
-                checked={queryType === value}
-                onChange={(e) => setQueryType(e.target.value)}
+                checked={query.type === value}
+                onChange={(e) => handleChange(e)}
               />
             </label>
           </li>

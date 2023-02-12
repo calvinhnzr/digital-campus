@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react"
 
 import "./styles/App.css"
-import { useAtom, Provider } from "jotai"
+import { useAtom } from "jotai"
 import { campusDataAtom } from "./store"
 
-import { fetchData } from "./helpers/fetchData"
-import { Stats, PivotControls, Stage, Center } from "@react-three/drei"
+import { Center } from "@react-three/drei"
 import Main from "./components/layout/Main"
 import Nav from "./components/layout/nav/Nav"
 
@@ -27,14 +26,13 @@ function App() {
   const url = "http://localhost:8000/api/campus"
   useEffect(() => {
     handleFetchData(url)
-    console.log(campusData)
   }, [])
 
   return (
     <div className="App">
       <Main>
         <Nav />
-        <Filter />
+        {/* <Filter /> */}
         <Results />
       </Main>
       <Scene>

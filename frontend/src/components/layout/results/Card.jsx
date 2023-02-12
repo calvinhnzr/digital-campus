@@ -95,10 +95,6 @@ const Body = styled.section`
 `
 
 const Card = (props) => {
-  useEffect(() => {
-    console.log(props.data)
-  }, [])
-
   return (
     <StyledCard>
       <Header>

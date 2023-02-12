@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import { useAtom } from "jotai"
+import { useAtom, useSetAtom } from "jotai"
 import { FaSearch } from "react-icons/fa"
-import { queryNumberAtom } from "../../../store"
+import { queryAtom } from "../../../store"
 
 const Label = styled.label`
   z-index: 100;
@@ -40,15 +40,25 @@ const Label = styled.label`
 `
 
 const Search = () => {
-  const [queryNumber, setQueryNumber] = useAtom(queryNumberAtom)
+  const [query, setQuery] = useAtom(queryAtom)
 
   function handleChange(e) {
-    setQueryNumber(e.target.value)
+    setQuery({
+      id: false,
+      number: e.target.value,
+      type: false,
+    })
   }
 
   return (
     <Label>
-      <input type="text" maxLength="4" placeholder="3216" onChange={(e) => handleChange(e)} value={queryNumber} />
+      <input
+        type="text"
+        maxLength="4"
+        placeholder="e.g. 3216"
+        onChange={(e) => handleChange(e)}
+        value={query.number ? query.number : ""}
+      />
       <FaSearch />
     </Label>
   )
