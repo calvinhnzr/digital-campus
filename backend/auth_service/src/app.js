@@ -26,7 +26,14 @@ const newPiToken = (room) => {
 
 // index
 app.get("/", (req, res) => {
-  const token = generateToken("3216");
+  return res.send("auth_service");
+});
+
+// token mock
+app.get("/token/:room", (req, res) => {
+  const { room } = req.params;
+
+  const token = generateToken(room);
   return res.json({ token });
 });
 
@@ -39,10 +46,21 @@ app.get("/auth", async (req, res) => {
   const result = checkToken(token);
   if (!result) return res.status(401).json({ message: "token invalid" });
 
-  const exists = await checkIfUserExists(token);
-  if (!exists) return res.status(200).json({ exists: false });
+  return res.status(200).json({ message: "token valid" });
+});
 
-  return res.status(200).json({ exists: true });
+app.get("/auth/status", async (req, res) => {
+  const { token } = req.query;
+
+  if (!token) return res.status(400).json({ message: "no token provided" });
+
+  const result = checkToken(token);
+  if (!result) return res.status(401).json({ message: "token invalid" });
+
+  const exists = await checkIfUserExists(token);
+  if (!exists) return res.status(404).json({ message: "token not found" });
+
+  return res.status(200).json({ message: "token found" });
 });
 
 // login
