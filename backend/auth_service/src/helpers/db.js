@@ -1,10 +1,10 @@
+require("dotenv").config();
+
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 const path = require("path");
 
 const { getTokenRoom } = require("./token");
-
-require("dotenv").config();
 
 const uri = `mongodb+srv://webclub:${process.env.MONGO_PW}@cluster0.uipp4bn.mongodb.net/digitalCampusAuthDB?retryWrites=true&w=majority`;
 

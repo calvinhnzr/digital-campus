@@ -2,9 +2,10 @@ import { useState, useEffect, useRef, useLayoutEffect } from "react"
 import styled from "styled-components"
 import { useAtom } from "jotai"
 import { FaFlask, FaChevronDown, FaChevronUp } from "react-icons/fa"
-import { verifiedRoomAtom } from "../../../store"
+import { currentRoomAtom, newRoomAtom } from "../../../store"
 import More from "./More"
 import Button from "./Button"
+import NewRoom from "../../render/NewRoom"
 
 const StyledCard = styled.div`
   padding: 0 1.5rem;
@@ -110,7 +111,9 @@ const Body = styled.section`
 const Card = (props) => {
   const [open, setOpen] = useState(false)
   const [count, setCount] = useState(0)
-  const [verifiedRoom, setVerifiedRoom] = useAtom(verifiedRoomAtom)
+  const [currentRoom, setcurrentRoom] = useAtom(currentRoomAtom)
+  const [newRoom, setNewRoom] = useAtom(newRoomAtom)
+
   let url = `http://localhost:8002/api/count?room=${props.data.number}`
 
   const fetchRoomCount = async (url) => {
@@ -125,7 +128,7 @@ const Card = (props) => {
 
   useLayoutEffect(() => {
     fetchRoomCount(url)
-  }, [verifiedRoom])
+  }, [currentRoom, newRoom])
 
   return (
     <StyledCard open={open}>

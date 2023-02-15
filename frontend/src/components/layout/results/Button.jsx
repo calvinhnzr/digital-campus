@@ -1,9 +1,9 @@
 import { useLayoutEffect } from "react"
 import styled from "styled-components"
 import { useAtom } from "jotai"
-import { verifiedRoomAtom } from "../../../store"
+import { currentRoomAtom, newRoomAtom } from "../../../store"
 
-import { newTokenAtom, oldTokenAtom } from "../../../App"
+import { newTokenAtom, currentTokenAtom } from "../../../App"
 
 const StyledButton = styled.label`
   /* opacity: 0.5; */
@@ -34,9 +34,10 @@ const StyledButton = styled.label`
 `
 
 const Button = (props) => {
-  const [verifiedRoom, setVerifiedRoom] = useAtom(verifiedRoomAtom)
+  const [newRoom, setNewRoom] = useAtom(newRoomAtom)
+  const [currentRoom, setCurrentRoom] = useAtom(currentRoomAtom)
   const [newToken, setNewToken] = useAtom(newTokenAtom)
-  const [oldToken, setOldToken] = useAtom(oldTokenAtom)
+  const [currentToken, setCurrentToken] = useAtom(currentTokenAtom)
 
   async function handleFetch(method, body) {
     const response = await fetch("http://localhost:8002/auth", {
@@ -53,52 +54,69 @@ const Button = (props) => {
   }
 
   async function login() {
-    const body = { tokenOld: oldToken, tokenNew: newToken }
+    const body = { tokenOld: currentToken, tokenNew: newToken }
 
     const data = await handleFetch("POST", body)
 
     if (data) {
-      setOldToken(data.token)
       setNewToken("")
-      setVerifiedRoom({
-        number: data.room,
-        loggedIn: true,
-      })
+      setCurrentToken(data.token)
+
+      setNewRoom({ number: "", loggedIn: false })
+      setCurrentRoom({ number: props.number, loggedIn: true })
+
+      localStorage.removeItem("newToken")
     }
   }
 
   async function logout() {
-    const body = { token: oldToken }
+    const body = { token: currentToken }
 
     const data = await handleFetch("DELETE", body)
 
     if (data) {
-      setOldToken("")
-      setVerifiedRoom({
-        number: "",
-        loggedIn: false,
-      })
+      setCurrentToken("")
+      setCurrentRoom({ number: "", loggedIn: false })
+
+      localStorage.removeItem("currentToken")
     }
   }
 
   async function handleClick() {
-    verifiedRoom.loggedIn ? logout() : login()
+    const room = props.number === currentRoom.number ? currentRoom : newRoom
+    const loggedIn = room.loggedIn
+    loggedIn ? logout() : login()
   }
 
-  return (
-    <StyledButton>
-      {props.number === verifiedRoom.number ? (
+  if (props.number === currentRoom.number) {
+    return (
+      <StyledButton>
         <input
           type="button"
-          value={verifiedRoom.loggedIn ? "Raum verlassen" : "Raum betreten"}
-          className={verifiedRoom.loggedIn ? "logout" : "login"}
+          value={currentRoom.loggedIn ? "Raum verlassen" : "Raum betreten"}
+          className={currentRoom.loggedIn ? "logout" : "login"}
           onClick={(e) => handleClick(e)}
         />
-      ) : (
+      </StyledButton>
+    )
+  } else if (props.number === newRoom.number) {
+    return (
+      <StyledButton>
+        <input
+          type="button"
+          value={newRoom.loggedIn ? "Raum verlassen" : "Raum betreten"}
+          className={newRoom.loggedIn ? "logout" : "login"}
+          onClick={(e) => handleClick(e)}
+        />
+      </StyledButton>
+    )
+  } else {
+    return (
+      <StyledButton>
         <input type="button" value="Raum betreten" />
-      )}
-    </StyledButton>
-  )
+      </StyledButton>
+    )
+  }
 }
 
 export default Button

@@ -1,18 +1,19 @@
 // jwt
 const { generateToken, checkToken } = require("./helpers/token");
-
 // redis
 const redisPubSub = require("./helpers/redisPubSub");
-
 // db
 const { connect, addUser, removeUser, checkIfUserExists, getUserCount } = require("./helpers/db");
-
 // express
 const express = require("express");
 const cors = require("cors");
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// socket connection
+const { initSocketIO } = require("./helpers/socket");
+const httpServer = initSocketIO(app);
 
 // pi initial setup
 redisPubSub.onMessage("piStarted", (payload) => {
@@ -39,17 +40,6 @@ app.get("/token/:room", (req, res) => {
 
 // auth check
 app.get("/auth", async (req, res) => {
-  const { token } = req.query;
-
-  if (!token) return res.status(400).json({ message: "no token provided" });
-
-  const result = checkToken(token);
-  if (!result) return res.status(401).json({ message: "token invalid" });
-
-  return res.status(200).json({ message: "token valid" });
-});
-
-app.get("/auth/status", async (req, res) => {
   const { token } = req.query;
 
   if (!token) return res.status(400).json({ message: "no token provided" });
@@ -105,7 +95,7 @@ app.delete("/auth", async (req, res) => {
   if (!result) return res.status(401).json({ message: "token invalid" });
 
   const exists = await checkIfUserExists(token);
-  if (!exists) return res.status(410).json({ message: "token not found" });
+  if (!exists) return res.status(404).json({ message: "token not found" });
 
   await removeUser(token);
 
@@ -127,7 +117,9 @@ app.all("*", (req, res) => res.status(404).json({ message: "not found" }));
 
 // start express server
 const PORT = process.env.PORT || 8002;
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+httpServer.listen(PORT, () => {
+  console.log(`auth_service listening on port ${PORT}!`);
+});
 
 // start db
 connect().catch((err) => console.log(err));

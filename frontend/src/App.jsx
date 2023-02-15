@@ -7,7 +7,7 @@ import jwt_decode from "jwt-decode"
 
 import "./styles/App.css"
 
-import { campusDataAtom, verifiedRoomAtom } from "./store"
+import { campusDataAtom, currentRoomAtom, newRoomAtom } from "./store"
 
 import Main from "./components/layout/Main"
 import Nav from "./components/layout/nav/Nav"
@@ -17,15 +17,16 @@ import Campus from "./components/render/Campus"
 import Results from "./components/layout/results/Results"
 import Filter from "./components/layout/filter/Filter"
 
-export const newTokenAtom = atomWithStorage("newToken", false) // temp
-export const oldTokenAtom = atomWithStorage("oldToken", false)
+export const newTokenAtom = atomWithStorage("newToken", false)
+export const currentTokenAtom = atomWithStorage("currentToken", false)
 
 function App() {
   const url = "http://localhost:8000/api/campus"
   const [campusData, setCampusData] = useAtom(campusDataAtom)
   const [newToken, setNewToken] = useAtom(newTokenAtom)
-  const [oldToken, setOldToken] = useAtom(oldTokenAtom)
-  const [verifiedRoom, setVerifiedRoom] = useAtom(verifiedRoomAtom)
+  const [currentToken, setCurrentToken] = useAtom(currentTokenAtom)
+  const [newRoom, setNewRoom] = useAtom(newRoomAtom)
+  const [currentRoom, setCurrentRoom] = useAtom(currentRoomAtom)
 
   let [searchParams, setSearchParams] = useSearchParams()
 
@@ -35,60 +36,64 @@ function App() {
     setCampusData(data)
   }
 
-  const handleParamToken = async () => {
-    const paramToken = searchParams.get("token")
-    paramToken && setNewToken(paramToken)
-  }
+  const handleLoadTokens = async () => {
+    // get new token from query and update state
+    const qToken = searchParams.get("token")
+    qToken && setNewToken(qToken)
 
-  const handleFetchToken = async () => {
-    let url = `http://localhost:8002/`
-    const res = await fetch(url)
-    const data = await res.json()
-    setNewToken(data.token)
-  }
-
-  async function authToken() {
-    let newValidToken, oldValidToken
-    newToken && (newValidToken = await isTokenValide(newToken))
-    oldToken && (oldValidToken = await isTokenValide(newToken))
-
-    console.log(newValidToken)
-    console.log(jwt_decode(newToken).room)
-
-    if (!newToken && !oldToken) {
-      // normaler Seitenaufruf
+    // query token is the same as current token, delete query token
+    if (qToken === currentToken) {
+      localStorage.removeItem("newToken")
+      setNewRoom({ number: "", loggedIn: false })
+      setNewToken("")
     }
 
-    if (newToken && !oldToken && newValidToken) {
-      // komponenten für raum frei schalten
-      // button: change state
-      setVerifiedRoom({
-        number: `${jwt_decode(newToken).room}`,
-        status: newValidToken.exists,
-      })
+    // clear search params
+    setSearchParams({})
+  }
+
+  const authToken = async () => {
+    setNewRoom({ number: "", loggedIn: false })
+    setCurrentRoom({ number: "", loggedIn: false })
+
+    const newTokenStatus = newToken && (await checkTokenStatus(newToken))
+    const currentTokenStatus = currentToken && (await checkTokenStatus(currentToken))
+
+    if (newTokenStatus.ok) {
+      setNewRoom({ number: jwt_decode(newToken).room, loggedIn: true })
+    }
+
+    if (newTokenStatus.status == 404) {
+      setNewRoom({ number: jwt_decode(newToken).room, loggedIn: false })
+    }
+
+    if (currentTokenStatus.ok) {
+      setCurrentRoom({ number: jwt_decode(currentToken).room, loggedIn: true })
+    }
+
+    if (currentTokenStatus.status === 404) {
+      setCurrentRoom({ number: jwt_decode(currentToken).room, loggedIn: false })
     }
   }
 
-  const isTokenValide = async (token) => {
+  const checkTokenStatus = async (token) => {
     let url = `http://localhost:8002/auth?token=${token}`
-    const response = await fetch(url)
-    if (!response.ok) {
-      return false
-    }
-    const payload = await response.json()
-    return payload
+    return await fetch(url)
   }
 
   useEffect(() => {
     handleFetchCampus(url)
+    handleLoadTokens()
 
-    handleFetchToken()
-    // handleParamToken()
+    return () => {
+      localStorage.removeItem("newToken")
+      setNewRoom({ number: "", loggedIn: false })
+    }
   }, [])
 
   useEffect(() => {
-    ;(newToken || oldToken) && authToken()
-  }, [newToken, oldToken])
+    ;(newToken || currentToken) && authToken()
+  }, [newToken, currentToken])
 
   return (
     <div className="App">
