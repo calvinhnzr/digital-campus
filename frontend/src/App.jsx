@@ -4,10 +4,11 @@ import { useAtom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
 import { useSearchParams } from "react-router-dom"
 import jwt_decode from "jwt-decode"
+import io from "socket.io-client"
 
 import "./styles/App.css"
 
-import { campusDataAtom, currentRoomAtom, newRoomAtom } from "./store"
+import { campusDataAtom, currentRoomAtom, newRoomAtom, queryAtom } from "./store"
 
 import Main from "./components/layout/Main"
 import Nav from "./components/layout/nav/Nav"
@@ -20,6 +21,8 @@ import Filter from "./components/layout/filter/Filter"
 export const newTokenAtom = atomWithStorage("newToken", false)
 export const currentTokenAtom = atomWithStorage("currentToken", false)
 
+const roomSocket = io.connect(`http://localhost:8002/`)
+
 function App() {
   const url = "http://localhost:8000/api/campus"
   const [campusData, setCampusData] = useAtom(campusDataAtom)
@@ -27,6 +30,7 @@ function App() {
   const [currentToken, setCurrentToken] = useAtom(currentTokenAtom)
   const [newRoom, setNewRoom] = useAtom(newRoomAtom)
   const [currentRoom, setCurrentRoom] = useAtom(currentRoomAtom)
+  const [query, setQuery] = useAtom(queryAtom)
 
   let [searchParams, setSearchParams] = useSearchParams()
 
@@ -82,6 +86,7 @@ function App() {
   }
 
   useEffect(() => {
+    roomSocket.connect()
     handleFetchCampus(url)
     handleLoadTokens()
 
@@ -95,12 +100,20 @@ function App() {
     ;(newToken || currentToken) && authToken()
   }, [newToken, currentToken])
 
+  useEffect(() => {
+    setQuery({
+      id: "",
+      number: newRoom.number,
+      type: "",
+    })
+  }, [newRoom])
+
   return (
     <div className="App">
       <Nav />
       <Main>
         {/* <Filter /> */}
-        <Results />
+        <Results roomSocket={roomSocket} />
       </Main>
       <Scene>
         <Camera />

@@ -13,7 +13,7 @@ app.use(express.json());
 
 // socket connection
 const { initSocketIO } = require("./helpers/socket");
-const httpServer = initSocketIO(app);
+const { io, httpServer } = initSocketIO(app);
 
 // pi initial setup
 redisPubSub.onMessage("piStarted", (payload) => {
@@ -81,6 +81,8 @@ app.post("/auth", async (req, res) => {
 
   newPiToken(room);
 
+  io.emit(`room_${room}_updated`, await getUserCount(room));
+
   return res.status(201).json({ room, token });
 });
 
@@ -98,6 +100,9 @@ app.delete("/auth", async (req, res) => {
   if (!exists) return res.status(404).json({ message: "token not found" });
 
   await removeUser(token);
+
+  const { room } = checkToken(token);
+  io.emit(`room_${room}_updated`, await getUserCount(room));
 
   return res.status(200).json({ message: "user logged out successfully" });
 });

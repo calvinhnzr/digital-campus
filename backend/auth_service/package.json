@@ -20,8 +20,7 @@
     "ioredis": "^5.2.4",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.2",
-    "socket.io": "^4.6.0",
-    "socketio-jwt": "^4.6.2"
+    "socket.io": "^4.6.0"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.7",

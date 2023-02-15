@@ -124,11 +124,17 @@ const Card = (props) => {
 
   useLayoutEffect(() => {
     props.index === 0 && setOpen(true)
+    fetchRoomCount(url)
   }, [])
 
-  useLayoutEffect(() => {
-    fetchRoomCount(url)
-  }, [currentRoom, newRoom])
+  useEffect(() => {
+    props.roomSocket.on(`room_${props.data.number}_updated`, (count) => {
+      setCount(count)
+    })
+    return () => {
+      props.roomSocket.off(`room_${props.data.number}_updated`)
+    }
+  }, [props.roomSocket])
 
   return (
     <StyledCard open={open}>

@@ -6,7 +6,6 @@ import Card from "./Card"
 
 import { roomsDataAtom, queryAtom, selectedAtom } from "../../../store"
 
-
 const Aside = styled.aside`
   display: flex;
   flex-direction: column;
@@ -31,7 +30,7 @@ const Aside = styled.aside`
   }
 `
 
-const Results = ({ children }) => {
+const Results = (props) => {
   const [roomsData, setRoomsData] = useAtom(roomsDataAtom)
   const [query, setQuery] = useAtom(queryAtom)
   const [selected, setSelected] = useAtom(selectedAtom)
@@ -69,9 +68,10 @@ const Results = ({ children }) => {
   return (
     <Aside>
       {(roomsData && query.number) || query.type
-        ? handleQuery().map((data, index) => <Card index={index} key={data._id} data={data} />)
+        ? handleQuery().map((data, index) => (
+            <Card index={index} key={data._id} data={data} roomSocket={props.roomSocket} />
+          ))
         : ""}
-
     </Aside>
   )
 }
