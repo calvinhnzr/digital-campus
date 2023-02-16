@@ -1,25 +1,8 @@
 const mongoose = require("mongoose");
-const path = require("path");
 
 require("dotenv").config();
 
 const uri = `mongodb+srv://webclub:${process.env.MONGO_PW}@cluster0.uipp4bn.mongodb.net/digitalCampusDB?retryWrites=true&w=majority`;
-
-// OLD:
-// const roomSchema = new mongoose.Schema({
-//   _id: String,
-//   name: String, //fehlt hiervor "roomNo" als key?
-//   type: String,
-//   description: String,
-//   seats: Number,
-//   location: Array,
-//   availability: {
-//     scheduleStatus: Boolean,
-//     loginCount: Number,
-//   },
-//   assets: [{ assetId: String, count: Number }],
-// });
-// const Room = mongoose.model("rooms", roomSchema);
 
 const assetSchema = new mongoose.Schema({
   _id: String,
@@ -186,24 +169,6 @@ const campusSchema = new mongoose.Schema({
 
 const Campus = mongoose.model("campus", campusSchema);
 
-const activeUsersSchema = new mongoose.Schema({
-  campus: String,
-  rooms: [
-    {
-      roomNo: String,
-      activeUsers: [],
-    },
-  ],
-});
-
-const ActiveUsers = mongoose.model("activeUsers", activeUsersSchema);
-
-async function returnAllActiveUsers() {
-  const users = await ActiveUsers.find({});
-  console.log(users);
-  return users;
-}
-
 async function returnAllCampus() {
   const campuses = await Campus.find({});
   console.log(campuses);
@@ -287,23 +252,6 @@ async function connect() {
   console.log("connected to MongoDB");
 }
 
-// OLD:
-// async function returnAllRooms() {
-//   const rooms = await Room.find({});
-//   console.log(rooms);
-//   return rooms;
-// }
-
-// TODO:
-// [BUG] funktioniert nicht da, die k/v pairs als [object Object] empfangen werden
-// hier die k/v pairs = [object Object]
-async function returnFilteredRooms(keyValuePairs) {
-  console.log(`hier die k/v pairs = ${keyValuePairs}`);
-  const rooms = await Room.find(keyValuePairs);
-  console.log(`hier sind die gefilterten:>>> ${rooms} <<<`);
-  return rooms;
-}
-
 async function returnAllAssets() {
   const assets = await Asset.find({});
   console.log(assets);
@@ -316,18 +264,12 @@ async function returnAllTimetables() {
   return timetable;
 }
 
-// connect().catch((err) => console.log(err));
-
 module.exports = {
   connect,
-  // OLD:
-  // returnAllRooms,
-  returnFilteredRooms,
   returnAllAssets,
   returnAllTimetables,
   returnAllCampus,
   returnAllRooms,
   returnRoomsByQuery,
   returnCampusByName,
-  returnAllActiveUsers,
 };

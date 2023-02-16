@@ -1,4 +1,4 @@
-const { returnAllTimetables } = require("../db");
+const { returnAllTimetables } = require("../helpers/db");
 
 const getTimetables = async (req, res) => {
   const timetables = await returnAllTimetables();

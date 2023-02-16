@@ -1,5 +1,5 @@
-const { connect } = require("./db");
-const redisPubSub = require("./redisPubSub");
+const { connect } = require("./helpers/db");
+const redisPubSub = require("./helpers/redisPubSub");
 const express = require("express");
 const cors = require("cors");
 
@@ -12,22 +12,18 @@ app.use(
 );
 
 // ROUTES IMPORT
-// const roomRoutes = require("./routes/roomRoutes");
 const assetsRoutes = require("./routes/assetsRoutes.js");
 const timetableRoutes = require("./routes/timetablesRoutes");
 const campusRoutes = require("./routes/campusRoutes");
-const activeUserRoutes = require("./routes/activeUserRoutes");
 
 // ROUTES
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-// app.use("/api/rooms", roomRoutes);
 app.use("/api/assets", assetsRoutes);
 app.use("/api/timetables", timetableRoutes);
 app.use("/api/campus", campusRoutes);
-app.use("/api/activeusers", activeUserRoutes);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

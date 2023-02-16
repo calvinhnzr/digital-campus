@@ -1,4 +1,4 @@
-const { returnAllCampus, returnCampusByName, returnAllRooms, returnRoomsByQuery } = require("../db");
+const { returnAllCampus, returnCampusByName, returnAllRooms, returnRoomsByQuery } = require("../helpers/db");
 
 const getCampus = async (req, res) => {
   const campuses = await returnAllCampus();
