@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const path = require("path");
 
-// require('dotenv').config({ path:__dirname + '../../../../.env'})
 require("dotenv").config();
 
 const uri = `mongodb+srv://webclub:${process.env.MONGO_PW}@cluster0.uipp4bn.mongodb.net/digitalCampusDB?retryWrites=true&w=majority`;
@@ -26,6 +25,7 @@ const assetSchema = new mongoose.Schema({
   _id: String,
   name: String,
   description: String,
+  type: { type: String },
 });
 
 const Asset = mongoose.model("assets", assetSchema);
@@ -112,12 +112,7 @@ const campusSchema = new mongoose.Schema({
               name: String,
               type: { type: String },
               description: String,
-              assets: [
-                {
-                  assetId: String,
-                  count: Number,
-                },
-              ],
+              assets: [String],
               coords: {
                 x: Number,
                 y: Number,
@@ -223,8 +218,6 @@ async function returnCampusByName(name) {
 
 // for a specific campus
 async function returnAllRooms(name) {
-  // const rooms = await Campus.aggregate([{ $match: { floors: { $regex: "*" } } }, { $group: { _id: "_id" } }]);
-  // const rooms = await Campus.find({ name: name }.buildings);
   const campus = await Campus.find({ name: name });
   const rooms = [];
   for (let i = 0; i < campus[0].buildings.length; i++) {
@@ -235,6 +228,58 @@ async function returnAllRooms(name) {
     }
   }
   return rooms;
+}
+
+async function returnRoomsByQuery(name, query) {
+  const day = query.day;
+  const time = query.time;
+  const building = query.building;
+  const level = query.level;
+  const type = query.type;
+  const status = query.status;
+  const assets = query.assets;
+
+  // const campus = await Campus.find({ buildings: { $elemMatch: { name: query.building } } });
+  // fetch campus data from db
+  const campus = await Campus.findOne({
+    $and: [{ buildings: { $elemMatch: { name: query.building } } }, { name: name }],
+  });
+  if (!campus) return false;
+
+  // fetch timetables from db
+  const timetablesFetch = await Timetable.findOne({ campus: name });
+  const timetables = timetablesFetch && timetablesFetch.rooms;
+
+  //filter building
+  const buildingFiltered = campus.buildings.find((element) => element.name === building);
+  const floors = buildingFiltered.floors;
+
+  // filter level
+  const rooms = level
+    ? floors.find((element) => element.level === Number(level)).rooms
+    : [...floors.flatMap((element) => element.rooms)];
+
+  // filter type
+  const typeFiltered = type ? rooms.filter((element) => element.type === type) : rooms;
+
+  // filter assets
+  const assetsFiltered = assets
+    ? typeFiltered.filter((room) => {
+        return assets.every((asset) => room.assets.includes(asset));
+      })
+    : typeFiltered;
+
+  // filter timetables
+  const timetablesFiltered = assetsFiltered.filter((room) => {
+    const tableForRoom = timetables.find((timetable) => timetable.roomNo === room.number);
+    const tableForDay = tableForRoom && tableForRoom.timetable[day];
+
+    // fetch count from auth service and decide if room is free or not
+
+    return !(tableForDay && tableForDay.find((slot) => slot.time.slice(0, 2) === time.slice(0, 2)));
+  });
+
+  return timetablesFiltered;
 }
 
 async function connect() {
@@ -271,7 +316,7 @@ async function returnAllTimetables() {
   return timetable;
 }
 
-connect().catch((err) => console.log(err));
+// connect().catch((err) => console.log(err));
 
 module.exports = {
   connect,
@@ -282,6 +327,7 @@ module.exports = {
   returnAllTimetables,
   returnAllCampus,
   returnAllRooms,
+  returnRoomsByQuery,
   returnCampusByName,
   returnAllActiveUsers,
 };
