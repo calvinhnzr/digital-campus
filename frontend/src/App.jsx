@@ -8,7 +8,6 @@ import io from "socket.io-client"
 
 import "./styles/App.css"
 
-
 import { campusDataAtom, currentRoomAtom, newRoomAtom, queryAtom, hideFormAtom } from "./store"
 import Main from "./components/layout/Main"
 import Nav from "./components/layout/nav/Nav"
@@ -38,7 +37,6 @@ function App() {
   const handleFetchCampus = async (url) => {
     const response = await fetch(url)
     const data = await response.json()
-    console.log(data)
     setCampusData(data)
   }
 
@@ -125,7 +123,6 @@ function App() {
       )}
 
       <Main>
-
         <Results roomSocket={roomSocket} />
       </Main>
       <Scene>

@@ -79,7 +79,27 @@ const Filter = (props) => {
     setAssets(data)
   }
 
-  function onSubmit(data) {
+  ;("localhost:8000/api/campus/Gummersbach/rooms/query?day=tuesday&time=12:00&building=Gebäude A&level=3&type=labor&asset=63bda39f455c6a8f49d1b28c&asset=63bda39f455c6a8f49d1b289")
+
+  async function onSubmit(query) {
+    // console.log(data)
+
+    // const assets = data.asset
+
+    const params = new URLSearchParams({
+      day: query.day.toString(), // requiered
+      time: query.time.toString(), // requiered
+      building: query.building.toString(), // requiered
+      level: query.level,
+      type: query.type,
+    })
+    query.asset.forEach((asset) => params.append("asset", asset))
+
+    console.log(params.toString())
+    const url = "http://localhost:8000/api/campus/Gummersbach/rooms/query?" + params
+    console.log(url)
+    const response = await fetch(url)
+    const data = await response.json()
     console.log(data)
   }
 
@@ -90,11 +110,11 @@ const Filter = (props) => {
   // watch input value by passing the name of it
 
   return (
-    <StyledFilter onSubmit={handleSubmit(onSubmit)}>
+    <StyledFilter>
       <label>
         <input type="button" onClick={() => setHideForm(!hideForm)} />
       </label>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Section className="status">
           <h4>Verfügbarkeit</h4>
           <label>
@@ -112,7 +132,7 @@ const Filter = (props) => {
           <div className="date-time">
             <div className="day">
               <p>Wochentag</p>
-              <select name="weekday" defaultValue={weekDays[dayNum]} {...register("weekday")}>
+              <select name="day" defaultValue={weekDays[dayNum]} {...register("day")}>
                 {weekDays.map((day, index) => {
                   return (
                     <option key={index + day} value={day}>
@@ -171,6 +191,14 @@ const Filter = (props) => {
                 </option>
               )
             })}
+          </select>
+        </Section>
+
+        <Section>
+          <h4>Gebäude</h4>
+          <select {...register("building")}>
+            <option value="Gebäude A">Gebäude A</option>
+            <option value="Gebäude B">Gebäude B</option>
           </select>
         </Section>
 
