@@ -1,4 +1,4 @@
-FROM node
+FROM node:19.6.0
 
 # We don't need the standalone Chromium
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true

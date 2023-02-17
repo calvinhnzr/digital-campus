@@ -3,12 +3,15 @@ const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-const generateToken = (room) => {
-  const currentDate = new Date();
-  const endOfDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 23, 59, 59, 999);
-  const expiresIn = (endOfDay.getTime() - currentDate.getTime()) / 1000;
+const calculateDayExpiration = () => {
+  const endOfDay = new Date();
+  endOfDay.setHours(23, 59, 59, 999);
+  return Math.ceil((endOfDay.getTime() - Date.now()) / 1000);
+};
 
-  const token = jwt.sign({ room }, JWT_SECRET, { expiresIn: Math.ceil(expiresIn) });
+const generateToken = (room) => {
+  const expiresIn = calculateDayExpiration();
+  const token = jwt.sign({ room }, JWT_SECRET, { expiresIn });
   return token;
 };
 
@@ -17,16 +20,19 @@ const checkToken = (token) => {
     const decoded = jwt.verify(token, JWT_SECRET);
     return decoded;
   } catch (err) {
+    console.error(err);
     return false;
   }
 };
 
 const getTokenRoom = (token) => {
-  const decoded = checkToken(token);
-  if (decoded) {
+  try {
+    const decoded = jwt.verify(token, secret);
     return decoded.room;
+  } catch (err) {
+    console.error(err);
+    return null;
   }
-  return false;
 };
 
 module.exports = { generateToken, checkToken, getTokenRoom };

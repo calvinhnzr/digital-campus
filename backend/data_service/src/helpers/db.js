@@ -182,15 +182,11 @@ const campusSchema = new mongoose.Schema({
 const Campus = mongoose.model("campus", campusSchema);
 
 async function returnAllCampus() {
-  const campuses = await Campus.find({});
-  console.log(campuses);
-  return campuses;
+  return await Campus.find({});
 }
 
 async function returnCampusByName(name) {
-  const campus = await Campus.find({ name: name });
-  console.log(campus);
-  return campus;
+  return await Campus.find({ name: name });
 }
 
 // for a specific campus
@@ -265,15 +261,11 @@ async function connect() {
 }
 
 async function returnAllAssets() {
-  const assets = await Asset.find({});
-  console.log(assets);
-  return assets;
+  return await Asset.find({});
 }
 
 async function returnAllTimetables() {
-  const timetable = await Timetable.find({});
-  console.log(timetable);
-  return timetable;
+  return await Timetable.find({});
 }
 
 module.exports = {
