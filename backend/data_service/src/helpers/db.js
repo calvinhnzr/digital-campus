@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
 
 require("dotenv").config();
 
@@ -91,11 +92,22 @@ const campusSchema = new mongoose.Schema({
           rooms: [
             {
               roomId: String,
+              type: { type: String },
               number: String,
               name: String,
-              type: { type: String },
-              description: String,
               assets: [String],
+              seats: {
+                count: Number,
+                fixed: Boolean,
+              },
+              link: String,
+              members: [
+                {
+                  name: String,
+                  link: String,
+                  email: String,
+                },
+              ],
               coords: {
                 x: Number,
                 y: Number,
