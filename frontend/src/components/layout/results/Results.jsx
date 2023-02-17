@@ -53,7 +53,7 @@ const Results = (props) => {
       arr = roomsData.filter((data) => query.number === data.number)
     }
     if (query.type) {
-      arr = roomsData.filter((data) => query.type === data.type)
+      arr = roomsData.filter((data) => query.type.toLowerCase() === data.type.toLowerCase())
     }
 
     return arr
@@ -69,7 +69,9 @@ const Results = (props) => {
     <Aside>
       {(roomsData && query.number) || query.type
         ? handleQuery().map((data, index) => (
-            <Card index={index} key={data._id} data={data} roomSocket={props.roomSocket} />
+
+            <Card index={index} key={data._id} data={data} roomSocket={props.roomSocket} size={handleQuery().length} />
+
           ))
         : ""}
     </Aside>

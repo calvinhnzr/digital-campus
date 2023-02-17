@@ -1,7 +1,9 @@
-import { useEffect, useState, Suspense } from "react"
+import { useEffect, useState, Suspense, useRef } from "react"
 import { useGLTF, Html } from "@react-three/drei"
+import { useFrame } from "@react-three/fiber"
+
 import { useAtom, useAtomValue } from "jotai"
-import { queryAtom } from "../../store"
+import { queryAtom, hoverRoomAtom } from "../../store"
 
 function Model(props) {
   const gltf = useGLTF(`/room.gltf`, true)
@@ -17,7 +19,7 @@ const NewRoom = (props) => {
   let y = props.data.coords.y
 
   const [query, setQuery] = useAtom(queryAtom)
-
+  const [hoverRoom, setHoverRoom] = useAtom(hoverRoomAtom)
   const [hover, setHover] = useState(false)
   const [highlightColor, setHighlightColor] = useState(false)
 
@@ -31,12 +33,23 @@ const NewRoom = (props) => {
     })
   }
 
+  const meshRef = useRef()
+  useFrame(() => {
+    if (hoverRoom.room === props.data.number) {
+      if (meshRef.current.position.y <= 10) {
+        meshRef.current.position.y += 1
+      }
+    } else {
+      meshRef.current.position.y = 0
+    }
+  })
+
   useEffect(() => {
     if (query.number) {
       query.number === props.data.number ? setHighlightColor(true) : setHighlightColor(false)
     }
     if (query.type) {
-      query.type === props.data.type ? setHighlightColor(true) : setHighlightColor(false)
+      query.type.toLowerCase() === props.data.type.toLowerCase() ? setHighlightColor(true) : setHighlightColor(false)
     }
   }, [query, highlightColor])
 
@@ -47,7 +60,15 @@ const NewRoom = (props) => {
           <Model width={width} depth={depth} />
         </mesh>
       </Suspense> */}
-
+      {/* {hoverRoom.room === props.data.number && (
+        <Html
+          style={{
+            color: "black",
+          }}
+        >
+          {props.data.number}
+        </Html>
+      )} */}
       <mesh
         onClick={(e) => handleClick(e)}
         onPointerOver={(e) => {
@@ -58,6 +79,8 @@ const NewRoom = (props) => {
           e.stopPropagation()
           setHover(false)
         }}
+        ref={meshRef}
+        // position={hoverRoom.room === props.data.number && [0, 10, 0]}
       >
         <boxGeometry args={[width, height, depth]} />
         <meshStandardMaterial

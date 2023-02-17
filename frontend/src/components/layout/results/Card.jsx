@@ -1,8 +1,12 @@
 import { useState, useEffect, useRef, useLayoutEffect } from "react"
 import styled from "styled-components"
 import { useAtom } from "jotai"
-import { FaFlask, FaChevronDown, FaChevronUp } from "react-icons/fa"
-import { currentRoomAtom, newRoomAtom } from "../../../store"
+
+import { FaFlask, FaChevronDown, FaChevronUp, FaRestroom, FaPaperPlane, FaBookOpen } from "react-icons/fa"
+import { MdInfo } from "react-icons/md"
+import { BsPersonFill } from "react-icons/bs"
+
+import { currentRoomAtom, newRoomAtom, queryAtom, hoverRoomAtom } from "../../../store"
 import More from "./More"
 import Button from "./Button"
 import NewRoom from "../../render/NewRoom"
@@ -32,7 +36,7 @@ const Header = styled.label`
   grid-template-rows: auto;
   gap: 1rem;
   padding: 1.5rem 0;
-  padding-bottom: ${(props) => (props.open ? "2rem" : "1.5rem")};
+  padding-bottom: ${(props) => (props.open && props.expand ? "2rem" : "1.5rem")};
 
   z-index: 200;
   grid-template-areas:
@@ -47,10 +51,25 @@ const Header = styled.label`
   .type {
     grid-area: type;
     font-weight: 700;
-    color: #4a92d4;
+
     justify-self: end;
     display: flex;
     text-transform: capitalize;
+    &.lab {
+      color: #4a92d4;
+    }
+    &.office {
+      color: #ec#e94341;
+    }
+    &.project {
+      color: #ecaf45;
+    }
+    &.wc {
+      color: #3c74a9;
+    }
+    &.lecture {
+      color: #72c454;
+    }
 
     svg {
       margin-left: 0.4rem;
@@ -84,7 +103,7 @@ const Header = styled.label`
 
 const Body = styled.section`
   /* padding-top: 1rem; */
-  padding: 1.5rem 0;
+  padding-bottom: 1.5rem;
   display: grid;
   border-top: 1px solid #d9d9d9;
   flex-direction: column;
@@ -111,8 +130,10 @@ const Body = styled.section`
 const Card = (props) => {
   const [open, setOpen] = useState(false)
   const [count, setCount] = useState(0)
-  const [currentRoom, setcurrentRoom] = useAtom(currentRoomAtom)
+  const [query, setQuery] = useAtom(queryAtom)
   const [newRoom, setNewRoom] = useAtom(newRoomAtom)
+  const [hoverRoom, setHoverRoom] = useAtom(hoverRoomAtom)
+  const [expand, setExpand] = useState(false)
 
   let url = `http://localhost:8002/api/count?room=${props.data.number}`
 
@@ -122,10 +143,9 @@ const Card = (props) => {
     setCount(data.count)
   }
 
-  useLayoutEffect(() => {
-    props.index === 0 && setOpen(true)
-    fetchRoomCount(url)
-  }, [])
+  function handleClick() {
+    setOpen(!open)
+  }
 
   useEffect(() => {
     props.roomSocket.on(`room_${props.data.number}_updated`, (count) => {
@@ -136,20 +156,60 @@ const Card = (props) => {
     }
   }, [props.roomSocket])
 
+  function handleMouseOver(number) {
+    setHoverRoom({
+      room: number,
+    })
+    // console.log(number)
+  }
+
+  useLayoutEffect(() => {
+
+    // props.index !== 0 && setOpen(false)
+
+    // fetchRoomCount(url)
+    ;(props.data.type.toLowerCase() === "lab" ||
+      props.data.type.toLowerCase() === "lecture" ||
+      props.data.type.toLowerCase() === "project") &&
+      setExpand(true)
+
+    return () => {
+      setExpand(false)
+      setOpen(false)
+    }
+  }, [])
+
+  useLayoutEffect(() => {
+    props.index === 0 && props.size === 1 && setOpen(true)
+  }, [query.number])
+
+
   return (
     <StyledCard open={open}>
-      <Header open={open}>
-        <input type="checkbox" style={{ display: "none" }} onChange={() => setOpen(!open)} />
+      <Header
+        open={open}
+        expand={expand}
+        onMouseOver={() => handleMouseOver(props.data.number)}
+        onMouseOut={() => setHoverRoom({ room: "" })}
+      >
+        <input type="button" style={{ display: "none" }} onClick={handleClick} />
         <h3 className="name">{props.data.name ? props.data.name : "{name}"}</h3>
-        <h4 className="type">
-          {props.data.type ? props.data.type : "{type}"} <FaFlask />
+        <h4 className={`type ${props.data.type.toLowerCase()}`}>
+          {props.data.type ? <span>{props.data.type}</span> : "{type}"}
+          {props.data.type.toLowerCase() === "office" && <BsPersonFill />}
+          {props.data.type.toLowerCase() === "lab" && <FaFlask />}
+          {props.data.type.toLowerCase() === "project" && <FaPaperPlane />}
+          {props.data.type.toLowerCase() === "service" && <MdInfo />}
+          {props.data.type.toLowerCase() === "lecture" && <FaBookOpen />}
+          {props.data.type.toLowerCase() === "wc" && <FaRestroom />}
         </h4>
         <span className="number">{props.data.number ? props.data.number : "{number}"}</span>
 
-        {count ? <p className="status busy">{count ? count : "loading"}</p> : <p className="status empty">frei</p>}
+        {expand &&
+          (count ? <p className="status busy">{count ? count : "loading"}</p> : <p className="status empty">frei</p>)}
       </Header>
 
-      {open && (
+      {open && expand && (
         <Body>
           <Button number={props.data.number} />
           <More label="Ausstattung" gridArea="ausstattung" data={props.data}>

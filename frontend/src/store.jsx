@@ -22,6 +22,10 @@ export const queryAtom = atom({
   type: "",
 })
 
+export const hoverRoomAtom = atom({
+  room: "",
+})
+
 export const selectedAtom = atom([
   {
     data: {},
@@ -30,13 +34,7 @@ export const selectedAtom = atom([
   },
 ])
 
-export const formAtom = atom({
-  status: "",
-  date: "",
-  time: "",
-  type: "",
-  assets: "",
-})
+export const hideFormAtom = atom(true)
 
 // Token
 export const isUserLoggedInRoomAtom = atom(false)

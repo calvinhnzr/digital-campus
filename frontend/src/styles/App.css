@@ -4,6 +4,16 @@
   width: 100%;
 }
 
+.blackout {
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.6;
+  position: absolute;
+  z-index: 2000;
+  cursor: pointer;
+}
+
 canvas,
 main {
   height: 100%;

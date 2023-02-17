@@ -5,8 +5,6 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi"
 
 import { queryAtom } from "../../../store.jsx"
 
-const Button = () => {}
-
 const Container = styled.ul`
   display: flex;
   grid-template-columns: auto;
@@ -15,25 +13,18 @@ const Container = styled.ul`
   margin: 0;
   list-style: none;
   gap: 1.5rem;
-  /* height: fit-content; */
   align-items: center;
-  /* outline: 1px solid red; */
   overflow-x: scroll;
-  /* &::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
     -webkit-appearance: none;
-  } */
+  }
   li {
     &.checked {
-      /* text-decoration: underline; */
-      /* padding: 0.3rem 0.6rem;
-      background: rgba(255, 255, 255, 0.6);
-      border-radius: 6px; */
-
       label {
         box-sizing: border-box;
         font-weight: 700;
-        color: #87ff87;
+        text-decoration: underline;
       }
     }
     label {
@@ -54,8 +45,10 @@ const Container = styled.ul`
 `
 
 const RoomTypes = () => {
-  let types = ["büro", "labor", "verwaltung", "hörsaal", "seminaraum", "projektraum"]
-  let more = ["Toilette", "Aufzug", "Treppe", "Studienservice"]
+  let typesDe = ["Büro", "Labor", "Projektraum", "Hörsaal"]
+  let typesEn = ["office", "lab", "project", "lecture"]
+  let moreDe = ["Service", "Sonstige", "WC"]
+  let moreEn = ["service", "misc", "WC"]
 
   const [query, setQuery] = useAtom(queryAtom)
 
@@ -69,7 +62,24 @@ const RoomTypes = () => {
 
   return (
     <Container>
-      {types.map((value, index) => {
+      {typesEn.map((value, index) => {
+        return (
+          <li key={index} className={query.type === value ? "checked" : ""}>
+            <label title={value}>
+              {value}
+              <input
+                type="radio"
+                name="queryRoomType"
+                value={value}
+                checked={query.type === value}
+                onChange={(e) => handleChange(e)}
+              />
+            </label>
+          </li>
+        )
+      })}
+      <span>|</span>
+      {moreEn.map((value, index) => {
         return (
           <li key={index} className={query.type === value ? "checked" : ""}>
             <label title={value}>

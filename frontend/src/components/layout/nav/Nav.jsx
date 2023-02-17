@@ -4,7 +4,7 @@ import { useAtom } from "jotai"
 
 import { FaMap, FaCameraRetro } from "react-icons/fa"
 
-import { perspectiveAtom } from "../../../store.jsx"
+import { hideFormAtom, perspectiveAtom } from "../../../store.jsx"
 
 import Search from "./Search.jsx"
 import RoomTypes from "./RoomTypes.jsx"
@@ -47,9 +47,12 @@ const StyledNav = styled.nav`
 
 const Nav = (props) => {
   const [orthograficView, setOrthograficView] = useAtom(perspectiveAtom)
-
+  const [hideForm, setHideForm] = useAtom(hideFormAtom)
   return (
     <StyledNav>
+      <label>
+        <input type="button" onClick={() => setHideForm(!hideForm)} />
+      </label>
       <Search />
       <RoomTypes />
       <label className="perspective">

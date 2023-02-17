@@ -7,6 +7,7 @@ import { newTokenAtom, currentTokenAtom } from "../../../App"
 
 const StyledButton = styled.label`
   /* opacity: 0.5; */
+  padding-top: 1.5rem;
   input {
     grid-area: button;
     border-radius: 6px;

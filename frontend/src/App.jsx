@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useLayoutEffect } from "react"
 import { Center } from "@react-three/drei"
 import { useAtom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
@@ -8,8 +8,8 @@ import io from "socket.io-client"
 
 import "./styles/App.css"
 
-import { campusDataAtom, currentRoomAtom, newRoomAtom, queryAtom } from "./store"
 
+import { campusDataAtom, currentRoomAtom, newRoomAtom, queryAtom, hideFormAtom } from "./store"
 import Main from "./components/layout/Main"
 import Nav from "./components/layout/nav/Nav"
 import Scene from "./components/render/Scene"
@@ -24,19 +24,21 @@ export const currentTokenAtom = atomWithStorage("currentToken", false)
 const roomSocket = io.connect(`http://localhost:8002/`)
 
 function App() {
-  const url = "http://localhost:8000/api/campus"
   const [campusData, setCampusData] = useAtom(campusDataAtom)
   const [newToken, setNewToken] = useAtom(newTokenAtom)
   const [currentToken, setCurrentToken] = useAtom(currentTokenAtom)
   const [newRoom, setNewRoom] = useAtom(newRoomAtom)
   const [currentRoom, setCurrentRoom] = useAtom(currentRoomAtom)
   const [query, setQuery] = useAtom(queryAtom)
+  const [hideForm, setHideForm] = useAtom(hideFormAtom)
 
   let [searchParams, setSearchParams] = useSearchParams()
 
+  const url = "http://localhost:8000/api/campus"
   const handleFetchCampus = async (url) => {
     const response = await fetch(url)
     const data = await response.json()
+    console.log(data)
     setCampusData(data)
   }
 
@@ -100,19 +102,30 @@ function App() {
     ;(newToken || currentToken) && authToken()
   }, [newToken, currentToken])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setQuery({
       id: "",
-      number: newRoom.number,
+      number: currentRoom.number ? currentRoom.number : newRoom.number,
       type: "",
     })
-  }, [newRoom])
+  }, [newRoom.number])
 
   return (
     <div className="App">
       <Nav />
+      {hideForm ? (
+        ""
+      ) : (
+        <>
+          <Filter />{" "}
+          <label className="blackout">
+            <input type="button" onClick={() => setHideForm(true)} />
+          </label>
+        </>
+      )}
+
       <Main>
-        {/* <Filter /> */}
+
         <Results roomSocket={roomSocket} />
       </Main>
       <Scene>
