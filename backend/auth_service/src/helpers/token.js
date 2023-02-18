@@ -26,13 +26,11 @@ const checkToken = (token) => {
 };
 
 const getTokenRoom = (token) => {
-  try {
-    const decoded = jwt.verify(token, secret);
+  const decoded = checkToken(token);
+  if (decoded) {
     return decoded.room;
-  } catch (err) {
-    console.error(err);
-    return null;
   }
+  return false;
 };
 
 module.exports = { generateToken, checkToken, getTokenRoom };

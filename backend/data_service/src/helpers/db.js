@@ -189,71 +189,87 @@ async function returnCampusByName(name) {
   return await Campus.find({ name: name });
 }
 
-// for a specific campus
 async function returnAllRooms(name) {
-  const campus = await Campus.find({ name: name });
+  const campus = await Campus.findOne({ name: name });
+  if (!campus) return false;
+
   const rooms = [];
-  for (let i = 0; i < campus[0].buildings.length; i++) {
-    for (let j = 0; j < campus[0].buildings[i].floors.length; j++) {
-      for (let k = 0; k < campus[0].buildings[i].floors[j].rooms.length; k++) {
-        rooms.push(campus[0].buildings[i].floors[j].rooms[k]);
-      }
-    }
-  }
+  campus.buildings.forEach((building) => {
+    building.floors.forEach((floor) => {
+      floor.rooms.forEach((room) => {
+        rooms.push({
+          ...room._doc,
+          building: building.name,
+          level: floor.level,
+        });
+      });
+    });
+  });
+
   return rooms;
 }
 
-async function returnRoomsByQuery(name, query) {
-  const day = query.day;
-  const time = query.time;
-  const building = query.building;
-  const level = query.level;
-  const type = query.type;
-  const status = query.status;
-  const assets = query.assets;
+async function returnRoomsByQuery(roomsParam, campusName, query) {
+  const { day, time, building, level, type, status, assets } = query;
 
-  // const campus = await Campus.find({ buildings: { $elemMatch: { name: query.building } } });
-  // fetch campus data from db
-  const campus = await Campus.findOne({
-    $and: [{ buildings: { $elemMatch: { name: query.building } } }, { name: name }],
-  });
-  if (!campus) return false;
+  let rooms = roomsParam;
 
-  // fetch timetables from db
-  const timetablesFetch = await Timetable.findOne({ campus: name });
-  const timetables = timetablesFetch && timetablesFetch.rooms;
+  if (!rooms) return false;
 
-  //filter building
-  const buildingFiltered = campus.buildings.find((element) => element.name === building);
-  const floors = buildingFiltered.floors;
+  // building filter
+  if (building) {
+    rooms = rooms.filter((room) => room.building === building);
+  }
 
-  // filter level
-  const rooms = level
-    ? floors.find((element) => element.level === Number(level)).rooms
-    : [...floors.flatMap((element) => element.rooms)];
+  // floor filter
+  if (level) {
+    rooms = rooms.filter((room) => room.level === level);
+  }
 
-  // filter type
-  const typeFiltered = type ? rooms.filter((element) => element.type === type) : rooms;
+  // type filter
+  if (type) {
+    rooms = rooms.filter((room) => room.type === type);
+  }
 
-  // filter assets
-  const assetsFiltered = assets
-    ? typeFiltered.filter((room) => {
-        return assets.every((asset) => room.assets.includes(asset));
-      })
-    : typeFiltered;
+  // assets filter
+  if (assets) {
+    rooms = rooms.filter((room) => {
+      return assets.every((asset) => room.assets.includes(asset));
+    });
+  }
 
-  // filter timetables
-  const timetablesFiltered = assetsFiltered.filter((room) => {
-    const tableForRoom = timetables.find((timetable) => timetable.roomNo === room.number);
-    const tableForDay = tableForRoom && tableForRoom.timetable[day];
+  // status filter
+  if (status && day && time) {
+    // fetch timetables from db
+    const timetablesFetch = await Timetable.findOne({ campus: campusName });
+    const timetables = timetablesFetch && timetablesFetch.rooms;
 
-    // fetch count from auth service and decide if room is free or not
+    // filter rooms by timetable
+    rooms = rooms.filter((room) => {
+      const tableForRoom = timetables.find((timetable) => timetable.roomNo === room.number);
+      const tableForDay = tableForRoom && tableForRoom.timetable[day];
 
-    return !(tableForDay && tableForDay.find((slot) => slot.time.slice(0, 2) === time.slice(0, 2)));
-  });
+      return !(tableForDay && tableForDay.find((slot) => slot.time.slice(0, 2) === time.slice(0, 2)));
+    });
 
-  return timetablesFiltered;
+    // filter rooms by current status
+    for (const room of rooms) {
+      const currentStatus = await fetchCurrentStatus(room.number);
+      // if room is occupied
+      if (currentStatus.count) {
+        rooms = rooms.filter((r) => r.number !== room.number);
+      }
+    }
+  }
+
+  return rooms;
 }
+
+const fetchCurrentStatus = async (number) => {
+  const response = await fetch(`http://auth_service:8002/api/count?room=${number}`);
+  const data = await response.json();
+  return data;
+};
 
 async function connect() {
   await mongoose.connect(uri);

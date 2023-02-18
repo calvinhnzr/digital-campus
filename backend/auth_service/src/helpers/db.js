@@ -2,7 +2,6 @@ require("dotenv").config();
 
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-const path = require("path");
 
 const { getTokenRoom } = require("./token");
 

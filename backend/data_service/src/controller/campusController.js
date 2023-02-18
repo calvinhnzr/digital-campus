@@ -12,38 +12,62 @@ const getCampusByName = async (req, res) => {
 };
 
 const getAllRooms = async (req, res) => {
-  const campusName = req.params.name;
-  const rooms = await returnAllRooms(campusName);
-  res.send(rooms);
-};
+  const { name: campusName } = req.params;
+  if (!campusName) return res.status(400).json({ message: "no campus specified" });
 
-const getRoomByQuery = async (req, res) => {
-  const campusName = req.params.name;
-  // const rooms = returnRoomsByQuery(campusName);
+  // get all rooms
+  const rooms = await returnAllRooms(campusName);
+  if (!rooms) return res.status(404).json({ message: "no rooms found" });
+
+  // check if query is empty
+  if (Object.keys(req.query).length === 0) return res.json(rooms);
+
+  // get query parameters
   const query = {
-    day: req.query.day,
-    time: decodeURIComponent(req.query.time),
-    building: decodeURIComponent(req.query.building),
+    day: req.query.day && req.query.day,
+    time: req.query.time && decodeURIComponent(req.query.time),
+    building: req.query.building && decodeURIComponent(req.query.building),
     level: req.query.level && Number(req.query.level),
-    type: req.query.type,
-    status: req.query.status,
-    assets: req.query.asset,
+    type: req.query.type && req.query.type,
+    status: req.query.status && req.query.status === "true",
+    assets: typeof req.query.asset === "string" ? [req.query.asset] : req.query.asset,
   };
 
-  if (typeof query.assets === "string") {
-    query.assets = [query.assets];
+  const queryRooms = await returnRoomsByQuery(rooms, campusName, query);
+  if (!queryRooms) {
+    return res.status(404).json({ message: "something went wrong searching for the rooms specified by the query" });
   }
 
-  if (query.day && query.time && query.building) {
-    console.log("query has necessary fields");
-
-    const queryRequest = await returnRoomsByQuery(campusName, query);
-    if (!queryRequest) return res.status(404).json({ message: "wrong query" });
-
-    return res.json(queryRequest);
-  }
-
-  return res.status(400).json({ message: "required query parameters missing" });
+  return res.json(queryRooms);
 };
 
-module.exports = { getCampus, getCampusByName, getAllRooms, getRoomByQuery };
+// const getRoomByQuery = async (req, res) => {
+//   const campusName = req.params.name;
+
+//   const query = {
+//     day: req.query.day,
+//     time: decodeURIComponent(req.query.time),
+//     building: decodeURIComponent(req.query.building),
+//     level: req.query.level && Number(req.query.level),
+//     type: req.query.type,
+//     status: decodeURIComponent(req.query.status),
+//     assets: req.query.asset,
+//   };
+
+//   if (typeof query.assets === "string") {
+//     query.assets = [query.assets];
+//   }
+
+//   if (!(query.day && query.time && query.building)) {
+//     return res.status(400).json({ message: "required query parameters missing" });
+//   }
+
+//   const queryRequest = await returnRoomsByQuery(campusName, query);
+//   if (!queryRequest) {
+//     return res.status(404).json({ message: "wrong query" });
+//   }
+
+//   return res.json(queryRequest);
+// };
+
+module.exports = { getCampus, getCampusByName, getAllRooms };

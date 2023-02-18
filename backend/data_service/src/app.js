@@ -5,11 +5,7 @@ const cors = require("cors");
 
 const app = express();
 
-app.use(
-  cors({
-    origin: ["http://localhost:3000", "https://my-app.com"],
-  })
-);
+app.use(cors());
 
 // ROUTES IMPORT
 const assetsRoutes = require("./routes/assetsRoutes.js");
@@ -18,7 +14,7 @@ const campusRoutes = require("./routes/campusRoutes");
 
 // ROUTES
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("data_service!");
 });
 
 app.use("/api/assets", assetsRoutes);
