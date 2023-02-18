@@ -15,7 +15,7 @@ import Scene from "./components/render/Scene"
 import Camera from "./components/render/Camera"
 import Campus from "./components/render/Campus"
 import Results from "./components/layout/results/Results"
-import Filter from "./components/layout/filter/Filter"
+import Form from "./components/layout/filter/Form"
 
 export const newTokenAtom = atomWithStorage("newToken", false)
 export const currentTokenAtom = atomWithStorage("currentToken", false)
@@ -115,7 +115,7 @@ function App() {
         ""
       ) : (
         <>
-          <Filter />{" "}
+          <Form />
           <label className="blackout">
             <input type="button" onClick={() => setHideForm(true)} />
           </label>

@@ -140,6 +140,7 @@ const Card = (props) => {
   const fetchRoomCount = async (url) => {
     const response = await fetch(url)
     const data = await response.json()
+    console.log(data.count)
     setCount(data.count)
   }
 
@@ -164,25 +165,23 @@ const Card = (props) => {
   }
 
   useLayoutEffect(() => {
-
     // props.index !== 0 && setOpen(false)
 
-    // fetchRoomCount(url)
+    fetchRoomCount(url)
     ;(props.data.type.toLowerCase() === "lab" ||
       props.data.type.toLowerCase() === "lecture" ||
       props.data.type.toLowerCase() === "project") &&
       setExpand(true)
 
     return () => {
-      setExpand(false)
-      setOpen(false)
+      // setExpand(false)
+      // setOpen(false)
     }
   }, [])
 
   useLayoutEffect(() => {
     props.index === 0 && props.size === 1 && setOpen(true)
   }, [query.number])
-
 
   return (
     <StyledCard open={open}>
@@ -204,7 +203,6 @@ const Card = (props) => {
           {props.data.type.toLowerCase() === "wc" && <FaRestroom />}
         </h4>
         <span className="number">{props.data.number ? props.data.number : "{number}"}</span>
-
         {expand &&
           (count ? <p className="status busy">{count ? count : "loading"}</p> : <p className="status empty">frei</p>)}
       </Header>

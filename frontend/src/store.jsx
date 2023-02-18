@@ -22,10 +22,16 @@ export const queryAtom = atom({
   type: "",
 })
 
+export const formTypesAtom = atom(0)
+export const formStatusAtom = atom(false)
+
+export const formResponseAtom = atom()
+
 export const hoverRoomAtom = atom({
   room: "",
 })
 
+// lagacy
 export const selectedAtom = atom([
   {
     data: {},
@@ -43,5 +49,3 @@ export const tempURLToken = atom("")
 
 // Other
 export const perspectiveAtom = atom(false)
-
-export const roomTypes = atom(["Büro", "Labor", "Verwaltung", "Hörsaal", "Seminaraum", "Projektraum", "Toilette"])
