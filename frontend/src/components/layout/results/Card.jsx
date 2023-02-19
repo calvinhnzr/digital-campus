@@ -140,7 +140,7 @@ const Card = (props) => {
   const fetchRoomCount = async (url) => {
     const response = await fetch(url)
     const data = await response.json()
-    console.log(data.count)
+    // console.log(data.count)
     setCount(data.count)
   }
 

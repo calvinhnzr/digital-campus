@@ -19,6 +19,7 @@ const StyledButton = styled.label`
     font-weight: 500;
     font-family: inherit;
     background-color: #1a1a1a;
+    opacity: 0.3;
     color: white;
     cursor: pointer;
     transition: border-color 0.25s;
@@ -26,10 +27,13 @@ const StyledButton = styled.label`
     &.login {
       cursor: pointer;
       background-color: #47da1b;
+      background-color: #1a1a1a;
+      opacity: 1;
     }
     &.logout {
       cursor: pointer;
       background-color: #da1b4e;
+      opacity: 1;
     }
   }  
 `

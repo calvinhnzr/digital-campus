@@ -110,21 +110,11 @@ function App() {
 
   return (
     <div className="App">
-      <Nav />
-      {hideForm ? (
-        ""
-      ) : (
-        <>
-          <Form />
-          <label className="blackout">
-            <input type="button" onClick={() => setHideForm(true)} />
-          </label>
-        </>
-      )}
-
       <Main>
-        <Results roomSocket={roomSocket} />
+        <Nav />
+        <Form />
       </Main>
+      <Results roomSocket={roomSocket} />
       <Scene>
         <Camera />
         <Center>

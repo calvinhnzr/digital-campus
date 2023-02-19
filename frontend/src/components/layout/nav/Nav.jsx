@@ -1,32 +1,24 @@
 import React from "react"
 import styled from "styled-components"
 import { useAtom } from "jotai"
-
 import { FaMap, FaCameraRetro } from "react-icons/fa"
 
 import { hideFormAtom, perspectiveAtom } from "../../../store.jsx"
-
 import Search from "./Search.jsx"
 import RoomTypes from "./RoomTypes.jsx"
 
 const StyledNav = styled.nav`
-  /* outline: 1px solid red; */
-  /* position: absolute; */
   grid-area: nav;
   gap: 0 2rem;
-  padding: 2rem 2.5rem;
   display: flex;
   height: 3rem;
-  width: 100%;
-  /* width: calc(100% - 5rem); */
   background: linear-gradient(to bottom, #636363, #63636300);
-
   height: auto;
+  width: 100%;
+  padding: 2rem 3rem;
   position: fixed;
-  z-index: 1000;
+  z-index: 4001;
   .perspective {
-    /* outline: 1px solid red; */
-
     margin-left: auto;
     cursor: pointer;
     input {
@@ -50,9 +42,9 @@ const Nav = (props) => {
   const [hideForm, setHideForm] = useAtom(hideFormAtom)
   return (
     <StyledNav>
-      <label>
+      {/* <label>
         <input type="button" onClick={() => setHideForm(!hideForm)} />
-      </label>
+      </label> */}
       <Search />
       <RoomTypes />
       <label className="perspective">

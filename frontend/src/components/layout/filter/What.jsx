@@ -1,10 +1,28 @@
 import { useState, useEffect } from "react"
-import { useAtom } from "jotai"
-
 import styled from "styled-components"
+import { useAtom } from "jotai"
 import { formTypesAtom } from "../../../store"
 
-const Label = styled.label``
+const Label = styled.label`
+  cursor: pointer;
+  flex: 1 1 1;
+  span {
+    display: block;
+    background-color: white;
+    padding: 0.3rem 0.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+
+  input:checked + span {
+    background-color: #1a1a1a;
+    color: white;
+  }
+
+  input {
+    display: none;
+  }
+`
 
 const Asset = (props) => {
   const [formTypes, setFormTypes] = useAtom(formTypesAtom)
@@ -15,11 +33,26 @@ const Asset = (props) => {
 
   return (
     <Label>
-      <input type="checkbox" value={props.value._id} {...props.register("asset")} onChange={(e) => handleChange(e)} />
-      {props.value.name}
+      <input
+        type="checkbox"
+        value={props.value._id}
+        {...props.register("asset", {
+          onChange: (e) => {
+            handleChange(e)
+          },
+        })}
+      />
+      <span>{props.value.name}</span>
     </Label>
   )
 }
+
+const Div = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-content: stretch;
+`
 
 const What = (props) => {
   const [assets, setAssets] = useState()
@@ -36,15 +69,15 @@ const What = (props) => {
   }, [])
 
   return (
-    <div>
-      <h4>Equipment</h4>
-      <div>
+    <section>
+      <h3>Equipment</h3>
+      <Div>
         {assets &&
           assets.map((value) => {
-            return <Asset key={value._id} value={value} register={props.register} />
+            return <Asset key={value._id} value={value} name="asset" register={props.register} />
           })}
-      </div>
-    </div>
+      </Div>
+    </section>
   )
 }
 

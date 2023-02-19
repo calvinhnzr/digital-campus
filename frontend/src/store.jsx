@@ -24,7 +24,6 @@ export const queryAtom = atom({
 
 export const formTypesAtom = atom(0)
 export const formStatusAtom = atom(false)
-
 export const formResponseAtom = atom()
 
 export const hoverRoomAtom = atom({
@@ -41,6 +40,7 @@ export const selectedAtom = atom([
 ])
 
 export const hideFormAtom = atom(true)
+export const hideResultsAtom = atom(false)
 
 // Token
 export const isUserLoggedInRoomAtom = atom(false)

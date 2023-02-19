@@ -3,7 +3,7 @@ import { useGLTF, Html } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 
 import { useAtom, useAtomValue } from "jotai"
-import { queryAtom, hoverRoomAtom } from "../../store"
+import { queryAtom, hoverRoomAtom, formResponseAtom } from "../../store"
 
 function Model(props) {
   const gltf = useGLTF(`/room.gltf`, true)
@@ -22,6 +22,7 @@ const NewRoom = (props) => {
   const [hoverRoom, setHoverRoom] = useAtom(hoverRoomAtom)
   const [hover, setHover] = useState(false)
   const [highlightColor, setHighlightColor] = useState(false)
+  const [formResponse, setFormResponse] = useAtom(formResponseAtom)
 
   function handleClick(e) {
     e.stopPropagation()
@@ -51,7 +52,14 @@ const NewRoom = (props) => {
     if (query.type) {
       query.type.toLowerCase() === props.data.type.toLowerCase() ? setHighlightColor(true) : setHighlightColor(false)
     }
-  }, [query, highlightColor])
+    if (query.id) {
+      if (formResponse.find((e) => e.roomId === props.data.roomId)) {
+        setHighlightColor(true)
+      } else {
+        setHighlightColor(false)
+      }
+    }
+  }, [query, highlightColor, formResponse])
 
   return (
     <group position={[x + width / 2, height / 2, y + depth / 2]}>
