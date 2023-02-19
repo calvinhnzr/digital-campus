@@ -214,8 +214,6 @@ async function returnRoomsByQuery(roomsParam, campusName, query) {
 
   let rooms = roomsParam;
 
-  if (!rooms) return false;
-
   // building filter
   if (building) {
     rooms = rooms.filter((room) => room.building === building);
@@ -255,8 +253,9 @@ async function returnRoomsByQuery(roomsParam, campusName, query) {
     // filter rooms by current status
     for (const room of rooms) {
       const currentStatus = await fetchCurrentStatus(room.number);
-      // if room is occupied
+      // if room is occupied by more than 1 person
       if (currentStatus.count) {
+        // remove room from list
         rooms = rooms.filter((r) => r.number !== room.number);
       }
     }

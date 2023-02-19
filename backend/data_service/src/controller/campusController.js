@@ -41,33 +41,4 @@ const getAllRooms = async (req, res) => {
   return res.json(queryRooms);
 };
 
-// const getRoomByQuery = async (req, res) => {
-//   const campusName = req.params.name;
-
-//   const query = {
-//     day: req.query.day,
-//     time: decodeURIComponent(req.query.time),
-//     building: decodeURIComponent(req.query.building),
-//     level: req.query.level && Number(req.query.level),
-//     type: req.query.type,
-//     status: decodeURIComponent(req.query.status),
-//     assets: req.query.asset,
-//   };
-
-//   if (typeof query.assets === "string") {
-//     query.assets = [query.assets];
-//   }
-
-//   if (!(query.day && query.time && query.building)) {
-//     return res.status(400).json({ message: "required query parameters missing" });
-//   }
-
-//   const queryRequest = await returnRoomsByQuery(campusName, query);
-//   if (!queryRequest) {
-//     return res.status(404).json({ message: "wrong query" });
-//   }
-
-//   return res.json(queryRequest);
-// };
-
 module.exports = { getCampus, getCampusByName, getAllRooms };

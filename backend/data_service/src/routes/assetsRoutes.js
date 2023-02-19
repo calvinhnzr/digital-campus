@@ -1,8 +1,7 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const assetsController = require('../controller/assetsController');
+const assetsController = require("../controller/assetsController");
 
-router.get('/', assetsController.getAssets);
+router.get("/", assetsController.getAssets);
 
-
-module.exports =  router;
+module.exports = router;
