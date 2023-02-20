@@ -1,4 +1,4 @@
-const { generate } = require("./helpers/generate");
+const { generate, generateHTML } = require("./helpers/generate");
 
 const path = require("path");
 
@@ -16,6 +16,12 @@ app.set("views", __dirname + "/views");
 app.get("/display/campus/:campus/rooms/:room", async (req, res) => {
   const campusParam = req.params.campus;
   const roomParam = req.params.room;
+
+  const { type } = req.query;
+  if (type === "html") {
+    const html = await generateHTML(campusParam, roomParam);
+    return res.status(200).send(html);
+  }
 
   const result = await generate(campusParam, roomParam);
 

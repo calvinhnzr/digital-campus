@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Display - Room <%= timetable.roomNo %></title>
+    <title>Display - Raum <%= timetable.roomNo %></title>
   </head>
   <body>
     <style>
@@ -124,7 +124,7 @@
         text-transform: capitalize;
       }
 
-      .description {
+      .name {
         text-align: center;
       }
 
@@ -140,7 +140,7 @@
       }
     </style>
 
-    <% const roomNo = [timetable.roomNo.slice(0,1), ".", timetable.roomNo.slice(1)].join("") %>
+    <% const roomNo = [roomInfo.number.slice(0,1), ".", roomInfo.number.slice(1)].join("") %>
     <!--  -->
     <% const monday = timetable.timetable.monday %>
     <!--  -->
@@ -152,19 +152,49 @@
     <!--  -->
     <% const friday = timetable.timetable.friday %>
     <!--  -->
-    <% const roomType = roomInfo.type %>
+    <% let roomType = "" %>
     <!--  -->
-    <% const roomDescription = roomInfo.description %>
-    <!-- TODO -->
-    <%# const roomStatus = roomStatus.status %>
+    <% if (roomInfo.type === "office") { %>
+    <!--  -->
+    <% roomType = "Büro" %>
+    <!--  -->
+    <% } else if (roomInfo.type === "lab") {%>
+    <!--  -->
+    <% roomType = "Labor" %>
+    <!--  -->
+    <% } else if (roomInfo.type === "lecture") {%>
+    <!--  -->
+    <% roomType = "Hörsaal" %>
+    <!--  -->
+    <% } else if (roomInfo.type === "project") {%>
+    <!--  -->
+    <% roomType = "Projektraum" %>
+    <!--  -->
+    <% } else if (roomInfo.type === "service") {%>
+    <!--  -->
+    <% roomType = "Service" %>
+    <!--  -->
+    <% } else if (roomInfo.type === "misc") {%>
+    <!--  -->
+    <% roomType = "Sonstiges" %>
+    <!--  -->
+    <% } else if (roomInfo.type === "wc") {%>
+    <!--  -->
+    <% roomType = "WC" %>
+    <!--  -->
+    <% } %>
+    <!--  -->
+    <% const roomName = roomInfo.name %>
+    <!--  -->
+    <% const roomCount = count.count %>
 
     <div class="title">
       <h1>R <%= roomNo %></h1>
 
-      <h2><%= roomType || "Raumtyp noch nicht vorhanden!" %></h2>
+      <h2><%= roomType || "Raumtyp aktuell nicht vorhanden!" %></h2>
     </div>
 
-    <h2 class="description"><%= roomDescription || "Raumbeschreibung noch nicht vorhanden!" %></h2>
+    <h2 class="name"><%= roomName || "Raumname aktuell nicht vorhanden!" %></h2>
 
     <table>
       <thead>
@@ -178,7 +208,7 @@
         </tr>
       </thead>
       <tbody>
-        <% for (let i = 8; i < 21; i++) { %> <% let hour = i.toString().padStart(2, "0") %>
+        <% for (let i = 8; i < 21; i++) { %> <% const hour = i.toString().padStart(2, "0") %>
         <tr>
           <td class="time-col"><%= hour %>:00</td>
           <td><%= monday.find(t => t.time === `${hour}:00`)?.name || " " %></td>
@@ -191,6 +221,10 @@
       </tbody>
     </table>
 
-    <h2 class="status">Raumbelegung noch nicht vorhanden!</h2>
+    <% if (roomCount === 1) { %>
+    <h2 class="status"><%= roomCount %> Person im Raum</h2>
+    <% } else { %>
+    <h2 class="status"><%= roomCount || "Keine" %> Personen im Raum</h2>
+    <% } %>
   </body>
 </html>

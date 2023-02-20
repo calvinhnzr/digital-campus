@@ -6,20 +6,11 @@ const Jimp = require("jimp");
 // generate html from ejs template
 const generateHTML = async (campusParam, roomParam) => {
   // get room information
-  const roomResponse = await fetch("http://data_service:8000/api/campus");
+  const roomResponse = await fetch(`http://data_service:8000/api/campus/${campusParam}/rooms`);
   const roomData = await roomResponse.json();
 
   let roomInfo;
-  const rCampus = roomData.find((campus) => campus.name.toLowerCase() === campusParam.toLowerCase());
-  rCampus.buildings.forEach((building) => {
-    building.floors.forEach((floor) => {
-      floor.rooms.forEach((room) => {
-        if (room.number.toLowerCase() === roomParam.toLowerCase()) {
-          roomInfo = room;
-        }
-      });
-    });
-  });
+  roomInfo = roomData.find((room) => room.number === roomParam);
 
   if (!roomInfo) {
     return { error: "Room not found" };
@@ -36,9 +27,12 @@ const generateHTML = async (campusParam, roomParam) => {
     return { error: "Timetable not found" };
   }
 
+  const countResponse = await fetch(`http://auth_service:8002/api/count?room=${roomParam}`);
+  const countData = await countResponse.json();
+
   // render ejs template as html
   return new Promise((resolve, reject) => {
-    ejs.renderFile(__dirname + "/../views/pages/index.ejs", { timetable, roomInfo }, (err, html) => {
+    ejs.renderFile(__dirname + "/../views/pages/index.ejs", { timetable, roomInfo, count: countData }, (err, html) => {
       if (err) {
         console.log(err);
         reject({ error: "Error rendering EJS file" });
@@ -106,4 +100,4 @@ const generate = async (campus, room) => {
   return result;
 };
 
-module.exports = { generate };
+module.exports = { generate, generateHTML };
