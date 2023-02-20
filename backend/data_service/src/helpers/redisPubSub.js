@@ -1,5 +1,4 @@
 const Redis = require("ioredis");
-const path = require("path");
 
 // config local (redis instance running in docker container)
 // const redisSub = new Redis({ port: 6379, host: "localhost"});
@@ -11,8 +10,7 @@ const redisPub = new Redis({ port: 6379, host: "redis" });
 // const redisSub = new Redis({ port: 6379, host: "192.168.100.111"});
 // const redisPub = new Redis({ port: 6379, host: "192.168.100.111"});
 
-// Get the name of this service with the dir structure being root/backend/thisService/src/redisPubSub.js
-// regex / OR \ is used to support both windows and unix, pop to only get last dirname
+// config
 const thisService = "data_service";
 const channel = "campusGummersbach";
 
@@ -50,7 +48,6 @@ function publishEvent(eventType, payload) {
 function onMessage(eventType, callback) {
   redisSub.on("message", (channel, message) => {
     const receivedMessage = JSON.parse(message);
-    console.log(`received message from channel: ${channel} message: ${message}`);
 
     if (receivedMessage.type === eventType) {
       callback(receivedMessage.payload);

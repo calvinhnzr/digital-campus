@@ -3,7 +3,7 @@ const { generate } = require("./helpers/generate");
 const path = require("path");
 
 // redis
-const redisPubSub = require("./redisPubSub");
+const redisPubSub = require("./helpers/redisPubSub");
 
 // express
 const express = require("express");

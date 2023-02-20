@@ -1,23 +1,18 @@
-const Redis = require('ioredis');
-const path = require('path');
+const Redis = require("ioredis");
 
 // config local (redis instance running in docker container)
 // const redisSub = new Redis({ port: 6379, host: "localhost"});
 // const redisPub = new Redis({ port: 6379, host: "localhost"});
 // config docker
-// const redisSub = new Redis({ port: 6379, host: "redis"});
-// const redisPub = new Redis({ port: 6379, host: "redis"});
+const redisSub = new Redis({ port: 6379, host: "redis" });
+const redisPub = new Redis({ port: 6379, host: "redis" });
 // config pi (host is subject to change, based on ip in local network)
-const redisSub = new Redis({ port: 6379, host: '192.168.100.111' });
-const redisPub = new Redis({ port: 6379, host: '192.168.100.111' });
+// const redisSub = new Redis({ port: 6379, host: "192.168.100.111"});
+// const redisPub = new Redis({ port: 6379, host: "192.168.100.111"});
 
-// Get the name of this service with the dir structure being root/backend/thisService/src/redisPubSub.js
-// regex / OR \ is used to support both windows and unix, pop to only get last dirname
-const thisService = path
-  .dirname(path.dirname(path.dirname(__filename)))
-  .split(/[\\/]/)
-  .pop();
-const channel = 'campusGummersbach';
+// config
+const thisService = "display_service";
+const channel = "campusGummersbach";
 
 // connect to channel and publish hello world message
 async function startRedis() {
@@ -29,12 +24,10 @@ async function startRedis() {
     }
   });
 
-  onMessage('serviceStart', (payload) => {
+  onMessage("serviceStart", (payload) => {
     console.log(payload.message);
   });
-  publishEvent('serviceStart', {
-    message: `Hello World! >>${thisService}<< has now started`,
-  });
+  publishEvent("serviceStart", { message: `Hello World! >>${thisService}<< has now started` });
 }
 
 // publish event to channel
@@ -53,11 +46,8 @@ function publishEvent(eventType, payload) {
 
 // listen to channel for events
 function onMessage(eventType, callback) {
-  redisSub.on('message', (channel, message) => {
+  redisSub.on("message", (channel, message) => {
     const receivedMessage = JSON.parse(message);
-    console.log(
-      `received message from channel: ${channel} message: ${message}`
-    );
 
     if (receivedMessage.type === eventType) {
       callback(receivedMessage.payload);

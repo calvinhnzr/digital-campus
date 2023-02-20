@@ -1,5 +1,4 @@
 const Redis = require("ioredis");
-const path = require("path");
 
 // config local (redis instance running in docker container)
 // const redisSub = new Redis({ port: 6379, host: "localhost"});
@@ -49,7 +48,6 @@ function publishEvent(eventType, payload) {
 function onMessage(eventType, callback) {
   redisSub.on("message", (channel, message) => {
     const receivedMessage = JSON.parse(message);
-    console.log(`received message from channel: ${channel} message: ${message}`);
 
     if (receivedMessage.type === eventType) {
       callback(receivedMessage.payload);

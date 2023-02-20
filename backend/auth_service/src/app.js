@@ -22,7 +22,11 @@ redisPubSub.onMessage("piStarted", (payload) => {
 
 const newPiToken = (room) => {
   const token = generateToken(room);
-  redisPubSub.publishEvent("newToken", { token });
+  redisPubSub.publishEvent("newToken", { token, room });
+};
+
+const refreshPiDisplay = (room) => {
+  redisPubSub.publishEvent("refreshDisplay", { room });
 };
 
 // index
@@ -103,6 +107,8 @@ app.delete("/auth", async (req, res) => {
 
   const { room } = checkToken(token);
   io.emit(`room_${room}_updated`, await getUserCount(room));
+
+  refreshPiDisplay(room);
 
   return res.status(200).json({ message: "user logged out successfully" });
 });

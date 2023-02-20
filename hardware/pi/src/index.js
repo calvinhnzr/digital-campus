@@ -1,4 +1,4 @@
-const redisPubSub = require('./redisPubSub');
+const redisPubSub = require('./helpers/redisPubSub');
 const open = require('open');
 
 const domain = 'https://www.th-koeln.de/';
