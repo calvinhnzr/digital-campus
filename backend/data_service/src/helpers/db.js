@@ -206,13 +206,24 @@ async function returnAllRooms(name) {
     });
   });
 
+  const assets = await Asset.find({});
+
+  // for each room replace the asset id with the asset object, containing the id, name, description and type
+  rooms.forEach((room) => {
+    room.assets = room.assets.map((assetId) => {
+      const newAsset = { ...assets.find((asset) => asset._id == assetId)._doc, id: assetId };
+      delete newAsset._id;
+      return newAsset;
+    });
+  });
+
   return rooms;
 }
 
 async function returnRoomsByQuery(roomsParam, campusName, query) {
   const { day, time, building, level, type, status, assets } = query;
 
-  let rooms = roomsParam;
+  let rooms = roomsParam.filter((room) => room.type === "lab" || room.type === "lecture" || room.type === "project");
 
   // building filter
   if (building) {
