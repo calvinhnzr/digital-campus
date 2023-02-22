@@ -13,24 +13,37 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 
-// example: http://localhost:8001/display/campus/gummersbach/rooms/3216
+// example display: http://localhost:8001/display/campus/gummersbach/rooms/3216
+// example display as html: http://localhost:8001/display/campus/gummersbach/rooms/3216?type=html
+// example timetable: http://localhost:8001/timetable/campus/gummersbach/rooms/3216
 // room display endpoint
-app.get("/display/campus/:campus/rooms/:room", async (req, res) => {
-  const campusParam = req.params.campus;
-  const roomParam = req.params.room;
+app.get("/:view/campus/:campus/rooms/:room", async (req, res) => {
+  const { campus: campusParam, room: roomParam, view } = req.params;
+
+  console.log("campusParam: ", campusParam);
+  console.log("roomParam: ", roomParam);
+  console.log("view: ", view);
+
+  if (!campusParam || !roomParam || !view) {
+    return res.status(400).json({ error: "Missing parameters" });
+  }
+
+  if (view !== "display" && view !== "timetable") {
+    return res.status(400).json({ error: "Invalid view" });
+  }
 
   const { type } = req.query;
   if (type === "html") {
-    const html = await generateHTML(campusParam, roomParam);
+    const html = await generateHTML(campusParam, roomParam, view);
     return res.status(200).send(html);
   }
 
-  const result = await generate(campusParam, roomParam);
+  const result = await generate(campusParam, roomParam, view);
 
   if (result.error) {
-    return res.status(500).send(result.error);
+    return res.status(500).json({ error: result.error });
   } else {
-    return res.status(200).sendFile(path.join(__dirname, "../index.bmp"));
+    return res.status(200).sendFile(path.join(__dirname, `../${view}.bmp`));
   }
 });
 

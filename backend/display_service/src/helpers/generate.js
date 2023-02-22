@@ -5,21 +5,27 @@ const puppeteer = require("puppeteer");
 const Jimp = require("jimp");
 
 // generate html from ejs template
-const generateHTML = async (campusParam, roomParam) => {
-  // get room information
-  const roomResponse = await fetch(`${process.env.DATA_SERVICE_URL}/api/campus/${campusParam}/rooms`);
+const generateHTML = async (campusParam, roomParam, view) => {
+  let roomInfo, countData;
 
-  if (!roomResponse.ok) {
-    return { error: "Campus not found" };
-  }
+  if (view === "display") {
+    // get room information
+    const roomResponse = await fetch(`${process.env.DATA_SERVICE_URL}/api/campus/${campusParam}/rooms`);
 
-  const roomData = await roomResponse.json();
+    if (!roomResponse.ok) {
+      return { error: "Campus not found" };
+    }
 
-  let roomInfo;
-  roomInfo = roomData.find((room) => room.number === roomParam);
+    const roomData = await roomResponse.json();
 
-  if (!roomInfo) {
-    return { error: "Room not found" };
+    roomInfo = roomData.find((room) => room.number === roomParam);
+
+    if (!roomInfo) {
+      return { error: "Room not found" };
+    }
+
+    const countResponse = await fetch(`${process.env.AUTH_SERVICE_URL}/api/count?room=${roomParam}`);
+    countData = await countResponse.json();
   }
 
   // get timetable information
@@ -33,32 +39,32 @@ const generateHTML = async (campusParam, roomParam) => {
     return { error: "Timetable not found" };
   }
 
-  const countResponse = await fetch(`${process.env.AUTH_SERVICE_URL}/api/count?room=${roomParam}`);
-  const countData = await countResponse.json();
-
   // render ejs template as html
   return new Promise((resolve, reject) => {
-    ejs.renderFile(__dirname + "/../views/pages/index.ejs", { timetable, roomInfo, count: countData }, (err, html) => {
-      if (err) {
-        console.log(err);
-        reject({ error: "Error rendering EJS file" });
-      }
+    ejs.renderFile(
+      __dirname + `/../views/pages/${view}.ejs`,
+      { timetable, roomInfo, count: countData },
+      (err, html) => {
+        if (err) {
+          console.log(err);
+          reject({ error: "Error rendering EJS file" });
+        }
 
-      resolve(html);
-    });
+        resolve(html);
+      }
+    );
   });
 };
 
 // https://dev.to/cloudx/how-to-use-puppeteer-inside-a-docker-container-568c
 // generate image from html
-const generateImage = async (html) => {
+const generateImage = async (html, view) => {
   try {
     const browser = await puppeteer.launch({ executablePath: "/usr/bin/google-chrome", args: ["--no-sandbox"] });
     const page = await browser.newPage();
     await page.setContent(html);
-    await page.setViewport({ width: 800, height: 600 });
-    // await page.setViewport({ width: 1872, height: 1404 });
-    const file = await page.screenshot({ path: "index.png", fullPage: true });
+    await page.setViewport(view === "display" ? { width: 800, height: 600 } : { width: 800, height: 200 });
+    const file = await page.screenshot({ path: `${view}.png`, fullPage: true });
     await browser.close();
 
     return file;
@@ -70,15 +76,15 @@ const generateImage = async (html) => {
 
 // https://coderrocketfuel.com/article/convert-between-jpeg-and-bmp-files-using-node-js-and-jimp#install-jimp-npm-package
 // convert image to bmp
-const convertImage = async () => {
+const convertImage = async (view) => {
   return new Promise((resolve, reject) => {
-    Jimp.read("index.png", (err, image) => {
+    Jimp.read(`${view}.png`, (err, image) => {
       if (err) {
         console.log(err);
         reject({ error: "Error reading image" });
       }
 
-      image.write("index.bmp", (error) => {
+      image.write(`${view}.bmp`, (error) => {
         if (error) {
           console.log(error);
           reject({ error: "Error writing image" });
@@ -90,18 +96,18 @@ const convertImage = async () => {
   });
 };
 
-const generate = async (campus, room) => {
-  const html = await generateHTML(campus, room);
+const generate = async (campus, room, view) => {
+  const html = await generateHTML(campus, room, view);
   if (html.error) {
     return html;
   }
 
-  const image = await generateImage(html);
+  const image = await generateImage(html, view);
   if (image.error) {
     return image;
   }
 
-  const result = await convertImage();
+  const result = await convertImage(view);
 
   return result;
 };
