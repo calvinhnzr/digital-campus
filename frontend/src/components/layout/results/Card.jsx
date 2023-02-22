@@ -128,7 +128,7 @@ const Card = (props) => {
   const [expand, setExpand] = useState(false)
   const [assets, setAssets] = useAtom(assetsDataAtom)
 
-  let url = `http://localhost:8002/api/count?room=${props.data.number}`
+  let url = `${import.meta.env.VITE_AUTH_SERVICE_URL}/api/count?room=${props.data.number}`
 
   async function fetchRoomCount(url) {
     const response = await fetch(url)

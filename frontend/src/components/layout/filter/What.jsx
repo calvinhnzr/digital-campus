@@ -58,7 +58,7 @@ const What = (props) => {
   const [assets, setAssets] = useAtom(assetsDataAtom)
 
   async function handleFetchAssets() {
-    const url = "http://localhost:8000/api/assets"
+    const url = `${import.meta.env.VITE_DATA_SERVICE_URL}/api/assets`
     const response = await fetch(url)
     const data = await response.json()
     setAssets(data)

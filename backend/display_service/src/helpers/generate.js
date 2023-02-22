@@ -1,12 +1,18 @@
+require("dotenv").config();
+
 const ejs = require("ejs");
 const puppeteer = require("puppeteer");
-const path = require("path");
 const Jimp = require("jimp");
 
 // generate html from ejs template
 const generateHTML = async (campusParam, roomParam) => {
   // get room information
-  const roomResponse = await fetch(`http://data_service:8000/api/campus/${campusParam}/rooms`);
+  const roomResponse = await fetch(`${process.env.DATA_SERVICE_URL}/api/campus/${campusParam}/rooms`);
+
+  if (!roomResponse.ok) {
+    return { error: "Campus not found" };
+  }
+
   const roomData = await roomResponse.json();
 
   let roomInfo;
@@ -17,7 +23,7 @@ const generateHTML = async (campusParam, roomParam) => {
   }
 
   // get timetable information
-  const timetableResponse = await fetch("http://data_service:8000/api/timetables");
+  const timetableResponse = await fetch(`${process.env.DATA_SERVICE_URL}/api/timetables`);
   const timetableData = await timetableResponse.json();
 
   const tCampus = timetableData.find((campus) => campus.campus.toLowerCase() === campusParam.toLowerCase());
@@ -27,7 +33,7 @@ const generateHTML = async (campusParam, roomParam) => {
     return { error: "Timetable not found" };
   }
 
-  const countResponse = await fetch(`http://auth_service:8002/api/count?room=${roomParam}`);
+  const countResponse = await fetch(`${process.env.AUTH_SERVICE_URL}/api/count?room=${roomParam}`);
   const countData = await countResponse.json();
 
   // render ejs template as html

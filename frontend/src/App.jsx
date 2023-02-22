@@ -20,7 +20,7 @@ import Form from "./components/layout/filter/Form"
 export const newTokenAtom = atomWithStorage("newToken", false)
 export const currentTokenAtom = atomWithStorage("currentToken", false)
 
-const roomSocket = io.connect(`http://localhost:8002/`)
+const roomSocket = io.connect(import.meta.env.VITE_AUTH_SERVICE_URL)
 
 function App() {
   const [campusData, setCampusData] = useAtom(campusDataAtom)
@@ -33,7 +33,7 @@ function App() {
 
   let [searchParams, setSearchParams] = useSearchParams()
 
-  const url = "http://localhost:8000/api/campus"
+  const url = `${import.meta.env.VITE_DATA_SERVICE_URL}/api/campus`
   const handleFetchCampus = async (url) => {
     const response = await fetch(url)
     const data = await response.json()
@@ -81,7 +81,7 @@ function App() {
   }
 
   const checkTokenStatus = async (token) => {
-    let url = `http://localhost:8002/auth?token=${token}`
+    let url = `${import.meta.env.VITE_AUTH_SERVICE_URL}/auth?token=${token}`
     return await fetch(url)
   }
 

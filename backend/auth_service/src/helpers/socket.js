@@ -6,9 +6,11 @@ const { Server } = require("socket.io");
 const initSocketIO = (app) => {
   const httpServer = createServer(app);
 
+  const frontendURL = process.env.FRONTEND_URL;
+
   const io = new Server(httpServer, {
     cors: {
-      origin: ["http://localhost:3000"],
+      origin: frontendURL,
     },
   });
 

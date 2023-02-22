@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 // jwt
 const { generateToken, checkToken } = require("./helpers/token");
 // redis

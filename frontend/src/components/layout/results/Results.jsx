@@ -53,7 +53,7 @@ const Results = (props) => {
     return arr
   }
 
-  const url = "http://localhost:8000/api/campus/Gummersbach/rooms"
+  const url = `${import.meta.env.VITE_DATA_SERVICE_URL}/api/campus/Gummersbach/rooms`
   useEffect(() => {
     handleFetchData(url)
   }, [formResponse])

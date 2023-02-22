@@ -108,8 +108,7 @@ const Form = () => {
   const [roomsData, setRoomsData] = useAtom(roomsDataAtom)
 
   async function fetchQuery(params) {
-    console.log(params.toString())
-    const url = "http://localhost:8000/api/campus/Gummersbach/rooms?" + params
+    const url = `${import.meta.env.VITE_DATA_SERVICE_URL}/api/campus/Gummersbach/rooms?${params}`
     const response = await fetch(url)
     const data = await response.json()
     console.log("Response", data)

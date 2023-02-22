@@ -1,7 +1,7 @@
+require("dotenv").config();
+
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-
-require("dotenv").config();
 
 const uri = `mongodb+srv://webclub:${process.env.MONGO_PW}@cluster0.uipp4bn.mongodb.net/digitalCampusDB?retryWrites=true&w=majority`;
 
@@ -271,7 +271,7 @@ async function returnRoomsByQuery(roomsParam, campusName, query) {
 }
 
 const fetchCurrentStatus = async (number) => {
-  const response = await fetch(`http://auth_service:8002/api/count?room=${number}`);
+  const response = await fetch(`${process.env.AUTH_SERVICE_URL}/api/count?room=${number}`);
   const data = await response.json();
   return data;
 };

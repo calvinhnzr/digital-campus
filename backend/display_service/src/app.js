@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const { generate, generateHTML } = require("./helpers/generate");
 
 const path = require("path");

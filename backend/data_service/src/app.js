@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const { connect } = require("./helpers/db");
 const redisPubSub = require("./helpers/redisPubSub");
 const express = require("express");

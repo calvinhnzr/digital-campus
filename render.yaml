@@ -1,0 +1,44 @@
+services:
+  # Static frontend
+  - type: web
+    name: frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm run build
+    staticPublishPath: ./dist
+
+  # Docker web service
+  - type: web
+    name: data
+    env: docker
+    region: frankfurt
+    rootDir: backend/data_service
+    dockerfilePath: ./Dockerfile
+    plan: free
+
+  # Docker web service
+  - type: web
+    name: auth
+    env: docker
+    region: frankfurt
+    rootDir: backend/auth_service
+    dockerfilePath: ./Dockerfile
+    plan: free
+
+  # Docker web service
+  - type: web
+    name: display
+    env: docker
+    region: frankfurt
+    rootDir: backend/display_service
+    dockerfilePath: ./Dockerfile
+    plan: free
+
+  # Redis instance
+  - type: redis
+    name: redis
+    region: frankfurt
+    plan: free
+    ipAllowList: # required
+      - source: 0.0.0.0/0
+        description: everywhere

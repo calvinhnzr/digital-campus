@@ -45,7 +45,7 @@ const Button = (props) => {
   const [currentToken, setCurrentToken] = useAtom(currentTokenAtom)
 
   async function handleFetch(method, body) {
-    const response = await fetch("http://localhost:8002/auth", {
+    const response = await fetch(`${import.meta.env.VITE_AUTH_SERVICE_URL}/auth`, {
       method: `${method}`,
       body: JSON.stringify(body),
       headers: {

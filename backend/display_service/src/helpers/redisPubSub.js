@@ -1,14 +1,10 @@
+require("dotenv").config();
+
 const Redis = require("ioredis");
 
-// config local (redis instance running in docker container)
-// const redisSub = new Redis({ port: 6379, host: "localhost"});
-// const redisPub = new Redis({ port: 6379, host: "localhost"});
-// config docker
-const redisSub = new Redis({ port: 6379, host: "redis" });
-const redisPub = new Redis({ port: 6379, host: "redis" });
-// config pi (host is subject to change, based on ip in local network)
-// const redisSub = new Redis({ port: 6379, host: "192.168.100.111"});
-// const redisPub = new Redis({ port: 6379, host: "192.168.100.111"});
+const redisHost = process.env.REDIS_HOST;
+const redisPub = new Redis({ port: 6379, host: redisHost, lazyConnect: true });
+const redisSub = new Redis({ port: 6379, host: redisHost, lazyConnect: true });
 
 // config
 const thisService = "display_service";
