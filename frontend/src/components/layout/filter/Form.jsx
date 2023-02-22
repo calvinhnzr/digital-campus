@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { useForm } from "react-hook-form"
 import { useAtom } from "jotai"
 
-import { hideFormAtom, formResponseAtom, formTypesAtom, formStatusAtom, queryAtom } from "../../../store"
+import { hideFormAtom, formResponseAtom, formTypesAtom, formStatusAtom, queryAtom, roomsDataAtom } from "../../../store"
 import What from "./What"
 import Where from "./Where"
 import When from "./When"
@@ -105,8 +105,10 @@ const Form = () => {
   const [formTypes, setFormTypes] = useAtom(formTypesAtom)
   const [formStatus, setFormStatus] = useAtom(formStatusAtom)
   const [isDisabled, setIsDisabled] = useState(true)
+  const [roomsData, setRoomsData] = useAtom(roomsDataAtom)
 
   async function fetchQuery(params) {
+    console.log(params.toString())
     const url = "http://localhost:8000/api/campus/Gummersbach/rooms?" + params
     const response = await fetch(url)
     const data = await response.json()
@@ -120,6 +122,14 @@ const Form = () => {
   }
 
   async function onSubmit(query) {
+    // clear current cards
+    setQuery({
+      id: false,
+      number: false,
+      type: false,
+    })
+    setFormResponse("loading")
+    // show loading state
     const { building, level, type, status, day, time, asset } = query
     const daysEn = ["Sonntag", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     const d = new Date()

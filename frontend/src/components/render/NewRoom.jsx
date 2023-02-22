@@ -59,24 +59,15 @@ const NewRoom = (props) => {
         setHighlightColor(false)
       }
     }
+
+    // on reset
+    if (!query.number && !query.type && !query.id) {
+      setHighlightColor(false)
+    }
   }, [query, highlightColor, formResponse])
 
   return (
     <group position={[x + width / 2, height / 2, y + depth / 2]}>
-      {/* <Suspense fallback={null}>
-        <mesh>
-          <Model width={width} depth={depth} />
-        </mesh>
-      </Suspense> */}
-      {/* {hoverRoom.room === props.data.number && (
-        <Html
-          style={{
-            color: "black",
-          }}
-        >
-          {props.data.number}
-        </Html>
-      )} */}
       <mesh
         onClick={(e) => handleClick(e)}
         onPointerOver={(e) => {
@@ -88,7 +79,6 @@ const NewRoom = (props) => {
           setHover(false)
         }}
         ref={meshRef}
-        // position={hoverRoom.room === props.data.number && [0, 10, 0]}
       >
         <boxGeometry args={[width, height, depth]} />
         <meshStandardMaterial

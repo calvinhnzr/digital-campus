@@ -246,8 +246,14 @@ async function returnRoomsByQuery(roomsParam, campusName, query) {
     rooms = rooms.filter((room) => {
       const tableForRoom = timetables.find((timetable) => timetable.roomNo === room.number);
       const tableForDay = tableForRoom && tableForRoom.timetable[day];
-
-      return !(tableForDay && tableForDay.find((slot) => slot.time.slice(0, 2) === time.slice(0, 2)));
+      if (!tableForDay) {
+        return true;
+      }
+      return !(
+        tableForDay &&
+        tableForRoom &&
+        tableForDay.find((slot) => slot.time && slot.time.slice(0, 2) === time.slice(0, 2))
+      );
     });
 
     // filter rooms by current status

@@ -11,10 +11,10 @@ const Scene = (props) => {
   return (
     <Canvas
       style={{ zIndex: 1 }}
-      // gl={{
-      //   powerPreference: "high-performance",
-      // }}
-      // dpr={[1, 2]}
+      gl={{
+        powerPreference: "high-performance",
+      }}
+      dpr={[1, 2]}
     >
       {/* <Stats /> */}
       {/* <Grid position={[0, 0, 0]} args={[120, 120, 1]} /> */}

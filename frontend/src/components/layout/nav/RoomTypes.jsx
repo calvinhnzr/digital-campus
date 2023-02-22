@@ -46,9 +46,9 @@ const Container = styled.ul`
 
 const RoomTypes = () => {
   let typesDe = ["Büro", "Labor", "Projektraum", "Hörsaal"]
-  let typesEn = ["office", "lab", "project", "lecture"]
+  let typesEn = ["lab", "project", "lecture"]
   let moreDe = ["Service", "Sonstige", "WC"]
-  let moreEn = ["service", "misc", "WC"]
+  let moreEn = ["office", "service", "WC", "misc"]
 
   const [query, setQuery] = useAtom(queryAtom)
 

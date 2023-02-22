@@ -10,8 +10,8 @@ const Aside = styled.aside`
   display: flex;
   flex-direction: column;
   position: absolute;
-  height: 100%;
-
+  height: auto;
+  max-height: 100%;
   padding: 7rem 0 2rem;
   justify-self: end;
   overflow-y: scroll;
@@ -19,11 +19,8 @@ const Aside = styled.aside`
   align-self: start;
   right: 3rem;
   gap: 1rem;
-  /* outline: 1px solid red; */
   z-index: 1000;
   overflow-y: scroll;
-  /* height: 100%; */
-
   &::-webkit-scrollbar {
     display: none;
     -webkit-appearance: none;
@@ -68,11 +65,7 @@ const Results = (props) => {
             <Card index={index} key={data._id} data={data} roomSocket={props.roomSocket} size={handleQuery().length} />
           ))
         : ""}
-      {/* {formResponse
-        ? formResponse.map((data, index) => (
-            <Card index={index} key={data._id} data={data} roomSocket={props.roomSocket} size={formResponse.length} />
-          ))
-        : ""} */}
+      {formResponse === "loading" && "Loading..."}
     </Aside>
   )
 }

@@ -2,14 +2,13 @@ import { useState, useEffect, useRef, useLayoutEffect } from "react"
 import styled from "styled-components"
 import { useAtom } from "jotai"
 
-import { FaFlask, FaChevronDown, FaChevronUp, FaRestroom, FaPaperPlane, FaBookOpen } from "react-icons/fa"
-import { MdInfo } from "react-icons/md"
+import { FaFlask, FaRestroom, FaPaperPlane, FaBookOpen } from "react-icons/fa"
+import { MdInfo, MdSettings } from "react-icons/md"
 import { BsPersonFill } from "react-icons/bs"
 
-import { currentRoomAtom, newRoomAtom, queryAtom, hoverRoomAtom } from "../../../store"
+import { queryAtom, hoverRoomAtom, assetsDataAtom } from "../../../store"
 import More from "./More"
 import Button from "./Button"
-import NewRoom from "../../render/NewRoom"
 
 const StyledCard = styled.div`
   padding: 0 1.5rem;
@@ -58,14 +57,8 @@ const Header = styled.label`
     &.lab {
       color: #4a92d4;
     }
-    &.office {
-      color: #ec#e94341;
-    }
     &.project {
       color: #ecaf45;
-    }
-    &.wc {
-      color: #3c74a9;
     }
     &.lecture {
       color: #72c454;
@@ -131,21 +124,26 @@ const Card = (props) => {
   const [open, setOpen] = useState(false)
   const [count, setCount] = useState(0)
   const [query, setQuery] = useAtom(queryAtom)
-  const [newRoom, setNewRoom] = useAtom(newRoomAtom)
   const [hoverRoom, setHoverRoom] = useAtom(hoverRoomAtom)
   const [expand, setExpand] = useState(false)
+  const [assets, setAssets] = useAtom(assetsDataAtom)
 
   let url = `http://localhost:8002/api/count?room=${props.data.number}`
 
-  const fetchRoomCount = async (url) => {
+  async function fetchRoomCount(url) {
     const response = await fetch(url)
     const data = await response.json()
-    // console.log(data.count)
     setCount(data.count)
   }
 
   function handleClick() {
     setOpen(!open)
+  }
+
+  function handleMouseOver(number) {
+    setHoverRoom({
+      room: number,
+    })
   }
 
   useEffect(() => {
@@ -157,30 +155,16 @@ const Card = (props) => {
     }
   }, [props.roomSocket])
 
-  function handleMouseOver(number) {
-    setHoverRoom({
-      room: number,
-    })
-    // console.log(number)
-  }
-
   useLayoutEffect(() => {
-    // props.index !== 0 && setOpen(false)
-
     fetchRoomCount(url)
     ;(props.data.type.toLowerCase() === "lab" ||
       props.data.type.toLowerCase() === "lecture" ||
       props.data.type.toLowerCase() === "project") &&
       setExpand(true)
-
-    return () => {
-      // setExpand(false)
-      // setOpen(false)
-    }
   }, [])
 
   useLayoutEffect(() => {
-    props.index === 0 && props.size === 1 && setOpen(true)
+    props.index === 0 && props.size === 1 ? setOpen(true) : setOpen(false)
   }, [query.number])
 
   return (
@@ -201,6 +185,7 @@ const Card = (props) => {
           {props.data.type.toLowerCase() === "service" && <MdInfo />}
           {props.data.type.toLowerCase() === "lecture" && <FaBookOpen />}
           {props.data.type.toLowerCase() === "wc" && <FaRestroom />}
+          {props.data.type.toLowerCase() === "misc" && <MdSettings />}
         </h4>
         <span className="number">{props.data.number ? props.data.number : "{number}"}</span>
         {expand &&
@@ -212,7 +197,9 @@ const Card = (props) => {
           <Button number={props.data.number} />
           <More label="Ausstattung" gridArea="ausstattung" data={props.data}>
             <ul>
-              <li>Data</li>
+              {props.data.assets.map((assetId, index) => (
+                <li>{assetId}</li>
+              ))}
             </ul>
           </More>
           <More label="Stundeplan" gridArea="stundenplan" data={props.data}>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import styled from "styled-components"
 import { useAtom } from "jotai"
-import { formTypesAtom } from "../../../store"
+import { formTypesAtom, assetsDataAtom } from "../../../store"
 
 const Label = styled.label`
   cursor: pointer;
@@ -55,7 +55,7 @@ const Div = styled.div`
 `
 
 const What = (props) => {
-  const [assets, setAssets] = useState()
+  const [assets, setAssets] = useAtom(assetsDataAtom)
 
   async function handleFetchAssets() {
     const url = "http://localhost:8000/api/assets"

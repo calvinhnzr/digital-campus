@@ -6,6 +6,9 @@ export const campusDataAtom = atom()
 // api/campus/Gummersbach/rooms
 export const roomsDataAtom = atom()
 
+// api/assets
+export const assetsDataAtom = atom()
+
 export const currentRoomAtom = atom({
   number: "",
   loggedIn: false,
