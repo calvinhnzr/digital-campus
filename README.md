@@ -201,7 +201,7 @@ Nach dem Aufruf des Links wird der Nutzer auf die Anwendung weitergeleitet und k
 Die Nutzeranzahl eines Raumes wird dabei dynamisch für jeden Nutzer aktualisiert. Dies kann auch auf der E-Ink Anzeige eingesehen werden.
 
 ```
-https://display-ue6q.onrender.com/timetable/campus/Gummersbach/rooms/3216
+https://display-ue6q.onrender.com/display/campus/Gummersbach/rooms/3216
 ```
 
 <div align="center">
