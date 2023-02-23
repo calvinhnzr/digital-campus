@@ -4,9 +4,6 @@ const { generate, generateHTML } = require("./helpers/generate");
 
 const path = require("path");
 
-// redis
-const redisPubSub = require("./helpers/redisPubSub");
-
 // express
 const express = require("express");
 const app = express();
@@ -49,5 +46,3 @@ app.get("/:view/campus/:campus/rooms/:room", async (req, res) => {
 
 const PORT = process.env.PORT || 8001;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
-
-redisPubSub.startRedis();

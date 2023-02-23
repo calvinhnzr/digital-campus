@@ -1,7 +1,6 @@
 require("dotenv").config();
 
 const { connect } = require("./helpers/db");
-const redisPubSub = require("./helpers/redisPubSub");
 const express = require("express");
 const cors = require("cors");
 
@@ -27,4 +26,3 @@ const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
 connect().catch((err) => console.log(err));
-redisPubSub.startRedis();
