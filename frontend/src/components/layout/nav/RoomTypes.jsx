@@ -25,29 +25,30 @@ const Container = styled.ul`
     overflow-x: scroll;
     gap: 0.75rem;
     li {
-      background-color: rgb(239 239 239 / 15%);
+      /* background-color: rgb(239 239 239 / 50%); */
       padding: 0.5rem 1rem;
       border-radius: 16px;
       label {
-        color: #343434;
+        /* color: #343434; */
       }
     }
   }
 
   li {
-    background-color: rgb(239 239 239 / 15%);
+    /* background-color: rgb(239 239 239 / 55%); */
     padding: 0.4rem 0.75rem;
     border-radius: 16px;
     &.checked {
       background-color: rgb(239 239 239 / 95%);
+      background-color: white;
       label {
         box-sizing: border-box;
         font-weight: 700;
-        text-decoration: underline;
+        color: #1a1a1a;
       }
     }
     label {
-      color: #343434;
+      color: white;
       font-weight: 400;
       cursor: pointer;
       text-transform: capitalize !important;

@@ -15,6 +15,8 @@ const Div = styled.div`
   align-self: start;
   @media (max-width: 510px) {
     margin: 0 1.5rem;
+    min-width: inherit;
+    max-width: 12rem;
   }
 `
 
@@ -54,6 +56,7 @@ const TextInput = styled.label`
   }
   svg {
     color: #858585;
+    color: #1a1a1a;
     font-size: 2.75rem;
     transform: scale(0.5);
   }
@@ -79,7 +82,7 @@ const Search = () => {
       </ButtonInput>
       <TextInput>
         <input
-          type="text"
+          type="number"
           maxLength="4"
           placeholder="e.g. 3216"
           onChange={(e) => handleChange(e)}

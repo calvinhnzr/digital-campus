@@ -17,7 +17,7 @@ const StyledCard = styled.div`
   background-color: #efefef;
   background-color: rgb(239 239 239 / 95%);
   box-shadow: 5px 4px 14px rgba(0, 0, 0, 0.35);
-  border-radius: 6px;
+  border-radius: 12px;
   transition: ease-in-out 0.2s;
   opacity: ${(props) => (!props.open ? ".5" : "1")};
   > * {
@@ -108,15 +108,27 @@ const Body = styled.section`
     "button status"
     "ausstattung ausstattung"
     "stundenplan stundenplan";
-  .ausstattung {
-    grid-area: ausstattung;
-    font-weight: 700;
-    justify-self: start;
+  .timetable {
+    margin-top: 1rem;
+    width: 100%;
   }
-  .stundenplan {
-    grid-area: stundenplan;
-    font-weight: 700;
-    justify-self: start;
+
+  .assets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-content: stretch;
+    li {
+      display: block;
+      background-color: #1a1a1a;
+      color: white;
+      background-color: white;
+      color: #1a1a1a;
+
+      padding: 0.3rem 0.5rem;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
   }
 `
 
@@ -127,6 +139,7 @@ const Card = (props) => {
   const [hoverRoom, setHoverRoom] = useAtom(hoverRoomAtom)
   const [expand, setExpand] = useState(false)
   const [assets, setAssets] = useAtom(assetsDataAtom)
+  const [image, setImage] = useState("")
 
   let url = `${import.meta.env.VITE_AUTH_SERVICE_URL}/api/count?room=${props.data.number}`
 
@@ -196,16 +209,26 @@ const Card = (props) => {
         <Body>
           <Button number={props.data.number} />
           <More label="Ausstattung" gridArea="ausstattung" data={props.data}>
-            <ul>
-              {props.data.assets.map((assetId, index) => (
-                <li key={assetId}>{assetId}</li>
-              ))}
+            <ul className="assets">
+              {props.data.assets.length ? (
+                props.data.assets.map((asset) => <li key={asset.id}>{asset.name}</li>)
+              ) : (
+                <li>Assets</li>
+              )}
             </ul>
           </More>
-          <More label="Stundeplan" gridArea="stundenplan" data={props.data}>
-            <ul>
-              <li>Data</li>
-            </ul>
+          <More
+            label="Stundeplan"
+            gridArea="stundenplan"
+            data={props.data}
+            stundeplan={true}
+            number={props.data.number}
+            image={image}
+            setImage={setImage}
+          >
+            <a href={image} rel="noreferrer noopener" target="_blank">
+              <img src={image} className="timetable" alt={`Stundenplan für Raum ${props.data.number}`} />
+            </a>
           </More>
         </Body>
       )}

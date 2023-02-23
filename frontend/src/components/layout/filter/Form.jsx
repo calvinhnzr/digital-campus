@@ -122,6 +122,7 @@ const Form = () => {
 
   async function fetchQuery(params) {
     const url = `${import.meta.env.VITE_DATA_SERVICE_URL}/api/campus/Gummersbach/rooms?${params}`
+    console.log("url", url)
     const response = await fetch(url)
     const data = await response.json()
     console.log("Response", data)
@@ -154,11 +155,17 @@ const Form = () => {
       ...(level && { level }),
       ...(type && { type }),
       ...(status && { status }),
-      ...(day && status ? { day } : { day: daysEn[dayNum].toLowerCase() }),
-      ...(time && status ? { time } : { time: d.getHours() + ":00" }),
     })
-    console.log(params.toString())
+    if (status) {
+      day ? params.append("day", day) : params.append("day", daysEn[dayNum].toLowerCase())
+      time ? params.append("time", time) : params.append("time", d.getHours() + ":00")
+    }
+
+    console.log(status)
+
     asset && asset.forEach((asset) => params.append("asset", asset))
+
+    console.log(params.toString())
     params.toString() ? fetchQuery(params) : console.log("Fülle das Formular aus.")
   }
 

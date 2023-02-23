@@ -9,11 +9,12 @@ const Label = styled.label`
   }
   @media (max-width: 510px) {
     display: block;
+
     height: 100%;
     width: 100%;
     background-color: black;
     opacity: 0.6;
-    position: absolute;
+    position: fixed;
     z-index: 8000;
     cursor: pointer;
   }

@@ -7,15 +7,11 @@ import Card from "./Card"
 import { roomsDataAtom, queryAtom, selectedAtom, formResponseAtom } from "../../../store"
 
 const Aside = styled.aside`
-  /* outline: 1px solid red; */
   display: flex;
   flex-direction: column;
   position: absolute;
   position: fixed;
-  /* position: relative; */
-  /* right: 3rem; */
   right: 0;
-  /* padding-right: 3rem; */
   height: auto;
   max-height: 100%;
   z-index: 1000;
@@ -28,7 +24,7 @@ const Aside = styled.aside`
     align-self: start;
     align-items: flex-end;
     justify-self: end;
-    gap: 1rem;
+    gap: 1.2rem;
     overflow-y: scroll;
   }
 

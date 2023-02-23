@@ -42,7 +42,7 @@ export const selectedAtom = atom([
   },
 ])
 
-export const hideFormAtom = atom(false)
+export const hideFormAtom = atom(true)
 export const hideResultsAtom = atom(false)
 
 // Token
