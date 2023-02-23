@@ -5,7 +5,7 @@ mongoose.set("strictQuery", false);
 
 const { getTokenRoom } = require("./token");
 
-const uri = `mongodb+srv://webclub:${process.env.MONGO_PW}@cluster0.uipp4bn.mongodb.net/digitalCampusAuthDB?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PW}@cluster0.uipp4bn.mongodb.net/digitalCampusAuthDB?retryWrites=true&w=majority`;
 
 const activeUserSchema = new mongoose.Schema(
   {

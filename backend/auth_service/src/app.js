@@ -36,11 +36,29 @@ app.get("/", (req, res) => {
   return res.send("auth_service");
 });
 
+app.get("/link/:room", (req, res) => {
+  const { room } = req.params;
+
+  const token = generateToken(room);
+  if (!token) return res.status(400).json({ message: "no token generated" });
+
+  const html = `
+    <h1>Simulation - NFC Scan</h1>
+
+    <p>Klicken Sie auf den Link um den Beitritt zu dem Raum ${room} freizuschalten:</p>
+    <a href="${process.env.FRONTEND_URL}?token=${token}">${process.env.FRONTEND_URL}?token=${token}</a>
+  `;
+
+  return res.send(html);
+});
+
 // token mock
 app.get("/token/:room", (req, res) => {
   const { room } = req.params;
 
   const token = generateToken(room);
+  if (!token) return res.status(400).json({ message: "no token generated" });
+
   return res.json({ token });
 });
 
