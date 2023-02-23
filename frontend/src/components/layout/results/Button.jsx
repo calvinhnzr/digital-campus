@@ -19,6 +19,7 @@ const StyledButton = styled.label`
     font-weight: 500;
     font-family: inherit;
     background-color: #1a1a1a;
+    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
     opacity: 0.3;
     color: white;
     cursor: pointer;
@@ -26,12 +27,14 @@ const StyledButton = styled.label`
     cursor: not-allowed;
     &.login {
       cursor: pointer;
+      background-image: none;
       background-color: #47da1b;
       /* background-color: #1a1a1a; */
       opacity: 1;
     }
     &.logout {
       cursor: pointer;
+      background-image: none;
       background-color: #da1b4e;
       opacity: 1;
     }

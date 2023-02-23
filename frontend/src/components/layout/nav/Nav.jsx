@@ -45,7 +45,7 @@ const StyledNav = styled.nav`
   display: flex;
   align-items: center;
   height: 3rem;
-  background: linear-gradient(to bottom, #506177, #50617700);
+  /* background: linear-gradient(to bottom, #506177, #50617700); */
   height: auto;
   width: 100%;
   padding: 2rem 3rem;

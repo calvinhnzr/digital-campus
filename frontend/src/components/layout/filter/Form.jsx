@@ -78,6 +78,7 @@ const StyledFilter = styled.aside`
         border: none;
         border-radius: 6px;
         background-color: white;
+
         cursor: pointer;
         color: #1a1a1a;
         /* font-weight: 700; */
@@ -85,6 +86,7 @@ const StyledFilter = styled.aside`
         &[type="submit"] {
           background-color: #1a1a1a;
           color: white;
+          background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
         }
       }
     }

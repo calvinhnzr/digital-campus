@@ -2,6 +2,9 @@
   background-color: #636363;
   background-color: #858585;
   background-color: #506177;
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  /* background-image: linear-gradient(to right, #243949 0%, #517fa4 100%); */
+
   height: 100%;
   width: 100%;
 }
