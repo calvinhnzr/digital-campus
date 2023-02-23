@@ -243,7 +243,7 @@ async function returnRoomsByQuery(roomsParam, campusName, query) {
   // assets filter
   if (assets) {
     rooms = rooms.filter((room) => {
-      return assets.every((asset) => room.assets.includes(asset));
+      return assets.every((asset) => room.assets.find((roomAsset) => roomAsset.id === asset));
     });
   }
 
