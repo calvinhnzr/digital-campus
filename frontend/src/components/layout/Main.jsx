@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 const StyledMain = styled.main`
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
   position: absolute;
   display: grid;
   grid-template-rows: 7rem minmax(0, auto);
@@ -13,6 +13,13 @@ const StyledMain = styled.main`
   grid-template-areas:
     "nav nav nav "
     "filter .  results";
+
+  @media (max-width: 510px) {
+    /* grid-template-columns: auto;
+    grid-template-areas:
+      "filter"
+      "filter"; */
+  }
 `
 
 const Main = (props) => {

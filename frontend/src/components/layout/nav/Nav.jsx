@@ -2,31 +2,31 @@ import React from "react"
 import styled from "styled-components"
 import { useAtom } from "jotai"
 import { FaMap, FaCameraRetro } from "react-icons/fa"
+import { AiOutlineForm } from "react-icons/ai"
 
 import { hideFormAtom, perspectiveAtom, queryAtom } from "../../../store.jsx"
 import Search from "./Search.jsx"
 import RoomTypes from "./RoomTypes.jsx"
 
-const StyledNav = styled.nav`
-  grid-area: nav;
-  gap: 0 2rem;
+const Buttons = styled.div`
   display: flex;
   align-items: center;
-  height: 3rem;
-  background: linear-gradient(to bottom, #636363, #63636300);
-  height: auto;
-  width: 100%;
-  padding: 2rem 3rem;
-  position: fixed;
-  z-index: 4001;
+  gap: 1rem;
+  position: absolute;
+  top: 2rem;
+  right: 2.5rem;
+  z-index: 9999;
+  @media (max-width: 510px) {
+    top: 0;
+    right: 1.5rem;
+    /* display: none; */
+  }
   .reset {
-    margin-left: auto;
     cursor: pointer;
     input {
       display: none;
     }
   }
-
   .perspective {
     cursor: pointer;
     input {
@@ -37,11 +37,27 @@ const StyledNav = styled.nav`
       transform: scale(0.7);
     }
   }
+`
+
+const StyledNav = styled.nav`
+  grid-area: nav;
+  gap: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  background: linear-gradient(to bottom, #858585, #85858500);
+  height: auto;
+  width: 100%;
+  padding: 2rem 3rem;
+  position: fixed;
+  z-index: 4001;
+  /* mobile */
 
   @media (max-width: 510px) {
     flex-direction: column;
-    /* padding: 1.5rem 0; */
-    gap: 1.5rem;
+    gap: 1.5rem 2rem;
+    padding: 0rem;
+    margin-top: 1.5rem;
   }
 `
 
@@ -60,19 +76,18 @@ const Nav = (props) => {
 
   return (
     <StyledNav>
-      {/* <label>
-        <input type="button" onClick={() => setHideForm(!hideForm)} />
-      </label> */}
       <Search />
       <RoomTypes />
-      <label className="reset">
-        Reset
-        <input type="button" onClick={() => handleReset()} />
-      </label>
-      <label className="perspective">
-        {!orthograficView ? <FaMap /> : <FaCameraRetro />}
-        <input type="button" onClick={() => setOrthograficView(!orthograficView)} />
-      </label>
+      <Buttons>
+        <label className="reset">
+          Reset
+          <input type="button" onClick={() => handleReset()} />
+        </label>
+        <label className="perspective">
+          {!orthograficView ? <FaMap /> : <FaCameraRetro />}
+          <input type="button" onClick={() => setOrthograficView(!orthograficView)} />
+        </label>
+      </Buttons>
     </StyledNav>
   )
 }

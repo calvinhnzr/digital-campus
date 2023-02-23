@@ -105,7 +105,7 @@ const When = (props) => {
       </Div>
       <Div className="time">
         <label>
-          <p>Uhrzeit (8:00 - 21:00)</p>
+          <p>Uhrzeit</p>
           <input
             type="time"
             min="08:00"

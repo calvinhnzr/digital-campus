@@ -198,7 +198,7 @@ const Card = (props) => {
           <More label="Ausstattung" gridArea="ausstattung" data={props.data}>
             <ul>
               {props.data.assets.map((assetId, index) => (
-                <li>{assetId}</li>
+                <li key={assetId}>{assetId}</li>
               ))}
             </ul>
           </More>

@@ -27,7 +27,7 @@ const StyledButton = styled.label`
     &.login {
       cursor: pointer;
       background-color: #47da1b;
-      background-color: #1a1a1a;
+      /* background-color: #1a1a1a; */
       opacity: 1;
     }
     &.logout {

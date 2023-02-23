@@ -16,6 +16,7 @@ import Camera from "./components/render/Camera"
 import Campus from "./components/render/Campus"
 import Results from "./components/layout/results/Results"
 import Form from "./components/layout/filter/Form"
+import Blackout from "./components/layout/Blackout"
 
 export const newTokenAtom = atomWithStorage("newToken", false)
 export const currentTokenAtom = atomWithStorage("currentToken", false)
@@ -113,6 +114,7 @@ function App() {
       <Main>
         <Nav />
         <Form />
+        {!hideForm && <Blackout />}
       </Main>
       <Results roomSocket={roomSocket} />
       <Scene>

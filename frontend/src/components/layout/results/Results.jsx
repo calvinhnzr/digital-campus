@@ -7,23 +7,63 @@ import Card from "./Card"
 import { roomsDataAtom, queryAtom, selectedAtom, formResponseAtom } from "../../../store"
 
 const Aside = styled.aside`
+  /* outline: 1px solid red; */
   display: flex;
   flex-direction: column;
   position: absolute;
+  position: fixed;
+  /* position: relative; */
+  /* right: 3rem; */
+  right: 0;
+  /* padding-right: 3rem; */
   height: auto;
   max-height: 100%;
-  padding: 7rem 0 2rem;
-  justify-self: end;
-  overflow-y: scroll;
-  z-index: 90;
-  align-self: start;
-  right: 3rem;
-  gap: 1rem;
   z-index: 1000;
-  overflow-y: scroll;
-  &::-webkit-scrollbar {
+
+  .scroll {
+    padding: 7rem 0 2rem;
+    padding-right: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+    align-items: flex-end;
+    justify-self: end;
+    gap: 1rem;
+    overflow-y: scroll;
+  }
+
+  /* &::-webkit-scrollbar {
     display: none;
     -webkit-appearance: none;
+  } */
+  /* mobile */
+  @media (max-width: 510px) {
+    position: absolute;
+    width: 100%;
+    max-width: 100%;
+    right: 0;
+    bottom: 0;
+    overflow-y: hidden;
+    /* overflow-x: hidden; */
+    position: fixed;
+    .scroll {
+      flex-direction: row;
+      overflow-y: hidden;
+      overflow-x: scroll;
+      justify-self: start;
+      gap: 1.5rem;
+      /* justify-content: center; */
+      padding: 1.5rem;
+      /* width: 100%; */
+      width: auto;
+
+      /* height: 100%; */
+      /* padding: ; */
+      > * {
+        /* outline: 1px solid blue; */
+        width: calc(100vw - 5rem);
+      }
+    }
   }
 `
 
@@ -60,12 +100,20 @@ const Results = (props) => {
 
   return (
     <Aside>
-      {(roomsData && query.number) || query.type || query.id
-        ? handleQuery().map((data, index) => (
-            <Card index={index} key={data._id} data={data} roomSocket={props.roomSocket} size={handleQuery().length} />
-          ))
-        : ""}
-      {formResponse === "loading" && "Loading..."}
+      <div className="scroll">
+        {(roomsData && query.number) || query.type || query.id
+          ? handleQuery().map((data, index) => (
+              <Card
+                index={index}
+                key={data.roomId}
+                data={data}
+                roomSocket={props.roomSocket}
+                size={handleQuery().length}
+              />
+            ))
+          : ""}
+        {formResponse === "loading" && "Loading..."}
+      </div>
     </Aside>
   )
 }

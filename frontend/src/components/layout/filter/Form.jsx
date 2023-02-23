@@ -19,9 +19,8 @@ const StyledFilter = styled.aside`
   display: flex;
   flex-direction: column;
   position: relative;
-  border-radius: 6px;
   transition: ease-in-out 0.3s;
-  transform: ${(props) => (props.hideForm ? "translate(calc(-400px - 3rem))" : "")};
+  transform: ${(props) => (props.hideForm ? "translate(calc(-400px - 6rem))" : "")};
   opacity: ${(props) => (props.hideForm ? "0.3" : "")};
 
   .scroll {
@@ -29,13 +28,13 @@ const StyledFilter = styled.aside`
     /* display: none; */
     overflow-y: ${(props) => (props.hideForm ? "hidden" : "scroll")};
     padding: 2rem;
-    border-radius: 6px;
+    border-radius: 12px;
     background-color: rgb(239 239 239 / 95%);
     box-shadow: 5px 4px 14px rgba(0, 0, 0, 0.35);
   }
 
   > * {
-    color: black;
+    color: #1a1a1a;
   }
   h2 {
     font-size: 1.3rem;
@@ -95,6 +94,20 @@ const StyledFilter = styled.aside`
       /* background-color: black; */
     }
   }
+  /* mobile */
+  @media (max-width: 510px) {
+    z-index: 9999;
+    position: fixed;
+    height: 100%;
+    width: auto;
+    padding: 0;
+    margin: 0;
+    margin-right: 5rem;
+    transform: ${(props) => (props.hideForm ? "translate(calc(-100%))" : "")};
+    .scroll {
+      border-radius: 0 12px 12px 0;
+    }
+  }
 `
 
 const Form = () => {
@@ -118,6 +131,8 @@ const Form = () => {
       number: false,
       type: false,
     })
+    setIsDisabled(false)
+    setHideForm(true)
   }
 
   async function onSubmit(query) {
@@ -127,8 +142,9 @@ const Form = () => {
       number: false,
       type: false,
     })
-    setFormResponse("loading")
     // show loading state
+    setFormResponse("loading")
+    setIsDisabled(true)
     const { building, level, type, status, day, time, asset } = query
     const daysEn = ["Sonntag", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     const d = new Date()
