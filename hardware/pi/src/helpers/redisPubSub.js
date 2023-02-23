@@ -1,4 +1,6 @@
 const Redis = require('ioredis');
+require("dotenv").config({path:__dirname + '/../../.env'});
+const redisServer = process.env.REDISSERVER
 
 // config local (redis instance running in docker container)
 // const redisSub = new Redis({ port: 6379, host: "localhost"});
@@ -7,8 +9,11 @@ const Redis = require('ioredis');
 // const redisSub = new Redis({ port: 6379, host: "redis"});
 // const redisPub = new Redis({ port: 6379, host: "redis"});
 // config pi (host is subject to change, based on ip in local network)
-const redisSub = new Redis({ port: 6379, host: '192.168.100.111' });
-const redisPub = new Redis({ port: 6379, host: '192.168.100.111' });
+// const redisSub = new Redis({ port: 6379, host: '192.168.100.111' });
+// const redisPub = new Redis({ port: 6379, host: '192.168.100.111' });
+// config pi (host is deployed redis URL)
+const redisSub = new Redis(redisServer);
+const redisPub = new Redis(redisServer);
 
 // config
 const thisService = 'raspberry_pi_3217';
